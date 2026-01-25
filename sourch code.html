@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mâm Cơm Gia Đình - Phiên Bản Ảo Diệu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* ============ 1. CÀI ĐẶT MÀU SẮC & HIỆU ỨNG CỐT LÕI ============ */
+        :root {
+            --bg-color: #050505; /* Nền tối để làm nổi màu sặc sỡ */
+            --glass-bg: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-color);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 20% 30%, #4b0082 0%, transparent 20%),
+                radial-gradient(circle at 80% 70%, #8b0000 0%, transparent 20%);
+            animation: bg-shift 10s infinite alternate;
+        }
+
+        @keyframes bg-shift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        /* --- HIỆU ỨNG CHỮ CẦU VỒNG ẢO DIỆU (MAGIC TEXT) --- */
+        .magic-text {
+            font-family: 'Dancing Script', cursive; /* Font viết tay bay bổng */
+            background: linear-gradient(
+                45deg, 
+                #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000
+            );
+            background-size: 400%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: rainbow-move 5s linear infinite;
+        }
+
+        @keyframes rainbow-move {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        /* Hiệu ứng rung rinh khi hover vào chữ */
+        h1:hover, h2:hover, h3:hover {
+            animation: shake 0.5s;
+        }
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            100% { transform: translate(1px, -1px) rotate(0deg); }
+        }
+
+        /* ============ 2. HEADER ============ */
+        header {
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 3px solid transparent;
+            border-image: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet) 1;
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        header h1 {
+            font-size: 4rem;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        /* ============ 3. PHẦN 3 CỘT (Sum vầy, Hạnh phúc...) ============ */
+        .features {
+            display: flex;
+            justify-content: space-around;
+            padding: 30px 10%;
+            gap: 20px;
+            background: linear-gradient(180deg, #000 0%, #111 100%);
+        }
+
+        .feature-item {
+            flex: 1;
+            text-align: center;
+            padding: 20px;
+            border-radius: 15px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(5px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+            box-shadow: 0 0 10px #0ff, 0 0 20px #f0f; /* Bóng đổ Neon */
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px) scale(1.05);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 30px #ffff00, 0 0 60px #ff0000;
+        }
+
+        .feature-item h2 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #fff; /* Sẽ bị class magic-text đè lên */
+        }
+
+        .feature-item p {
+            font-size: 1.2rem;
+            color: #d1d1d1;
+        }
+
+        /* ============ 4. NỘI DUNG CHÍNH (Layout So Le) ============ */
+        .container {
+            width: 85%;
+            margin: 40px auto;
+            background: rgba(20, 20, 20, 0.9);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(0, 255, 200, 0.2);
+            border: 1px solid #333;
+        }
+
+        .row {
+            display: flex;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+        }
+
+        /* Đảo chiều layout cho hàng chẵn */
+        .row:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .text-col {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .text-col h3 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            /* Tạo hiệu ứng gạch chân 7 màu */
+            border-bottom: 4px solid;
+            border-image: linear-gradient(to right, #ff0000, #00ff00, #0000ff) 1;
+        }
+
+        .text-col ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .text-col li {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        /* Icon đầu dòng sặc sỡ */
+        .text-col li::before {
+            content: '★';
+            position: absolute;
+            left: 0;
+            color: #ffd700;
+            text-shadow: 0 0 5px #ffd700;
+            animation: spin 3s linear infinite;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        .img-col {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .img-col img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            min-height: 350px;
+            display: block;
+            transition: transform 0.5s ease, filter 0.5s ease;
+        }
+
+        /* Hiệu ứng ảnh ảo diệu khi hover */
+        .img-col:hover img {
+            transform: scale(1.1);
+            filter: hue-rotate(90deg) contrast(1.2); /* Đổi màu ảnh khi di chuột */
+        }
+
+        /* Link trong bài viết */
+        .highlight-link {
+            color: #00ffff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-shadow: 0 0 5px #00ffff;
+            border: 2px solid #00ffff;
+            padding: 5px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+
+        .highlight-link:hover {
+            background-color: #00ffff;
+            color: #000;
+            box-shadow: 0 0 20px #00ffff;
+        }
+
+        /* ============ 5. FOOTER ============ */
+        footer {
+            background: linear-gradient(135deg, #2c003e, #000000);
+            padding: 40px 10%;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            border-top: 4px solid #ff00ff;
+            position: relative;
+        }
+
+        /* Hiệu ứng sao lấp lánh ở footer */
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(white 1px, transparent 1px);
+            background-size: 30px 30px;
+            opacity: 0.2;
+            pointer-events: none;
+        }
+
+        footer h3 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            color: #ffff00;
+            text-shadow: 0 0 10px #ff0000;
+            margin-bottom: 20px;
+        }
+
+        footer ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        footer li {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        footer a:hover {
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00;
+            padding-left: 10px; /* Dịch chuyển chữ */
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.5rem; }
+            .features { flex-direction: column; }
+            .row, .row:nth-child(even) { flex-direction: column; }
+            .container { width: 95%; }
+            footer { flex-direction: column; text-align: center; gap: 20px;}
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1 class="magic-text">Mâm Cơm Gia Đình</h1>
+        <p style="color: #ff69b4; font-size: 1.5rem; letter-spacing: 2px;">★ Sợi Dây Gắn Kết Yêu Thương ★</p>
+    </header>
+
+    <section class="features">
+        <div class="feature-item">
+            <h2 class="magic-text">Sum vầy</h2>
+            <p>Gia đình bên nhau</p>
+        </div>
+        <div class="feature-item">
+            <h2 class="magic-text">Hạnh phúc</h2>
+            <p>Đầy đủ thành viên</p>
+        </div>
+        <div class="feature-item">
+            <h2 class="magic-text">Văn hoá</h2>
+            <p>Đã có từ lâu đời trong văn hoá người Việt</p>
+        </div>
+    </section>
+
+    <div class="container">
+
+        <div class="row">
+            <div class="text-col">
+                <h3 class="magic-text">Những câu chuyện xoay quanh mâm cơm</h3>
+                <ul>
+                    <li><strong>Giới thiệu:</strong> Mâm cơm gia đình không chỉ đơn thuần là bữa ăn mà còn là nơi gắn kết các thành viên, chia sẻ những câu chuyện đời thường và lưu giữ những kỷ niệm đẹp.</li>
+                    <li><strong>Câu chuyện 1: Bữa cơm đoàn tụ</strong><br>Đây là câu chuyện về ngày cả gia đình đoàn tụ sau nhiều năm xa cách. Bữa cơm đơn giản nhưng tràn đầy yêu thương và cảm xúc...</li>
+                    <li><strong>Câu chuyện 2: Món ăn của mẹ</strong><br>Mỗi lần nhớ về mẹ, món canh chua mẹ nấu luôn là ký ức không thể phai mờ trong tâm trí.</li>
+                </ul>
+            </div>
+            <div class="img-col">
+                <img src="https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=1000&auto=format&fit=crop" alt="Bữa cơm đoàn tụ">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="img-col">
+                <img src="https://images.unsplash.com/photo-1544025162-d76690b67f61?q=80&w=1000&auto=format&fit=crop" alt="Sườn rim">
+            </div>
+            <div class="text-col">
+                <h3 class="magic-text">Hướng dẫn nấu món "Sườn rim mật ong"</h3>
+                <ul>
+                    <li>1. Sơ chế nguyên liệu</li>
+                    <li>2. Ướp và chiên sườn</li>
+                    <li>3. Pha nước sốt rim sườn</li>
+                    <li>4. Rim sườn</li>
+                    <li>5. Thành phẩm</li>
+                </ul>
+                <a href="#" class="highlight-link">Xem chi tiết &rarr;</a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="text-col">
+                <h3 class="magic-text">Hạnh phúc của mâm cơm gia đình</h3>
+                <ul>
+                    <li>Hạnh phúc không chỉ nằm ở món ăn ngon, mà còn ở tình yêu thương, sự sẻ chia.</li>
+                    <li>Mâm cơm không cần cầu kỳ, chỉ cần có đủ hương vị của sự quan tâm.</li>
+                    <li>Hạnh phúc đơn giản, đôi khi chỉ là nhìn thấy nụ cười của cha mẹ, ánh mắt vui vẻ của con cái.</li>
+                </ul>
+            </div>
+            <div class="img-col">
+                <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=1000&auto=format&fit=crop" alt="Hạnh phúc gia đình">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="img-col">
+                <img src="https://images.unsplash.com/photo-1615937657715-bc7b4b7962c1?q=80&w=1000&auto=format&fit=crop" alt="Ý nghĩa mâm cơm">
+            </div>
+            <div class="text-col">
+                <h3 class="magic-text">Ý nghĩa của mâm cơm gia đình</h3>
+                <ul>
+                    <li>Mỗi bữa cơm gia đình không chỉ là thời gian ăn uống, mà còn là lúc sẻ chia yêu thương.</li>
+                    <li>Dù là món truyền thống hay hiện đại, đều gửi gắm vào đó sự quan tâm và tình cảm gia đình.</li>
+                    <li>Đó chính là hạnh phúc giản đơn, nhưng bền vững.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div>
+            <h3>Liên lạc:</h3>
+            <ul>
+                <li>Điện thoại: 0356120653</li>
+                <li>Website: <a href="#">Mâm cơm gia đình - sợi dây gắn kết yêu thương</a></li>
+            </ul>
+        </div>
+
+        <div>
+            <h3>Xem chi tiết:</h3>
+            <ul>
+                <li><a href="#">Hướng dẫn nấu món "Sườn rim mật ong"</a></li>
+                <li><a href="#">Các món ăn</a></li>
+            </ul>
+        </div>
+    </footer>
+
+</body>
+</html>
