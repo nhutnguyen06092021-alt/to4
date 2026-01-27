@@ -736,7 +736,7 @@
             }
             let bill = cart.map((item, i) => `${i+1}. ${item.name} x${item.quantity} (= ${(item.price*item.quantity).toLocaleString()}đ)`).join('\n');
             let total = cart.reduce((s, i) => s + i.price*i.quantity, 0).toLocaleString();
-            let msg = `🧧 ĐƠN HÀNG TẾT 12TN1 🧧\n---------------------------\n${bill}\n---------------------------\n💰 TỔNG: ${total} VNĐ\n---------------------------\nShop chốt đơn giúp mình nha!`;
+            let msg = `🧧 ĐƠN HÀNG TẾT 12A5 🧧\n---------------------------\n${bill}\n---------------------------\n💰 TỔNG: ${total} VNĐ\n---------------------------\nShop chốt đơn giúp mình nha!`;
             
             navigator.clipboard.writeText(msg).then(() => {
                 Swal.fire({
