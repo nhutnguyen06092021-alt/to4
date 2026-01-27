@@ -22,17 +22,18 @@
             --shadow-card: 0 10px 30px rgba(183, 28, 28, 0.15);
         }
 
-        /* --- TỐI ƯU CẢM ỨNG (QUAN TRỌNG) --- */
-        html, body {
-            touch-action: pan-y; /* Chỉ cho phép cuộn dọc, tối ưu click */
-            -webkit-tap-highlight-color: transparent; /* Bỏ màu xanh khi tap trên Android/iOS */
+        * {
+            /* Tối ưu chạm trên mobile: loại bỏ delay 300ms */
+            touch-action: manipulation; 
+            -webkit-tap-highlight-color: transparent; /* Bỏ màu xanh khi ấn trên mobile */
         }
 
         body {
             background-color: var(--tet-red);
             background-image: 
                 radial-gradient(circle at 100% 150%, var(--tet-red) 24%, var(--tet-red-dark) 25%, var(--tet-red-dark) 28%, var(--tet-red) 29%, var(--tet-red) 36%, var(--tet-red-dark) 36%, var(--tet-red-dark) 40%, transparent 40%, transparent),
-                radial-gradient(circle at 0    150%, var(--tet-red) 24%, var(--tet-red-dark) 25%, var(--tet-red-dark) 28%, var(--tet-red) 29%, var(--tet-red) 36%, var(--tet-red-dark) 36%, var(--tet-red-dark) 40%, transparent 40%, transparent);
+                radial-gradient(circle at 0    150%, var(--tet-red) 24%, var(--tet-red-dark) 25%, var(--tet-red-dark) 28%, var(--tet-red) 29%, var(--tet-red) 36%, var(--tet-red-dark) 36%, var(--tet-red-dark) 40%, transparent 40%, transparent),
+                radial-gradient(circle at 50%  100%, var(--tet-red-dark) 10%, var(--tet-red) 11%, var(--tet-red) 23%, var(--tet-red-dark) 24%, var(--tet-red-dark) 30%, var(--tet-red) 31%, var(--tet-red) 43%, var(--tet-red-dark) 44%, var(--tet-red-dark) 50%, var(--tet-red) 51%, var(--tet-red) 63%, var(--tet-red-dark) 64%, var(--tet-red-dark) 71%, transparent 71%, transparent);
             background-size: 50px 50px;
             color: var(--text-main);
             font-family: 'Mulish', sans-serif;
@@ -46,9 +47,9 @@
         .petal {
             position: absolute; display: block;
             border-radius: 50% 0 50% 50%; opacity: 0.8;
+            filter: drop-shadow(0 0 5px rgba(255,255,0,0.5));
         }
 
-        /* Preloader */
         #preloader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(135deg, var(--tet-red-dark), var(--tet-red)); 
@@ -56,13 +57,60 @@
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             transition: transform 0.6s cubic-bezier(0.83, 0, 0.17, 1);
         }
-        .loader-icon { font-size: 4rem; color: var(--tet-gold); animation: spin 2s infinite linear; }
+        .loader-icon { font-size: 4rem; color: var(--tet-gold); animation: spin 2s infinite linear; text-shadow: 0 0 20px var(--tet-gold); }
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        /* --- HERO --- */
+        /* --- UI GIỎ HÀNG --- */
+        .cart-sidebar {
+            position: fixed; top: 0; right: -400px; width: 350px; height: 100vh;
+            background: #fffdf0; z-index: 10000;
+            box-shadow: -10px 0 40px rgba(0,0,0,0.4);
+            transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex; flex-direction: column;
+            border-left: 5px solid var(--tet-red);
+        }
+        .cart-sidebar.open { right: 0; }
+        
+        .cart-header {
+            padding: 20px; 
+            background: linear-gradient(45deg, var(--tet-red-dark), var(--tet-red)); 
+            color: var(--tet-gold);
+            display: flex; justify-content: space-between; align-items: center;
+            font-family: 'Dancing Script', cursive; font-size: 1.8rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .cart-items-container { flex-grow: 1; overflow-y: auto; padding: 15px; }
+        .cart-item {
+            display: flex; gap: 10px; margin-bottom: 15px; background: white;
+            padding: 10px; border-radius: 12px; align-items: center;
+            border: 1px solid #ffeeba; box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            transition: transform 0.2s;
+        }
+        .cart-item img { width: 50px; height: 50px; object-fit: cover; border-radius: 50%; border: 2px solid var(--tet-gold); }
+        
+        .item-controls button {
+            background: var(--tet-red-dark); color: white; border: none; 
+            width: 28px; height: 28px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: bold; cursor: pointer;
+        }
+        /* Mobile Active Effect */
+        .item-controls button:active { transform: scale(0.9); background-color: #ff5252; }
+
+        .cart-footer { padding: 20px; background: #fff; border-top: 2px dashed var(--tet-gold); }
+        .btn-checkout {
+            width: 100%; 
+            background: linear-gradient(to right, #d32f2f, #ff6f00);
+            color: white;
+            border: none; padding: 15px; font-weight: 900; text-transform: uppercase;
+            border-radius: 50px; box-shadow: 0 8px 20px rgba(183, 28, 28, 0.4);
+            transition: transform 0.2s; cursor: pointer;
+        }
+        .btn-checkout:active { transform: scale(0.95); opacity: 0.9; }
+
         .hero {
             height: 65vh; position: relative;
-            background: url('https://cdr.vn/wp-content/uploads/2026/01/filevip-021246-file-thiet-ke-tet-doan-vien-sum-vay-2026-file-corel.jpg') center/cover;
+            background: url('https://brocanvas.vn/wp-content/uploads/2025/11/Hinh-anh-Happy-New-Year-2026-Ruc-ro.jpg') center/cover;
             display: flex; align-items: center; justify-content: center; text-align: center;
             box-shadow: 0 10px 50px rgba(0,0,0,0.3);
         }
@@ -74,16 +122,16 @@
         .hero-title {
             font-family: 'Dancing Script', cursive; font-size: 4.5rem;
             text-shadow: 4px 4px 0 #8e0000; margin-bottom: 10px;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        .hero-subtitle {
+            font-size: 1.3rem; background: var(--tet-gold); color: var(--tet-red-dark);
+            padding: 8px 30px; border-radius: 50px; font-weight: 900;
+            display: inline-block; transform: rotate(-2deg);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3); border: 2px solid white;
         }
 
-        /* Nút Hero */
-        .hero-btn {
-            cursor: pointer; transition: transform 0.1s;
-            touch-action: manipulation;
-        }
-        .hero-btn:active { transform: scale(0.95); }
-
-        /* --- MENU SECTION --- */
         .menu-section {
             background: var(--paper-bg); padding: 50px 4vw;
             border-radius: 40px 40px 0 0; position: relative; z-index: 5;
@@ -94,20 +142,22 @@
             font-family: 'Dancing Script', cursive; font-size: 3.2rem; color: var(--tet-red);
             border-bottom: 4px solid var(--tet-gold); display: inline-block; 
             padding-bottom: 10px; margin-bottom: 40px;
+            text-shadow: 1px 1px 0px rgba(0,0,0,0.1);
         }
 
-        /* --- CARD MÓN ĂN (TỐI ƯU HÓA) --- */
+        /* --- CARD MÓN ĂN --- */
         .food-card {
             background: white; border-radius: 20px; overflow: hidden;
             box-shadow: var(--shadow-card); 
+            transition: all 0.2s ease; 
             border: 2px solid transparent;
             position: relative; cursor: pointer; height: 100%;
-            /* Quan trọng: Giúp phần cứng xử lý render mượt hơn */
-            transform: translateZ(0);
-            transition: transform 0.1s ease, box-shadow 0.2s;
+            transform: translateZ(0); 
         }
-
-        /* CHỈ HOVER TRÊN MÁY TÍNH */
+        /* Mobile Tap Effect: Ấn là dính */
+        .food-card:active { transform: scale(0.96); border-color: var(--tet-gold); }
+        
+        /* Chỉ Hover trên PC */
         @media (hover: hover) {
             .food-card:hover {
                 transform: translateY(-5px); 
@@ -117,68 +167,60 @@
             .food-card:hover .card-img img { transform: scale(1.1); }
         }
 
-        /* HIỆU ỨNG CHẠM TRÊN ĐIỆN THOẠI (ACTIVE) */
-        .food-card:active {
-            transform: scale(0.96) !important; /* Nhún xuống khi chạm */
-            border-color: var(--tet-gold);
-            background-color: #fff8e1; /* Đổi màu nền nhẹ để biết đã chạm */
-        }
-
-        .card-img { height: 200px; overflow: hidden; position: relative; pointer-events: none; /* Tránh ảnh chặn click */ }
+        .card-img { height: 200px; overflow: hidden; position: relative; }
         .card-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
         
-        .card-body { padding: 15px; text-align: center; pointer-events: none; /* Click xuyên qua text xuống card */ }
-        .food-name { font-weight: 800; font-size: 1.15rem; margin-bottom: 5px; color: #333; height: 2.6em; overflow: hidden; }
+        .card-body { padding: 15px; text-align: center; }
+        .food-name { font-weight: 800; font-size: 1.15rem; margin-bottom: 5px; color: #333; height: 2.6em; overflow: hidden; line-height: 1.3; }
         .food-price { color: var(--tet-red); font-size: 1.2rem; font-weight: 900; }
         
         .badge-tet {
             position: absolute; top: 10px; left: 10px;
             background: linear-gradient(45deg, var(--tet-red), #ff5252); color: white;
             padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 0.75rem;
-            box-shadow: 0 4px 10px rgba(183, 28, 28, 0.3); z-index: 2; pointer-events: none;
+            box-shadow: 0 4px 10px rgba(183, 28, 28, 0.3); z-index: 2; border: 1px solid white;
         }
-
-        /* Nút cộng nhanh */
         .btn-quick-add {
             position: absolute; bottom: 10px; right: 10px;
             background: var(--tet-gold); color: var(--tet-red-dark);
-            width: 45px; height: 45px; border-radius: 50%; border: 2px solid white;
+            width: 40px; height: 40px; border-radius: 50%; border: 2px solid white;
             display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2); z-index: 5;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: 0.2s; z-index: 5;
             font-size: 1.2rem; cursor: pointer;
-            touch-action: manipulation;
         }
         .btn-quick-add:active { transform: scale(0.8); background: white; }
 
-        /* --- CART SIDEBAR --- */
-        .cart-sidebar {
-            position: fixed; top: 0; right: -400px; width: 350px; height: 100vh;
-            background: #fffdf0; z-index: 10000;
-            box-shadow: -10px 0 40px rgba(0,0,0,0.4);
-            transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex; flex-direction: column;
-            border-left: 5px solid var(--tet-red);
-        }
-        .cart-sidebar.open { right: 0; }
-        .cart-item {
-            display: flex; gap: 10px; margin-bottom: 15px; background: white;
-            padding: 10px; border-radius: 12px; align-items: center;
-            border: 1px solid #ffeeba; box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-        }
-        .cart-item img { width: 50px; height: 50px; object-fit: cover; border-radius: 50%; }
-        
-        .item-controls button {
-            background: var(--tet-red-dark); color: white; border: none; 
-            width: 30px; height: 30px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-weight: bold; cursor: pointer; touch-action: manipulation;
-        }
-        .item-controls button:active { transform: scale(0.8); }
-
-        /* --- FOOTER & MODAL --- */
         .contact-section {
             background: var(--tet-red-dark); color: white; padding: 60px 0 40px; position: relative;
             border-top: 5px solid var(--tet-gold);
+        }
+        .social-btn {
+            width: 50px; height: 50px; border-radius: 50%;
+            display: inline-flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; margin: 0 10px; transition: 0.3s;
+            color: var(--tet-red-dark); background: var(--tet-gold); text-decoration: none;
+            box-shadow: 0 0 15px rgba(255, 193, 7, 0.5);
+        }
+        @media (hover: hover) {
+            .social-btn:hover { transform: scale(1.1) rotate(10deg); background: white; }
+        }
+        
+        .shop-launcher { position: fixed; bottom: 30px; left: 20px; z-index: 9998; }
+        .launcher-btn {
+            width: 65px; height: 65px; background: radial-gradient(circle, #ffd700, #ff8f00);
+            border: 3px solid #fff; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.8rem; color: #d00000; cursor: pointer;
+            box-shadow: 0 5px 20px rgba(255, 143, 0, 0.5); transition: 0.2s;
+        }
+        .launcher-btn:active { transform: scale(0.9); }
+        .launcher-menu { position: absolute; bottom: 10px; left: 10px; width: 50px; height: 50px; pointer-events: none; }
+        .menu-node {
+            position: absolute; top: 0; left: 0; width: 50px; height: 50px;
+            background: #fff; border: 2px solid var(--tet-red); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            text-decoration: none; color: var(--tet-red); font-size: 1.1rem;
+            opacity: 0; transition: 0.4s; box-shadow: 0 5px 15px rgba(0,0,0,0.2); pointer-events: auto;
         }
         
         .float-cart-btn {
@@ -188,7 +230,7 @@
             display: flex; align-items: center; justify-content: center;
             font-size: 24px; box-shadow: 0 5px 25px rgba(183, 28, 28, 0.6);
             z-index: 9999; cursor: pointer; border: 3px solid white;
-            transition: transform 0.2s; touch-action: manipulation;
+            transition: transform 0.2s;
         }
         .float-cart-btn:active { transform: scale(0.9); }
         .cart-count {
@@ -197,7 +239,7 @@
             font-size: 14px; font-weight: 900;
             width: 28px; height: 28px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            border: 2px solid white;
+            border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.3);
         }
 
         .food-modal {
@@ -219,33 +261,21 @@
         
         .modal-img { flex: 1; height: 400px; position: relative; }
         .modal-img img { width: 100%; height: 100%; object-fit: cover; }
-        .modal-content { flex: 1; padding: 30px; display: flex; flex-direction: column; justify-content: center; }
+        .modal-content { flex: 1; padding: 30px; display: flex; flex-direction: column; justify-content: center; position: relative; }
         .close-btn { 
-            position: absolute; top: 15px; right: 20px; font-size: 2.5rem; 
-            cursor: pointer; color: #333; z-index: 10; touch-action: manipulation;
+            position: absolute; top: 15px; right: 20px; 
+            font-size: 2.5rem; cursor: pointer; color: #333; z-index: 10;
+            line-height: 0.8;
         }
-
-        /* Launcher Menu */
-        .shop-launcher { position: fixed; bottom: 30px; left: 20px; z-index: 9998; }
-        .launcher-btn {
-            width: 65px; height: 65px; background: radial-gradient(circle, #ffd700, #ff8f00);
-            border: 3px solid #fff; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.8rem; color: #d00000; cursor: pointer;
-            box-shadow: 0 5px 20px rgba(255, 143, 0, 0.5); transition: 0.2s;
-            touch-action: manipulation;
+        .close-btn:hover { color: var(--tet-red); }
+        
+        .overlay-backdrop {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6); z-index: 9999;
+            opacity: 0; visibility: hidden; transition: 0.3s;
+            backdrop-filter: blur(2px);
         }
-        .launcher-btn:active { transform: scale(0.9); }
-        .launcher-menu { position: absolute; bottom: 10px; left: 10px; width: 50px; height: 50px; pointer-events: none; }
-        .menu-node {
-            position: absolute; top: 0; left: 0; width: 50px; height: 50px;
-            background: #fff; border: 2px solid var(--tet-red); border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            text-decoration: none; color: var(--tet-red); font-size: 1.1rem;
-            opacity: 0; transition: 0.4s; box-shadow: 0 5px 15px rgba(0,0,0,0.2); 
-            pointer-events: auto; touch-action: manipulation;
-        }
-        .menu-node:active { transform: scale(0.9); background: #eee; }
+        .overlay-backdrop.active { opacity: 1; visibility: visible; }
 
         @media (max-width: 768px) {
             .modal-box { flex-direction: column; height: 85vh; overflow-y: auto; }
@@ -264,7 +294,7 @@
     </div>
 
     <div id="petals-container"></div>
-    <div class="overlay-backdrop" id="backdrop" onclick="toggleCart()" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:9999;opacity:0;visibility:hidden;transition:0.3s;"></div>
+    <div class="overlay-backdrop" id="backdrop" onclick="toggleCart()"></div>
 
     <div class="shop-launcher">
         <div class="launcher-btn" onclick="toggleLauncher()">
@@ -282,7 +312,7 @@
             <h1 class="hero-title">Đại Tiệc ẨM Thực</h1>
             <div class="hero-subtitle">12A5 • Nguyễn Minh Nhựt </div>
             <div class="mt-4">
-                <button onclick="window.location.href='order.html'" class="btn btn-warning btn-lg rounded-pill px-5 fw-bold shadow border-2 border-white text-danger hero-btn">
+                <button onclick="window.location.href='order.html'" class="btn btn-warning btn-lg rounded-pill px-5 fw-bold shadow border-2 border-white text-danger">
                     <i class="fas fa-utensils me-2"></i> ODER MÓN ĂN 
                 </button>
             </div>
@@ -291,11 +321,10 @@
 
     <section class="menu-section" id="thuc-don">
         <div class="section-header text-center"><h2 class="section-title">Ăn Vặt & Khai Vị</h2></div>
-        
         <div class="row g-3 g-md-4 mb-5">
             <div class="col-6 col-md-3" data-aos="fade-up">
                 <div class="food-card" onclick="openModal('changa')">
-                    <span class="badge-tet">BEST SELLER</span>
+                    <span class="badge-tet">SALE SẬP SÀN</span>
                     <button class="btn-quick-add" onclick="event.stopPropagation(); addToCart('changa')"><i class="fas fa-plus"></i></button>
                     <div class="card-img"><img id="img-changa" src="" alt="Chân gà"></div>
                     <div class="card-body"><div class="food-name">Chân Gà Sốt Thái</div><div class="food-price">20.000đ</div></div>
@@ -350,7 +379,7 @@
         <div class="row g-3 g-md-4 mb-5">
             <div class="col-6 col-md-4" data-aos="fade-up">
                 <div class="food-card" onclick="openModal('comcuon')">
-                    <span class="badge-tet">Mua 1 tặng 1</span>
+                    <span class="badge-tet">Mua 1 tặng 1 tính tiền 2 </span>
                     <button class="btn-quick-add" onclick="event.stopPropagation(); addToCart('comcuon')"><i class="fas fa-plus"></i></button>
                     <div class="card-img"><img id="img-comcuon" src="" alt="Cơm cuộn"></div>
                     <div class="card-body"><div class="food-name">Cơm Cuộn Rong Biển</div><div class="food-price">15.000đ</div></div>
@@ -439,12 +468,14 @@
             <span><i class="fas fa-shopping-bag me-2"></i>Giỏ Hàng Tết</span>
             <button class="btn-close btn-close-white" onclick="toggleCart()"></button>
         </div>
+        
         <div class="cart-items-container" id="cart-items">
             <div class="text-center text-muted mt-5">
                 <i class="fas fa-shopping-basket fa-3x mb-3 text-secondary opacity-50"></i>
                 <p>Chưa có món nào...</p>
             </div>
         </div>
+
         <div class="cart-footer">
             <div class="d-flex justify-content-between mb-3 fw-bold fs-5 text-danger">
                 <span>Tổng tiền:</span>
@@ -497,8 +528,10 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <script>
+        // --- CẤU HÌNH VÀ DỮ LIỆU ---
         const FACEBOOK_USERNAME = "nhutnguyen.72782"; 
 
+        // DATA ONLINE (Dùng link bạn đã cung cấp để đảm bảo không lỗi trên GitHub)
         const foodData = {
             'changa': { 
                 title: "Chân Gà Sốt Thái", 
@@ -625,9 +658,10 @@
             }
             updateCartUI();
             
+            // Toast đẹp hơn
             Toastify({
                 text: `🧧 Đã thêm ${product.title} vào giỏ!`,
-                duration: 1500, // Nhanh hơn chút
+                duration: 2000,
                 gravity: "bottom", position: "center", 
                 style: { background: "linear-gradient(to right, #ffb300, #ff6f00)", color: "#fff", borderRadius: "50px", fontWeight: "bold", boxShadow: "0 5px 15px rgba(0,0,0,0.2)" }
             }).showToast();
@@ -687,14 +721,7 @@
 
         function toggleCart() {
             document.getElementById('cart-sidebar').classList.toggle('open');
-            const backdrop = document.getElementById('backdrop');
-            if(document.getElementById('cart-sidebar').classList.contains('open')){
-                backdrop.style.opacity = '1';
-                backdrop.style.visibility = 'visible';
-            } else {
-                backdrop.style.opacity = '0';
-                backdrop.style.visibility = 'hidden';
-            }
+            document.getElementById('backdrop').classList.toggle('active');
         }
 
         function checkout() {
@@ -740,6 +767,7 @@
         // INITIALIZE
         window.onload = function() {
             syncImagesToHTML(); 
+            // Ẩn preloader mượt mà
             const preloader = document.getElementById('preloader');
             preloader.style.opacity = '0';
             setTimeout(() => { preloader.style.display = 'none'; }, 600);
@@ -791,7 +819,7 @@
             for(let i=0; i<12; i++){
                 const p = document.createElement('div');
                 p.className = 'petal';
-                p.style.background = Math.random()>0.5 ? '#ffd700' : '#ffcdd2';
+                p.style.background = Math.random()>0.5 ? '#ffd700' : '#ffcdd2'; // Vàng và Hồng
                 p.style.width = Math.random()*15+10+'px';
                 p.style.height = p.style.width;
                 p.style.left = Math.random()*100+'vw';
