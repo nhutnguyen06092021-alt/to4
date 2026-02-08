@@ -270,59 +270,59 @@
 </div>
 
 <script>
-    // 1. Cấu hình Dữ liệu mặc định
+    // 1. Cấu hình Dữ liệu mặc định (Đã cập nhật theo yêu cầu)
     const defaultData = {
         "Thứ 2": { 
-            sang: {s:"Toán (Chung)", o:"both"}, 
+            sang: {s:"Sinh", o:"ny"}, 
             trua: {s:"", o:"empty"},
-            chieu: {s:"Vật Lý", o:"you"}, 
-            toi: {s:"Sinh", o:"ny"} 
+            chieu: {s:"Hóa", o:"ny"}, 
+            toi: {s:"Toán (Chung)", o:"both"} 
         },
         "Thứ 3": { 
-            sang: {s:"Hóa (Chung)", o:"both"}, 
+            sang: {s:"Hóa", o:"ny"}, 
             trua: {s:"", o:"empty"},
-            chieu: {s:"Sử", o:"you"}, 
+            chieu: {s:"Toán (Chung)", o:"both"}, 
             toi: {s:"Sinh", o:"ny"} 
         },
         "Thứ 4": { 
-            sang: {s:"GDKT", o:"you"}, 
+            sang: {s:"Toán (Chung)", o:"both"}, 
             trua: {s:"", o:"empty"},
-            chieu: {s:"Toán (Chung)", o:"both"}, 
-            toi: {s:"Vật Lý (Bài tập)", o:"you"} 
+            chieu: {s:"Sinh", o:"ny"}, 
+            toi: {s:"Hóa", o:"ny"} 
         },
         "Thứ 5": { 
             sang: {s:"Sinh", o:"ny"}, 
             trua: {s:"", o:"empty"},
-            chieu: {s:"Hóa (Chung)", o:"both"}, 
-            toi: {s:"Vật Lý", o:"you"} 
+            chieu: {s:"Toán (Chung)", o:"both"}, 
+            toi: {s:"Hóa", o:"ny"} 
         },
         "Thứ 6": { 
             sang: {s:"Toán (Chung)", o:"both"}, 
             trua: {s:"", o:"empty"},
-            chieu: {s:"Sử", o:"you"}, 
-            toi: {s:"Nghỉ", o:"empty"} 
+            chieu: {s:"Hóa", o:"ny"}, 
+            toi: {s:"Sinh", o:"ny"} 
         },
         "Thứ 7": { 
-            sang: {s:"Vật Lý (Chuyên đề)", o:"you"}, 
+            sang: {s:"Hóa", o:"ny"}, 
             trua: {s:"", o:"empty"},
             chieu: {s:"Sinh", o:"ny"}, 
-            toi: {s:"Ôn Toán – Hóa", o:"both"} 
+            toi: {s:"Toán (Chung)", o:"both"} 
         },
         "CN": { 
             sang: {s:"Nghỉ", o:"empty"}, 
             trua: {s:"", o:"empty"},
-            chieu: {s:"Reset tinh thần 🌿", o:"empty"}, 
-            toi: {s:"Nghỉ ngơi", o:"empty"} 
+            chieu: {s:"Nghỉ", o:"empty"}, 
+            toi: {s:"Nghỉ", o:"empty"} 
         }
     };
 
     const days = ["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "CN"];
     
     const sessions = [
-        {key: "sang", label: "Sáng", hint: "07:00 - 11:00"},
-        {key: "trua", label: "Trưa", hint: "11:30 - 13:00"},
-        {key: "chieu", label: "Chiều", hint: "14:00 - 17:00"},
-        {key: "toi", label: "Tối", hint: "19:30 - 22:00"}
+        {key: "sang", label: "Sáng", hint: "08:30 - 11:00"},
+        {key: "trua", label: "Trưa", hint: "11:30 - 13:30"},
+        {key: "chieu", label: "Chiều", hint: "13:30 - 16:30"},
+        {key: "toi", label: "Tối", hint: "19:00 - 22:00"}
     ];
 
     // Lấy dữ liệu hoặc dùng mặc định
@@ -425,7 +425,6 @@
         if(item.o === 'empty') {
             ownerToSet = preferredOwner;
         }
-        if(ownerToSet === 'phy') ownerToSet = 'you'; 
 
         document.getElementById('e-owner').value = ownerToSet;
         document.getElementById('editModal').style.display = 'flex';
@@ -505,7 +504,7 @@
     }
 
     function resetDefault() {
-        if(confirm("Xóa hết dữ liệu về mặc định?")) {
+        if(confirm("Xóa hết dữ liệu về mặc định (Lịch mới)?")) {
             localStorage.removeItem('coupleTetScheduleV3');
             location.reload();
         }
