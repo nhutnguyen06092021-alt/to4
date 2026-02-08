@@ -3,9 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lịch Học Đôi Bạn</title>
+<title>Lịch Học Đôi Bạn - Table View</title>
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 <style>
     :root {
         --tet-red: #991b1b;
@@ -13,9 +12,9 @@
         --glass: rgba(255, 255, 255, 0.95);
         
         /* 3 Màu Chính */
-        --color-you: #2563eb;  /* Blue - Bạn */
-        --color-ny: #d946ef;   /* Purple - Ny */
-        --color-both: #16a34a; /* Green - Học chung */
+        --color-you: #2563eb;  /* Blue - Anh */
+        --color-ny: #d946ef;   /* Purple - Em */
+        --color-both: #16a34a; /* Green - Chung */
     }
 
     body {
@@ -25,6 +24,7 @@
         color: #1f2937;
         min-height: 100vh;
         overflow-x: hidden;
+        padding-bottom: 50px;
     }
 
     /* Hoa rơi */
@@ -42,116 +42,145 @@
 
     .container {
         position: relative; z-index: 10;
-        max-width: 1200px; margin: 0 auto; padding: 15px;
+        max-width: 800px; 
+        margin: 0 auto; padding: 10px;
     }
 
     /* Header */
     header {
         text-align: center;
-        background: rgba(0, 0, 0, 0.3);
+        background: rgba(0, 0, 0, 0.4);
         backdrop-filter: blur(5px);
         border: 2px solid var(--tet-gold);
-        border-radius: 20px;
-        padding: 20px;
-        margin-bottom: 25px;
+        border-radius: 15px;
+        padding: 15px;
+        margin-bottom: 20px;
         box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
 
     h1 {
         font-family: 'Dancing Script', cursive;
         color: var(--tet-gold);
-        font-size: 2.8rem; margin: 0;
+        font-size: 2.2rem; margin: 0;
         text-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
     }
 
-    .status-bar {
-        display: flex; justify-content: center; flex-wrap: wrap; gap: 15px;
-        margin-top: 15px; color: white;
-    }
-    .live-clock { font-weight: bold; font-size: 1.1rem; align-self: center;}
+    .live-clock { color: white; margin-top: 10px; font-weight: bold;}
     .reminder-badge {
+        display: inline-block;
         background: var(--tet-red); color: white;
-        padding: 6px 16px; border-radius: 50px;
-        font-size: 0.95rem; border: 1px solid var(--tet-gold);
+        padding: 5px 15px; border-radius: 50px;
+        font-size: 0.9rem; border: 1px solid var(--tet-gold);
+        margin-top: 10px;
         animation: pulse 2s infinite; font-weight: 600;
     }
     @keyframes pulse { 0% {transform: scale(1);} 50% {transform: scale(1.05);} 100% {transform: scale(1);} }
 
-    /* Legend: 3 mục */
-    .legend {
-        display: flex; justify-content: center; gap: 15px; margin-bottom: 25px; flex-wrap: wrap;
+    /* Day Selector Tabs */
+    .day-tabs {
+        display: flex;
+        overflow-x: auto;
+        gap: 10px;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+        scrollbar-width: none; /* Hide scrollbar Firefox */
     }
-    .tag {
-        padding: 8px 18px; border-radius: 50px; color: white;
-        font-size: 0.95rem; font-weight: 700;
-        display: flex; align-items: center; gap: 8px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        transition: transform 0.2s;
-    }
-    .tag:hover { transform: translateY(-2px); }
-    .tag.you { background: var(--color-you); }
-    .tag.ny { background: var(--color-ny); }
-    .tag.both { background: var(--color-both); }
-
-    /* Grid Lịch */
-    .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        gap: 20px;
-    }
-
-    .day-card {
-        background: var(--glass);
-        border-radius: 16px;
-        overflow: hidden;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        transition: 0.3s;
-    }
-    .day-card.today {
-        border: 3px solid var(--tet-gold);
-        transform: scale(1.02); z-index: 5;
-    }
-
-    .day-header {
-        background: var(--tet-red); color: var(--tet-gold);
-        padding: 12px; text-align: center;
-        font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
-    }
-
-    .session {
-        padding: 14px 16px;
-        border-bottom: 1px solid #e5e7eb;
-        display: flex; justify-content: space-between; align-items: center;
-        cursor: pointer; transition: background 0.2s;
-    }
-    .session:hover { background: #fee2e2; }
-    .session:last-child { border-bottom: none; }
-
-    .ss-time { font-size: 0.85rem; font-weight: 600; color: #6b7280; width: 50px; }
-    .ss-info { flex: 1; font-weight: 700; font-size: 1rem; }
+    .day-tabs::-webkit-scrollbar { display: none; } /* Hide scrollbar Chrome */
     
-    /* Màu chữ */
-    .txt-you { color: var(--color-you); }
-    .txt-ny { color: var(--color-ny); }
-    .txt-both { color: var(--color-both); }
-    .txt-empty { color: #9ca3af; font-weight: normal; font-style: italic; }
+    .tab-item {
+        background: rgba(255,255,255,0.2);
+        color: white;
+        padding: 10px 15px;
+        border-radius: 10px;
+        white-space: nowrap;
+        cursor: pointer;
+        border: 1px solid transparent;
+        transition: 0.3s;
+        font-weight: bold;
+    }
+    .tab-item.active {
+        background: var(--tet-gold);
+        color: var(--tet-red);
+        border-color: white;
+        box-shadow: 0 0 10px var(--tet-gold);
+    }
+
+    /* TABLE STYLES */
+    .table-container {
+        background: var(--glass);
+        border-radius: 15px;
+        overflow: hidden;
+        border: 2px solid var(--tet-gold);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th {
+        background: var(--tet-red);
+        color: var(--tet-gold);
+        padding: 15px 5px;
+        font-size: 1.1rem;
+    }
+    
+    /* Cột thời gian */
+    td.time-col {
+        background: #fef2f2;
+        width: 15%;
+        text-align: center;
+        font-weight: 800;
+        color: var(--tet-red);
+        border-bottom: 1px solid #ddd;
+        border-right: 2px solid #ddd;
+        font-size: 0.9rem;
+    }
+
+    /* Cột nội dung */
+    td.content-col {
+        width: 42.5%; /* Chia đều */
+        padding: 10px;
+        vertical-align: middle;
+        border-bottom: 1px solid #eee;
+        border-right: 1px solid #eee;
+        cursor: pointer;
+        transition: background 0.2s;
+        position: relative;
+    }
+    td.content-col:last-child { border-right: none; }
+    td.content-col:hover { background: #fffbeb; }
+
+    /* Styles cho text trong ô */
+    .cell-content {
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        text-align: center; min-height: 50px;
+    }
+    .subject-name { font-weight: 700; font-size: 1rem; margin-bottom: 5px; }
+    .status-icon { font-size: 1.2rem; opacity: 0.8; margin-top: 2px;}
+
+    /* Màu sắc theo người */
+    .txt-anh { color: var(--color-you); }
+    .txt-em { color: var(--color-ny); }
+    .txt-chung { color: var(--color-both); }
+    .txt-empty { color: #ccc; font-style: italic; font-size: 0.9rem;}
 
     /* Controls */
     .controls {
-        text-align: center; margin-top: 40px;
-        padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.2);
-        display: flex; justify-content: center; gap: 15px;
+        text-align: center; margin-top: 30px;
+        display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;
     }
     .btn-icon {
-        background: rgba(0,0,0,0.5); color: var(--tet-gold);
+        background: rgba(0,0,0,0.6); color: var(--tet-gold);
         border: 1px solid var(--tet-gold);
-        padding: 10px 20px; border-radius: 30px;
-        cursor: pointer; font-size: 0.9rem; font-weight: 600;
-        transition: 0.2s; display: flex; align-items: center; gap: 8px;
+        padding: 10px 15px; border-radius: 30px;
+        cursor: pointer; font-size: 0.85rem; font-weight: 600;
+        transition: 0.2s; display: flex; align-items: center; gap: 6px;
     }
     .btn-icon:hover { background: var(--tet-gold); color: var(--tet-red); }
 
-    /* Modal Edit */
+    /* Modal */
     .modal-wrap {
         position: fixed; top: 0; left: 0; width: 100%; height: 100%;
         background: rgba(0,0,0,0.8); z-index: 100;
@@ -165,14 +194,19 @@
         animation: zoomIn 0.3s;
     }
     @keyframes zoomIn { from {transform: scale(0.8); opacity: 0;} to {transform: scale(1); opacity: 1;} }
-
+    
     label { display: block; margin: 15px 0 5px; font-weight: bold; color: var(--tet-red); }
     input, select { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; font-size: 1rem;}
-    
     .modal-btns { margin-top: 25px; display: flex; gap: 10px; }
     .btn-save { flex: 1; background: var(--tet-red); color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; }
     .btn-close { flex: 1; background: #e5e7eb; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; }
 
+    /* Mobile Responsive adjustments */
+    @media (max-width: 400px) {
+        h1 { font-size: 1.8rem; }
+        th { font-size: 1rem; }
+        .subject-name { font-size: 0.9rem; }
+    }
 </style>
 </head>
 <body>
@@ -182,154 +216,218 @@
 <div class="container">
     <header>
         <h1>🌸 Lịch Học Đôi Bạn 🌸</h1>
-        <div class="status-bar">
-            <div class="live-clock" id="clock">Loading...</div>
-            <div class="reminder-badge" id="reminder">🔔 Đang kiểm tra lịch...</div>
-        </div>
+        <div class="live-clock" id="clock">Loading...</div>
+        <div class="reminder-badge" id="reminder">🔔 Đang tải...</div>
     </header>
 
-    <div class="legend">
-        <div class="tag you"><i class="fas fa-user"></i> Bạn</div>
-        <div class="tag ny"><i class="fas fa-heart"></i> Ny</div>
-        <div class="tag both"><i class="fas fa-users"></i> Học chung</div>
+    <div class="day-tabs" id="day-tabs">
+        </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:15%">Ca</th>
+                    <th style="width:42.5%">🌸 Anh</th>
+                    <th style="width:42.5%">❤️ Em</th>
+                </tr>
+            </thead>
+            <tbody id="schedule-body">
+                </tbody>
+        </table>
     </div>
 
-    <div class="grid" id="schedule-grid"></div>
-
     <div class="controls">
-        <button class="btn-icon" onclick="copyData()"><i class="fas fa-copy"></i> Copy Cấu Hình</button>
-        <button class="btn-icon" onclick="pasteData()"><i class="fas fa-file-import"></i> Nạp Dữ Liệu</button>
-        <button class="btn-icon" onclick="resetDefault()" style="border-color:#fca5a5; color:#fca5a5"><i class="fas fa-redo"></i> Reset</button>
+        <button class="btn-icon" onclick="copyData()">🌸 Copy Mã</button>
+        <button class="btn-icon" onclick="pasteData()">🌸 Nạp Mã</button>
+        <button class="btn-icon" onclick="resetDefault()" style="border-color:#fca5a5; color:#fca5a5">🌸 Reset</button>
     </div>
 </div>
 
 <div class="modal-wrap" id="editModal">
     <div class="modal">
         <h2 style="text-align: center; color: var(--tet-red); margin-top: 0;">🧧 Sửa Lịch Học</h2>
+        
         <input type="hidden" id="e-day">
         <input type="hidden" id="e-session">
 
         <label>Môn học / Nội dung:</label>
-        <input type="text" id="e-subject" placeholder="VD: Toán Hình">
+        <input type="text" id="e-subject" placeholder="VD: Toán Hình, Ăn trưa...">
 
-        <label>Ai học?</label>
+        <label>Ai thực hiện?</label>
         <select id="e-owner">
-            <option value="empty">⚪ Nghỉ / Trống</option>
-            <option value="you">🔵 Bạn (Riêng)</option>
-            <option value="ny">🟣 Ny (Riêng)</option>
-            <option value="both">🟢 Học Chung</option>
+            <option value="empty">⚪ Trống / Nghỉ</option>
+            <option value="you">🌸 Anh (Riêng)</option>
+            <option value="ny">❤️ Em (Riêng)</option>
+            <option value="both">🌸❤️ Cùng Nhau</option>
         </select>
 
         <div class="modal-btns">
             <button class="btn-close" onclick="closeModal()">Hủy</button>
-            <button class="btn-save" onclick="saveData()">Lưu Lịch</button>
+            <button class="btn-save" onclick="saveData()">Lưu Thay Đổi</button>
         </div>
     </div>
 </div>
 
 <script>
-    // Dữ liệu chuẩn: Đã chuyển Lý về thành "you" (Bạn)
+    // 1. Cấu hình Dữ liệu mặc định
     const defaultData = {
         "Thứ 2": { 
             sang: {s:"Toán (Chung)", o:"both"}, 
-            chieu: {s:"Vật Lý", o:"you"}, // Đã sửa thành you
+            trua: {s:"", o:"empty"},
+            chieu: {s:"Vật Lý", o:"you"}, 
             toi: {s:"Sinh", o:"ny"} 
         },
         "Thứ 3": { 
             sang: {s:"Hóa (Chung)", o:"both"}, 
+            trua: {s:"", o:"empty"},
             chieu: {s:"Sử", o:"you"}, 
             toi: {s:"Sinh", o:"ny"} 
         },
         "Thứ 4": { 
             sang: {s:"GDKT", o:"you"}, 
+            trua: {s:"", o:"empty"},
             chieu: {s:"Toán (Chung)", o:"both"}, 
-            toi: {s:"Vật Lý (Bài tập)", o:"you"} // Đã sửa thành you
+            toi: {s:"Vật Lý (Bài tập)", o:"you"} 
         },
         "Thứ 5": { 
             sang: {s:"Sinh", o:"ny"}, 
+            trua: {s:"", o:"empty"},
             chieu: {s:"Hóa (Chung)", o:"both"}, 
-            toi: {s:"Vật Lý", o:"you"} // Đã sửa thành you
+            toi: {s:"Vật Lý", o:"you"} 
         },
         "Thứ 6": { 
             sang: {s:"Toán (Chung)", o:"both"}, 
+            trua: {s:"", o:"empty"},
             chieu: {s:"Sử", o:"you"}, 
             toi: {s:"Nghỉ", o:"empty"} 
         },
         "Thứ 7": { 
-            sang: {s:"Vật Lý (Chuyên đề)", o:"you"}, // Đã sửa thành you
+            sang: {s:"Vật Lý (Chuyên đề)", o:"you"}, 
+            trua: {s:"", o:"empty"},
             chieu: {s:"Sinh", o:"ny"}, 
             toi: {s:"Ôn Toán – Hóa", o:"both"} 
         },
         "CN": { 
             sang: {s:"Nghỉ", o:"empty"}, 
+            trua: {s:"", o:"empty"},
             chieu: {s:"Reset tinh thần 🌿", o:"empty"}, 
             toi: {s:"Nghỉ ngơi", o:"empty"} 
         }
     };
 
     const days = ["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "CN"];
+    
     const sessions = [
-        {key: "sang", label: "Sáng", time: "08:00"},
-        {key: "chieu", label: "Chiều", time: "14:00"},
-        {key: "toi", label: "Tối", time: "19:30"}
+        {key: "sang", label: "Sáng", hint: "07:00 - 11:00"},
+        {key: "trua", label: "Trưa", hint: "11:30 - 13:00"},
+        {key: "chieu", label: "Chiều", hint: "14:00 - 17:00"},
+        {key: "toi", label: "Tối", hint: "19:30 - 22:00"}
     ];
 
-    let schedule = JSON.parse(localStorage.getItem('coupleTetScheduleV2')) || defaultData;
+    // Lấy dữ liệu hoặc dùng mặc định
+    let schedule = JSON.parse(localStorage.getItem('coupleTetScheduleV3')) || defaultData;
+    
+    let currentViewDayIndex = new Date().getDay() === 0 ? 6 : new Date().getDay() - 1;
+    if (currentViewDayIndex < 0) currentViewDayIndex = 0; 
 
-    function render() {
-        const grid = document.getElementById('schedule-grid');
-        grid.innerHTML = '';
+    function init() {
+        initFlowers();
+        renderTabs();
+        renderTable();
+        setInterval(updateTime, 1000);
+        updateTime();
+    }
+
+    // Render Thanh Tabs
+    function renderTabs() {
+        const container = document.getElementById('day-tabs');
+        container.innerHTML = '';
         
-        const now = new Date();
-        const currentDayIndex = now.getDay() === 0 ? 6 : now.getDay() - 1;
-
         days.forEach((day, index) => {
-            const isToday = index === currentDayIndex;
-            const data = schedule[day];
-            
-            const card = document.createElement('div');
-            card.className = `day-card ${isToday ? 'today' : ''}`;
-            
-            let html = `<div class="day-header">${day} ${isToday ? '🚩' : ''}</div>`;
-            
-            sessions.forEach(sess => {
-                const item = data[sess.key] || {s:"Trống", o:"empty"};
-                // Icon
-                let icon = '';
-                if(item.o === 'you') icon = '<i class="fas fa-user"></i>';
-                else if(item.o === 'ny') icon = '<i class="fas fa-heart"></i>';
-                else if(item.o === 'both') icon = '<i class="fas fa-users"></i>';
+            const btn = document.createElement('div');
+            btn.className = `tab-item ${index === currentViewDayIndex ? 'active' : ''}`;
+            btn.innerText = day;
+            btn.onclick = () => {
+                currentViewDayIndex = index;
+                renderTabs(); 
+                renderTable(); 
+            };
+            container.appendChild(btn);
+        });
+    }
 
-                html += `
-                    <div class="session" onclick="openModal('${day}', '${sess.key}')">
-                        <div class="ss-time">${sess.label}</div>
-                        <div class="ss-info txt-${item.o}">
-                            ${item.s}
-                        </div>
-                        <div style="font-size:0.8rem; color:#aaa">${icon}</div>
-                    </div>
-                `;
-            });
-            
-            card.innerHTML = html;
-            grid.appendChild(card);
+    // Render Bảng Chính
+    function renderTable() {
+        const tbody = document.getElementById('schedule-body');
+        tbody.innerHTML = '';
+
+        const currentDayName = days[currentViewDayIndex];
+        const dayData = schedule[currentDayName] || {};
+
+        sessions.forEach(sess => {
+            let item = dayData[sess.key];
+            if (!item) item = {s: "", o: "empty"}; 
+
+            let anhContent = '';
+            let emContent = '';
+            let anhClass = '';
+            let emClass = '';
+
+            // Thay đổi icon trong logic render
+            if (item.o === 'you') {
+                anhContent = `<div class="subject-name">${item.s}</div><div class="status-icon">🌸</div>`;
+                anhClass = 'txt-anh';
+                emContent = `<span class="txt-empty">---</span>`;
+            } else if (item.o === 'ny') {
+                anhContent = `<span class="txt-empty">---</span>`;
+                emContent = `<div class="subject-name">${item.s}</div><div class="status-icon">❤️</div>`;
+                emClass = 'txt-em';
+            } else if (item.o === 'both') {
+                anhContent = `<div class="subject-name">${item.s}</div>`;
+                emContent = `<div class="subject-name">${item.s}</div>`;
+                anhClass = 'txt-chung';
+                emClass = 'txt-chung';
+            } else {
+                anhContent = `<span class="txt-empty">---</span>`;
+                emContent = `<span class="txt-empty">---</span>`;
+            }
+
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td class="time-col">
+                    ${sess.label}<br>
+                    <span style="font-size:0.7rem; opacity:0.7; font-weight:normal">${sess.hint}</span>
+                </td>
+                <td class="content-col ${anhClass}" onclick="openModal('${sess.key}', 'you')">
+                    <div class="cell-content">${anhContent}</div>
+                </td>
+                <td class="content-col ${emClass}" onclick="openModal('${sess.key}', 'ny')">
+                    <div class="cell-content">${emContent}</div>
+                </td>
+            `;
+            tbody.appendChild(tr);
         });
         
         checkReminder();
     }
 
-    // Modal
-    function openModal(day, sessKey) {
-        const item = schedule[day][sessKey];
-        document.getElementById('e-day').value = day;
-        document.getElementById('e-session').value = sessKey;
-        document.getElementById('e-subject').value = item.s === "Trống" ? "" : item.s;
+    // Modal Handling
+    function openModal(sessionKey, preferredOwner) {
+        const currentDayName = days[currentViewDayIndex];
+        const item = schedule[currentDayName][sessionKey] || {s:"", o:"empty"};
+
+        document.getElementById('e-day').value = currentDayName;
+        document.getElementById('e-session').value = sessionKey;
+        document.getElementById('e-subject').value = item.s;
         
-        // Nếu dữ liệu cũ là 'phy', chuyển hiển thị thành 'you'
-        let ownerVal = item.o;
-        if(ownerVal === 'phy') ownerVal = 'you';
-        
-        document.getElementById('e-owner').value = ownerVal;
+        let ownerToSet = item.o;
+        if(item.o === 'empty') {
+            ownerToSet = preferredOwner;
+        }
+        if(ownerToSet === 'phy') ownerToSet = 'you'; 
+
+        document.getElementById('e-owner').value = ownerToSet;
         document.getElementById('editModal').style.display = 'flex';
     }
 
@@ -338,19 +436,21 @@
     }
 
     function saveData() {
-        const day = document.getElementById('e-day').value;
-        const key = document.getElementById('e-session').value;
-        const sub = document.getElementById('e-subject').value || "Trống";
-        const owner = document.getElementById('e-owner').value;
+        const d = document.getElementById('e-day').value;
+        const k = document.getElementById('e-session').value;
+        const s = document.getElementById('e-subject').value;
+        const o = document.getElementById('e-owner').value;
 
-        schedule[day][key] = {s: sub, o: owner};
-        localStorage.setItem('coupleTetScheduleV2', JSON.stringify(schedule));
+        if(!schedule[d]) schedule[d] = {};
         
-        render();
+        schedule[d][k] = {s: s, o: o};
+        
+        localStorage.setItem('coupleTetScheduleV3', JSON.stringify(schedule)); 
+        renderTable();
         closeModal();
     }
 
-    // Đồng hồ & Nhắc nhở
+    // Thời gian & Reminder
     function updateTime() {
         const now = new Date();
         document.getElementById('clock').innerText = now.toLocaleTimeString('vi-VN') + 
@@ -362,54 +462,59 @@
     function checkReminder() {
         const now = new Date();
         const dayIdx = now.getDay() === 0 ? 6 : now.getDay() - 1;
-        const currentDay = days[dayIdx];
+        const currentDayData = schedule[days[dayIdx]];
+        
+        if(!currentDayData) return;
+
         const h = now.getHours();
+        let msg = "Chúc ngủ ngon! 💤";
+        
+        let activeSess = null;
+        let timeLabel = "";
 
-        let msg = "Đã xong lịch hôm nay! 💤";
-        const todayData = schedule[currentDay];
+        if (h < 11) { activeSess = currentDayData.sang; timeLabel="Sáng"; }
+        else if (h < 14) { activeSess = currentDayData.trua; timeLabel="Trưa"; }
+        else if (h < 18) { activeSess = currentDayData.chieu; timeLabel="Chiều"; }
+        else { activeSess = currentDayData.toi; timeLabel="Tối"; }
 
-        if(h < 11) {
-            if(todayData.sang.o !== 'empty') msg = `Sắp tới: ${todayData.sang.s} (Sáng)`;
-        } else if(h < 17) {
-            if(todayData.chieu.o !== 'empty') msg = `Sắp tới: ${todayData.chieu.s} (Chiều)`;
-            else if(todayData.toi.o !== 'empty') msg = `Tối nay: ${todayData.toi.s}`;
-        } else if(h < 22) {
-            if(todayData.toi.o !== 'empty') msg = `Đang diễn ra: ${todayData.toi.s}`;
+        if (activeSess && activeSess.o !== 'empty') {
+            msg = `Đang diễn ra (${timeLabel}): ${activeSess.s}`;
+        } else {
+             msg = "Đang rảnh rỗi... 🥰";
         }
 
         document.getElementById('reminder').innerText = "🔔 " + msg;
     }
 
-    // Sync
+    // Import/Export
     function copyData() {
-        navigator.clipboard.writeText(JSON.stringify(schedule)).then(() => {
-            alert("Đã copy mã cấu hình!");
-        });
+        navigator.clipboard.writeText(JSON.stringify(schedule)).then(() => alert("Đã copy mã cấu hình!"));
     }
 
     function pasteData() {
-        const code = prompt("Dán mã cấu hình vào đây:");
-        if(code) {
+        const c = prompt("Dán mã cấu hình:");
+        if(c) {
             try {
-                schedule = JSON.parse(code);
-                localStorage.setItem('coupleTetScheduleV2', JSON.stringify(schedule));
-                render();
+                const parsed = JSON.parse(c);
+                schedule = parsed;
+                localStorage.setItem('coupleTetScheduleV3', JSON.stringify(schedule));
+                renderTable();
                 alert("Đã cập nhật!");
-            } catch(e) { alert("Lỗi mã!"); }
+            } catch(e) { alert("Mã lỗi!"); }
         }
     }
-    
+
     function resetDefault() {
-        if(confirm("Về lại mặc định ban đầu?")) {
-            localStorage.removeItem('coupleTetScheduleV2');
+        if(confirm("Xóa hết dữ liệu về mặc định?")) {
+            localStorage.removeItem('coupleTetScheduleV3');
             location.reload();
         }
     }
 
-    // Hoa rơi
+    // Hiệu ứng hoa
     function initFlowers() {
         const c = document.getElementById('flower-container');
-        for(let i=0; i<25; i++) {
+        for(let i=0; i<20; i++) {
             let f = document.createElement('div');
             f.className = 'flower';
             f.style.left = Math.random()*100 + '%';
@@ -419,10 +524,7 @@
         }
     }
 
-    initFlowers();
-    render();
-    setInterval(updateTime, 1000);
-
+    init();
 </script>
 </body>
 </html>
