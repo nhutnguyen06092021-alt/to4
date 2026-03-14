@@ -64,6 +64,7 @@ body {
   transition: width 0.2s, height 0.2s, background 0.2s;
   box-shadow: 0 0 10px var(--accent-cyan), 0 0 20px var(--accent-cyan);
   mix-blend-mode: screen;
+  display:none !important;
 }
 #cursor-ring {
   position: fixed; width: 36px; height: 36px;
@@ -71,6 +72,7 @@ body {
   pointer-events: none; z-index: 99998;
   transform: translate(-50%,-50%);
   transition: all 0.15s ease;
+  display:none !important;
 }
 body:has(a:hover) #cursor,
 body:has(button:hover) #cursor { width: 20px; height: 20px; background: var(--accent-pink); }
@@ -128,6 +130,10 @@ body:has(button:hover) #cursor { width: 20px; height: 20px; background: var(--ac
 .led-item.green { color: var(--accent-green); text-shadow: 0 0 8px var(--accent-green), 0 0 16px var(--accent-green); }
 .led-sep { color: var(--accent-purple); font-size: 16px; text-shadow: 0 0 8px var(--accent-purple); }
 @keyframes spin360 { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes ledScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
 
 
 /* ============================================================
@@ -311,6 +317,7 @@ main { position: relative; z-index: 1; }
   height: 320px;
   border: 1px solid var(--border-subtle);
   box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  white-space: nowrap;
 }
 .banner-slide {
   position: absolute; inset: 0;
@@ -359,6 +366,7 @@ main { position: relative; z-index: 1; }
   border: 1px solid var(--border-subtle);
   color: white; font-size: 16px;
   display: flex; align-items: center; justify-content: center;
+  cursor: pointer; pointer-events: all;
   cursor: pointer; pointer-events: all; transition: var(--transition);
 }
 .banner-arrow:hover { background: rgba(0,245,255,0.2); border-color: var(--accent-cyan); }
@@ -778,7 +786,7 @@ main { position: relative; z-index: 1; }
    QR PAYMENT PAGE
    ============================================================ */
 .qr-page-layout {
-  max-width: 10px; margin: 0 auto; text-align: center;
+  max-width: 700px; margin: 0 auto; text-align: center;
 }
 .qr-card {
   background: var(--bg-card);
@@ -1678,7 +1686,7 @@ kbd{display:inline-block;padding:3px 8px;background:var(--bg-secondary);border:1
    [UPGRADE] FEATURE 1 & 2: ENHANCED CURSOR + GLOW EFFECT
    Custom cursor dot + trailing ring + radial glow aura
    ============================================================ */
-* { cursor: default !important; }
+* { cursor: auto !important; }
 #cursor-dot {
   position: fixed; width: 8px; height: 8px;
   border-radius: 50%; pointer-events: none; z-index: 999999;
@@ -1693,6 +1701,7 @@ kbd{display:inline-block;padding:3px 8px;background:var(--bg-secondary);border:1
   transform: translate(-50%,-50%);
   background: radial-gradient(circle, rgba(0,245,255,0.06) 0%, transparent 70%);
   transition: opacity 0.4s ease;
+  display:none !important;
 }
 #cursor-ring {
   position: fixed; width: 36px; height: 36px;
@@ -2551,9 +2560,368 @@ header.scrolled {
 .adv-filter-collapsed { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
 .adv-filter-collapsed.open { max-height: 300px; }
 
+/* ============================================================
+   MOBILE NAVIGATION — Hamburger + Slide Drawer
+   ============================================================ */
+.hamburger-btn {
+  display: none;
+  flex-direction: column; justify-content: center; align-items: center;
+  gap: 5px; width: 40px; height: 40px;
+  background: none; border: 1px solid var(--border-subtle);
+  border-radius: 8px; cursor: pointer; transition: var(--transition);
+  padding: 0; flex-shrink: 0;
+}
+.hamburger-btn:hover { border-color: var(--accent-cyan); background: rgba(0,245,255,0.08); }
+.hamburger-line {
+  display: block; width: 20px; height: 2px;
+  background: var(--text-primary); border-radius: 2px;
+  transition: var(--transition);
+}
+.hamburger-btn.open .hamburger-line:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger-btn.open .hamburger-line:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger-btn.open .hamburger-line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Mobile nav overlay (backdrop) */
+.mobile-nav-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.65); backdrop-filter: blur(4px);
+  z-index: 9800;
+}
+.mobile-nav-overlay.open { display: block; animation: fadeInOverlay 0.3s ease; }
+@keyframes fadeInOverlay { from { opacity: 0; } to { opacity: 1; } }
+
+/* Mobile nav drawer (right slide-in) */
+.mobile-nav-drawer {
+  position: fixed; top: 0; right: -300px; bottom: 0;
+  width: 280px; background: var(--bg-secondary);
+  border-left: 1px solid var(--border-subtle);
+  z-index: 9900; display: flex; flex-direction: column;
+  transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: -8px 0 40px rgba(0,0,0,0.5);
+  overflow-y: auto;
+}
+.mobile-nav-drawer.open { right: 0; }
+.mobile-nav-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 20px; border-bottom: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+.mobile-nav-close {
+  background: none; border: none; color: var(--text-muted);
+  font-size: 20px; cursor: pointer; padding: 4px 8px;
+  transition: var(--transition);
+}
+.mobile-nav-close:hover { color: var(--accent-pink); }
+.mobile-nav-list {
+  display: flex; flex-direction: column; padding: 12px 0;
+  gap: 2px; flex: 1;
+}
+.mobile-nav-item {
+  background: none; border: none; text-align: left;
+  padding: 14px 24px; color: var(--text-secondary);
+  font-family: var(--font-display); font-size: 12px;
+  letter-spacing: 2px; cursor: pointer;
+  transition: var(--transition); border-radius: 0;
+  display: flex; align-items: center; gap: 8px;
+  width: 100%;
+}
+.mobile-nav-item:hover { background: rgba(0,245,255,0.07); color: var(--accent-cyan); }
+.mobile-nav-item.active { color: var(--accent-cyan); background: rgba(0,245,255,0.07); }
+
+/* ============================================================
+   RESPONSIVE MEDIA QUERIES — Full breakpoint system
+   ============================================================ */
+
+/* ── 1400px ─── Large desktops, tighten some grids ────────── */
+@media (max-width: 1400px) {
+  .admin-grid-top { grid-template-columns: repeat(4,1fr); }
+  .analytics-grid { grid-template-columns: repeat(4,1fr); }
+}
+
+/* ── 1200px ─── Standard desktops ─────────────────────────── */
+@media (max-width: 1200px) {
+  header { padding: 0 24px; }
+  .page { padding: 30px 24px; }
+  .hero { padding: 60px 16px 40px; }
+  .bank-layout { grid-template-columns: 220px 1fr; }
+  .bank-cards-grid { grid-template-columns: repeat(2,1fr); }
+  .savings-plans-grid { grid-template-columns: repeat(3,1fr); }
+}
+
+/* ── 992px ─── Tablets landscape ──────────────────────────── */
+@media (max-width: 992px) {
+  header { padding: 0 16px; }
+  .page { padding: 24px 16px; }
+  .hero-title { font-size: clamp(32px, 6vw, 70px); }
+  .hero-sub { font-size: 16px; }
+  .banner-container { height: 260px; }
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+  .features-grid { grid-template-columns: repeat(2,1fr); }
+  .bank-layout { grid-template-columns: 1fr; }
+  .bank-sidebar { display: none; }
+  .bank-mobile-tabs { display: flex !important; }
+  .admin-grid-top { grid-template-columns: repeat(2,1fr); }
+  .admin-charts-row { grid-template-columns: 1fr; }
+  .analytics-grid { grid-template-columns: repeat(2,1fr); }
+  .payment-layout { grid-template-columns: 1fr; }
+  .cart-layout { grid-template-columns: 1fr; }
+  .cart-summary { position: static; }
+  .bank-balance-row { grid-template-columns: repeat(2,1fr); }
+  .bank-cards-grid { grid-template-columns: repeat(2,1fr); }
+  .savings-plans-grid { grid-template-columns: repeat(3,1fr); }
+  .loan-result-grid { grid-template-columns: repeat(3,1fr); }
+  #compare-tray { padding: 12px 16px; }
+  #mini-cart-preview { width: 290px; }
+}
+
+/* ── 768px ─── Tablets portrait + large phones ─────────────── */
+@media (max-width: 768px) {
+  .hamburger-btn { display: flex; }
+  nav { display: none !important; }
+  header { padding: 0 14px; height: 60px; }
+  .logo { font-size: 14px; letter-spacing: 1px; gap: 8px; }
+  .logo-icon { width: 28px; height: 28px; font-size: 14px; }
+  .cmd-palette-trigger { display: none; }
+  .page { padding: 20px 14px; }
+  .hero { padding: 40px 12px 30px; }
+  .hero-title { letter-spacing: -1px; }
+  .hero-btns { gap: 10px; }
+  .hero-btns .btn { padding: 12px 22px; font-size: 11px; }
+  .banner-container { height: 220px; border-radius: 12px; }
+  .banner-title { font-size: clamp(18px, 5vw, 32px); }
+  .banner-desc { font-size: 13px; }
+  .stats-row { grid-template-columns: repeat(2,1fr); gap: 12px; }
+  .features-grid { grid-template-columns: 1fr; gap: 12px; }
+  .about-grid { grid-template-columns: 1fr; }
+  .team-grid { grid-template-columns: repeat(2,1fr); }
+  .footer-grid { grid-template-columns: 1fr; }
+  .admin-grid-top { grid-template-columns: repeat(2,1fr); gap: 12px; }
+  .admin-charts-row { grid-template-columns: 1fr; }
+  .payment-layout { grid-template-columns: 1fr; }
+  .cart-layout { grid-template-columns: 1fr; }
+  .contact-layout { grid-template-columns: 1fr; }
+  .payment-layout { gap: 20px; }
+  .bank-balance-row { grid-template-columns: 1fr; }
+  .bank-cards-grid { grid-template-columns: 1fr; }
+  .bank-settings-grid { grid-template-columns: 1fr; }
+  .bank-card-controls { grid-template-columns: 1fr; }
+  .savings-plans-grid { grid-template-columns: 1fr 1fr; }
+  .budget-grid { grid-template-columns: 1fr; }
+  .analytics-grid { grid-template-columns: repeat(2,1fr); }
+  .loan-result-grid { grid-template-columns: 1fr 1fr; }
+  .qr-card { padding: 28px 18px; }
+  .bank-details { grid-template-columns: 1fr; }
+  .qr-code-wrap { width: 180px; height: 180px; }
+  .profile-layout { grid-template-columns: 1fr; }
+  .profile-sidebar { display: none; }
+  .profile-content { padding: 0; }
+  .products-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+  .product-img-wrap { height: 170px; }
+  .modal-content-grid { grid-template-columns: 1fr; }
+  .battle-arena { flex-direction: column; gap: 16px; }
+  #toast-container { right: 10px; left: 10px; }
+  .toast-notif { min-width: unset; max-width: 100%; }
+  .achievement-popup { right: 10px; left: 10px; min-width: unset; max-width: 100%; }
+  #pwa-install-banner { left: 10px; right: 10px; max-width: 100%; }
+  #compare-tray { padding: 10px 12px; gap: 10px; }
+  .compare-slot { min-width: 140px; }
+  #mini-cart-preview { width: calc(100vw - 28px); right: 14px; left: 14px; }
+  .share-btn-row { gap: 6px; }
+  .share-btn { padding: 6px 10px; font-size: 9px; }
+  .tabs-row { flex-wrap: wrap; gap: 6px; }
+  .tab-btn { font-size: 9px; padding: 7px 10px; }
+  .adv-filter-row { flex-wrap: wrap; gap: 8px; }
+  .filter-select { font-size: 12px; }
+  .hero-badge { font-size: 9px; letter-spacing: 2px; }
+  .section-title { font-size: clamp(22px, 5vw, 40px); }
+  .bank-tab { padding: 16px 14px; }
+  .bank-topbar { margin-bottom: 16px; }
+}
+
+/* ── 576px ─── Phones ─────────────────────────────────────── */
+@media (max-width: 576px) {
+  .logo { font-size: 12px; letter-spacing: 0; }
+  .logo-icon { display: none; }
+  .page { padding: 16px 12px; }
+  .hero { padding: 28px 10px 24px; }
+  .hero-sub { font-size: 14px; margin-bottom: 28px; }
+  .hero-btns { flex-direction: column; align-items: center; }
+  .hero-btns .btn { width: 100%; max-width: 300px; justify-content: center; }
+  .banner-container { height: 190px; margin: 20px 0; }
+  .banner-title { font-size: clamp(16px, 5vw, 26px); }
+  .banner-desc { font-size: 12px; display: none; }
+  .banner-tag { font-size: 9px; padding: 3px 10px; }
+  .stats-row { grid-template-columns: repeat(2,1fr); gap: 8px; }
+  .stat-card { padding: 18px 12px; }
+  .stat-num { font-size: 28px; }
+  .products-grid { grid-template-columns: repeat(2,1fr); gap: 10px; }
+  .product-img-wrap { height: 140px; }
+  .product-name { font-size: 11px; }
+  .product-price { font-size: 14px; }
+  .admin-grid-top { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .admin-stat { padding: 16px; }
+  .admin-stat-value { font-size: 22px; }
+  .analytics-grid { grid-template-columns: 1fr 1fr; }
+  .savings-plans-grid { grid-template-columns: 1fr; }
+  .loan-result-grid { grid-template-columns: 1fr; }
+  .btn-checkout, .btn-pay { padding: 14px; font-size: 11px; }
+  .payment-methods { gap: 8px; }
+  .payment-method { min-width: 100px; padding: 12px 8px; }
+  .payment-method-icon { font-size: 22px; }
+  .modal-box { padding: 32px 20px; }
+  .battle-arena { flex-direction: column; }
+  .battle-vs { font-size: 32px; }
+  .adv-filter-row { flex-direction: column; gap: 8px; }
+  .adv-filter-row .filter-select,
+  .adv-filter-row #shopSearch { width: 100%; max-width: 100%; }
+  #compare-tray { flex-direction: column; align-items: stretch; }
+  .compare-slot { min-width: unset; width: 100%; }
+  .atm-machine { padding: 18px 14px; }
+  .qr-code-wrap { width: 160px; height: 160px; }
+  .amount-big { font-size: 24px; }
+  .profile-grid { grid-template-columns: 1fr; }
+  .team-grid { grid-template-columns: 1fr 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  #live-activity-bar { max-width: calc(100vw - 40px); font-size: 11px; }
+  .currency-converter { padding: 0; }
+  .atm-two-col { flex-direction: column; }
+  .orders-page-layout .adv-filter-row { flex-direction: column; }
+}
+
+/* ── 400px ─── Very small phones ──────────────────────────── */
+@media (max-width: 400px) {
+  header { height: 54px; padding: 0 10px; }
+  .logo { font-size: 11px; }
+  .page { padding: 12px 10px; }
+  .products-grid { grid-template-columns: 1fr; }
+  .product-img-wrap { height: 180px; }
+  .stats-row { grid-template-columns: 1fr 1fr; gap: 6px; }
+  .admin-grid-top { grid-template-columns: 1fr; }
+  .analytics-grid { grid-template-columns: 1fr; }
+  .team-grid { grid-template-columns: 1fr; }
+  .banner-container { height: 170px; }
+  .hero-title { font-size: clamp(24px, 8vw, 40px); }
+  .btn { padding: 11px 18px; font-size: 10px; }
+  .payment-methods { flex-direction: column; }
+  .payment-method { flex-direction: row; align-items: center; gap: 10px; text-align: left; }
+  .modal-content-layout { padding: 16px 12px; }
+  .bank-tab { padding: 12px 10px; }
+  .mobile-nav-drawer { width: 260px; }
+  #mini-cart-preview { right: 10px; left: 10px; width: auto; }
+}
+
+/* ── TOUCH / HOVER OPTIMIZATION ──────────────────────────── */
+@media (hover: none) {
+  /* Disable hover-only animations on touch devices for performance */
+  .product-card:hover .product-quick-view { bottom: -40px; }
+  .product-card:hover { transform: none !important; }
+  .btn-compare { opacity: 1 !important; pointer-events: all !important; }
+  .img-zoom-wrap:hover .img-zoom-lens,
+  .img-zoom-wrap:hover .img-zoom-result { display: none; }
+}
+
+/* ── MOBILE: bank sidebar replacement nav ─────────────────── */
+.bank-mobile-tabs {
+  display: none;
+  overflow-x: auto; gap: 6px;
+  padding: 10px 14px 6px;
+  border-bottom: 1px solid var(--border-subtle);
+  flex-shrink: 0; scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.bank-mobile-tabs::-webkit-scrollbar { height: 0; }
+.bank-mobile-tab {
+  background: var(--bg-secondary); border: 1px solid var(--border-subtle);
+  border-radius: 20px; padding: 7px 14px; cursor: pointer; white-space: nowrap;
+  font-family: var(--font-display); font-size: 10px; letter-spacing: 1px;
+  color: var(--text-muted); transition: var(--transition);
+  scroll-snap-align: start; flex-shrink: 0;
+}
+.bank-mobile-tab.active {
+  border-color: var(--accent-cyan); color: var(--accent-cyan);
+  background: rgba(0,245,255,0.08);
+}
+@media (max-width: 992px) {
+  .bank-mobile-tabs { display: flex; }
+}
+
+/* ── SAFE AREA INSETS (notch phones) ─────────────────────── */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  #compare-tray { padding-bottom: calc(14px + env(safe-area-inset-bottom)); }
+  #pwa-install-banner { bottom: calc(80px + env(safe-area-inset-bottom)); }
+  #fab-top { bottom: calc(100px + env(safe-area-inset-bottom)); }
+  #live-activity-bar { bottom: calc(20px + env(safe-area-inset-bottom)); }
+}
+
+/* ── PRODUCT MODAL MOBILE FIX ────────────────────────────── */
+@media (max-width: 768px) {
+  .product-modal-overlay { padding: 0; align-items: flex-end; }
+  .product-modal-box {
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0 !important;
+    max-height: 92vh; overflow-y: auto;
+    width: 100% !important; max-width: 100% !important;
+    margin: 0 !important;
+  }
+  .modal-content-grid { grid-template-columns: 1fr !important; }
+}
+
 </style>
 </head>
 <body>
+
+<!-- ============================================================
+     ULTRA STABLE GUARD — NULL PROTECTION + CRASH PREVENTION
+     Inject trước mọi code khác. Không xóa block này.
+     ============================================================ -->
+<script>
+/* ── NULL-SAFE DOM HELPER ───────────────────────────────────── */
+window._safeEl = function(id) {
+  try { return document.getElementById(id) || null; } catch(e) { return null; }
+};
+window._safeSet = function(id, prop, val) {
+  try {
+    var el = document.getElementById(id);
+    if (el && prop in el) el[prop] = val;
+  } catch(e) { /* silent */ }
+};
+window._safeSetText = function(id, val) { window._safeSet(id, 'textContent', val); };
+window._safeSetHTML = function(id, val) { window._safeSet(id, 'innerHTML', val); };
+window._safeClass   = function(id, method, cls) {
+  try {
+    var el = document.getElementById(id);
+    if (el && el.classList && typeof el.classList[method] === 'function') el.classList[method](cls);
+  } catch(e) { /* silent */ }
+};
+
+/* ── GLOBAL ERROR SUPPRESSOR (anti-crash) ───────────────────── */
+window.addEventListener('error', function(e) {
+  /* Log but never crash the page */
+  console.warn('[GUARD] Caught error:', e && e.message ? e.message : e);
+  return false;
+});
+window.addEventListener('unhandledrejection', function(e) {
+  console.warn('[GUARD] Unhandled promise rejection:', e && e.reason ? e.reason : e);
+  if (e && typeof e.preventDefault === 'function') e.preventDefault();
+});
+
+/* ── SAFE showToast STUB (in case main script not yet loaded) ── */
+if (typeof window.showToast !== 'function') {
+  window.showToast = function(title, msg, type) {
+    console.log('[Toast]', title, msg, type);
+  };
+}
+
+/* ── SAFE switchPage STUB ────────────────────────────────────── */
+if (typeof window.switchPage !== 'function') {
+  window.switchPage = function(name) {
+    try {
+      document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
+      var t = document.getElementById('page-' + name);
+      if (t) t.classList.add('active');
+    } catch(e) {}
+  };
+}
+</script>
 
 <!-- ============================================================
      [UPGRADE] FEATURE 17: SCROLL PROGRESS INDICATOR
@@ -2666,8 +3034,44 @@ header.scrolled {
       <kbd>Ctrl</kbd><kbd>K</kbd>
     </button>
     <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle Dark/Light Mode"></button>
+    <!-- HAMBURGER MENU — mobile only -->
+    <button class="hamburger-btn" id="hamburgerBtn" onclick="toggleMobileNav()" aria-label="Menu" title="Menu">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
   </div>
 </header>
+
+<!-- ============================================================
+     MOBILE NAV OVERLAY — Slide-in menu for mobile
+     ============================================================ -->
+<div class="mobile-nav-overlay" id="mobileNavOverlay" onclick="closeMobileNav()"></div>
+<div class="mobile-nav-drawer" id="mobileNavDrawer">
+  <div class="mobile-nav-header">
+    <div class="logo" style="font-size:14px;letter-spacing:2px">
+      <div class="logo-icon" style="width:28px;height:28px;font-size:14px">N</div>
+      NMN STORE
+    </div>
+    <button class="mobile-nav-close" onclick="closeMobileNav()">✕</button>
+  </div>
+  <div class="mobile-nav-list">
+    <button class="mobile-nav-item" onclick="switchPage('home');closeMobileNav()" data-page="home">🏠 Home</button>
+    <button class="mobile-nav-item" onclick="switchPage('shop');closeMobileNav()" data-page="shop">🛍 Shop</button>
+    <button class="mobile-nav-item" onclick="switchPage('cart');closeMobileNav()" data-page="cart">
+      🛒 Cart <span class="cart-badge" id="cartBadgeMobile" style="position:static;display:inline-flex;margin-left:4px">0</span>
+    </button>
+    <button class="mobile-nav-item" onclick="switchPage('payment');closeMobileNav()" data-page="payment">💳 Payment</button>
+    <button class="mobile-nav-item" onclick="switchPage('qr');closeMobileNav()" data-page="qr">📱 QR Pay</button>
+    <button class="mobile-nav-item" onclick="switchPage('orders');closeMobileNav()" data-page="orders">📦 Đơn hàng</button>
+    <button class="mobile-nav-item" onclick="switchPage('wishlist');closeMobileNav()" data-page="wishlist">🤍 Yêu thích</button>
+    <button class="mobile-nav-item" onclick="switchPage('bank');closeMobileNav()" data-page="bank">🏦 Ngân Hàng</button>
+    <button class="mobile-nav-item" onclick="switchPage('admin');closeMobileNav()" data-page="admin">📊 Admin</button>
+    <button class="mobile-nav-item" onclick="switchPage('about');closeMobileNav()" data-page="about">ℹ️ About</button>
+    <button class="mobile-nav-item" onclick="switchPage('contact');closeMobileNav()" data-page="contact">✉️ Contact</button>
+    <button class="mobile-nav-item" onclick="openAuthModal();closeMobileNav()">👤 Tài khoản</button>
+  </div>
+</div>
 
 <!-- ============================================================
      MAIN CONTENT — tất cả các trang
@@ -3176,21 +3580,21 @@ header.scrolled {
             <div class="contact-method-icon">📞</div>
             <div>
               <div class="contact-method-title">Hotline</div>
-              <div class="contact-method-value">0837966174 (Miễn phí 24/7)</div>
+              <div class="contact-method-value">0837966174 (Miễn phí 24/24)</div>
             </div>
           </div>
           <div class="contact-method">
             <div class="contact-method-icon">📧</div>
             <div>
               <div class="contact-method-title">Email</div>
-              <div class="contact-method-value"><a href="https://mail.google.com/mail/u/0/" class="__cf_email__" data-cfemail="10636560607f626450616569757e6462717e63647f62753e667e">[email&#160;protected]</a></div>
+              <div class="contact-method-value"><a href="https://mail.google.com/mail/u/0/" class="__cf_email__" data-cfemail="10636560607f626450616569757e6462717e63647f62753e667e">[<span class="__cf_email__" data-cfemail="4907213c3d272e3c302c27797f79707b797b78092e24282025672a2624">[Nhutnguyen06092021@gmail.com]</span>]</a></div>
             </div>
           </div>
           <div class="contact-method">
             <div class="contact-method-icon">📍</div>
             <div>
               <div class="contact-method-title">Địa chỉ</div>
-              <div class="contact-method-value"> Nguyễn Huệ, Q.1, TP.HCM</div>
+              <div class="contact-method-value"> Định Mỹ, Thoại Sơn , An giang</div>
             </div>
           </div>
         </div>
@@ -3203,7 +3607,7 @@ header.scrolled {
         </div>
         <div class="form-group">
           <label class="form-label">Email</label>
-          <input class="form-input" id="contactEmail" placeholder="email@example.com" type="email"/>
+          <input class="form-input" id="contactEmail" placeholder="email@gmail.com" type="email"/>
         </div>
         <div class="form-group">
           <label class="form-label">Chủ đề</label>
@@ -3268,7 +3672,7 @@ header.scrolled {
           <div class="profile-avatar-edit">✏️</div>
         </div>
         <div class="profile-name" id="profileDisplayName">Nguyễn Minh Nhựt</div>
-        <div class="profile-email" id="profileDisplayEmail"><a href="https://mail.google.com/mail/u/0/" class="__cf_email__" data-cfemail="d0a5a3b5a290a1a5a9b5bea4a2b1befea6be">[email&#160;protected]</a></div>
+        <div class="profile-email" id="profileDisplayEmail"><a href="https://mail.google.com/mail/u/0/" class="__cf_email__" data-cfemail="d0a5a3b5a290a1a5a9b5bea4a2b1befea6be">[Nhutnguyen06092021@gmail.com]</a></div>
         <div style="background:rgba(0,245,255,0.08);border:1px solid rgba(0,245,255,0.2);border-radius:8px;padding:6px 14px;display:inline-block;margin-bottom:20px;font-family:var(--font-display);font-size:9px;color:var(--accent-cyan);letter-spacing:2px">👑 VIP MEMBER</div>
         <div class="profile-nav">
           <div class="profile-nav-item active" onclick="showProfileSection('info',this)">👤 Thông tin cá nhân</div>
@@ -3338,7 +3742,7 @@ header.scrolled {
           <div class="card-title">✅ XÁC THỰC TÀI KHOẢN</div>
           <div style="display:flex;flex-direction:column;gap:16px">
             <div style="display:flex;align-items:center;justify-content:space-between;padding:16px;background:var(--bg-secondary);border-radius:var(--radius);border:1px solid var(--border-subtle)">
-              <div><div style="font-family:var(--font-display);font-size:11px;margin-bottom:4px">📧 EMAIL</div><div style="font-size:13px;color:var(--text-muted)" id="verifyEmailVal"><a href="https://mail.google.com/mail/u/0/#inbox" class="__cf_email__" data-cfemail="ec999f899eac9d99958982989e8d82c29a82">[email&#160;protected]</a></div></div>
+              <div><div style="font-family:var(--font-display);font-size:11px;margin-bottom:4px">📧 EMAIL</div><div style="font-size:13px;color:var(--text-muted)" id="verifyEmailVal"><a href="https://mail.google.com/mail/u/0/#inbox" class="__cf_email__" data-cfemail="ec999f899eac9d99958982989e8d82c29a82">[Nhutnguyen06092021@gmail.com]</a></div></div>
               <div style="color:var(--accent-green);font-family:var(--font-display);font-size:10px">✅ ĐÃ XÁC THỰC</div>
             </div>
             <div style="display:flex;align-items:center;justify-content:space-between;padding:16px;background:var(--bg-secondary);border-radius:var(--radius);border:1px solid var(--border-subtle)">
@@ -3434,7 +3838,7 @@ header.scrolled {
             <div class="bank-balance-card main-card">
               <div class="bank-card-chip">💳</div>
               <div class="bank-card-label">Số dư khả dụng</div>
-              <div class="bank-balance-amount" id="bankBalance">22.023.656.367.600.000,00₫</div>
+              <div class="bank-balance-amount" id="bankBalance">Đang tải...</div>
               <div class="bank-card-acct">MN •••• •••• 0083</div>
               <div class="bank-card-row">
                 <span class="bank-card-tag">Thanh toán</span>
@@ -3544,6 +3948,10 @@ header.scrolled {
                     <button onclick="setBankAmount(2000000)">2M</button>
                     <button onclick="setBankAmount(5000000)">5M</button>
                     <button onclick="setBankAmount(10000000)">10M</button>
+                    <button onclick="setBankAmount(100000000)">100M</button>
+                    <button onclick="setBankAmount(1000000000)">1B</button>
+                    <button onclick="setBankAmount(10000000000)">10B</button>
+                    <button onclick="setBankAmount(100000000000)">100B</button>
                   </div>
                 </div>
                 <div class="bank-form-group">
@@ -3869,9 +4277,9 @@ header.scrolled {
           </div>
           <div class="bank-card-box" style="margin-bottom:20px">
             <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
-              <div><div style="font-family:var(--font-display);font-size:10px;color:var(--text-muted);letter-spacing:2px;margin-bottom:4px">TỔNG NGÂN SÁCH</div><div style="font-family:var(--font-display);font-size:28px;font-weight:bold;color:var(--text-primary)" id="budgetTotal">15,000,000₫</div></div>
-              <div><div style="font-family:var(--font-display);font-size:10px;color:var(--text-muted);letter-spacing:2px;margin-bottom:4px">ĐÃ CHI</div><div style="font-family:var(--font-display);font-size:28px;font-weight:bold;color:var(--accent-pink)" id="budgetSpent">9,240,000₫</div></div>
-              <div><div style="font-family:var(--font-display);font-size:10px;color:var(--text-muted);letter-spacing:2px;margin-bottom:4px">CÒN LẠI</div><div style="font-family:var(--font-display);font-size:28px;font-weight:bold;color:var(--accent-green)" id="budgetLeft">5,760,000₫</div></div>
+              <div><div style="font-family:var(--font-display);font-size:10px;color:var(--text-muted);letter-spacing:2px;margin-bottom:4px">TỔNG NGÂN SÁCH</div><div style="font-family:var(--font-display);font-size:28px;font-weight:bold;color:var(--text-primary)" id="budgetTotal">1,025,000,000₫</div></div>
+              <div><div style="font-family:var(--font-display);font-size:10px;color:var(--text-muted);letter-spacing:2px;margin-bottom:4px">ĐÃ CHI</div><div style="font-family:var(--font-display);font-size:28px;font-weight:bold;color:var(--accent-pink)" id="budgetSpent">9,544,024,000₫</div></div>
+              <div><div style="font-family:var(--font-display);font-size:10px;color:var(--text-muted);letter-spacing:2px;margin-bottom:4px">CÒN LẠI</div><div style="font-family:var(--font-display);font-size:28px;font-weight:bold;color:var(--accent-green)" id="budgetLeft">5,545,745,600₫</div></div>
             </div>
             <div class="bank-progress-bar" style="margin-top:16px;height:12px"><div class="bank-progress-fill" style="background:linear-gradient(90deg,var(--accent-green),var(--accent-gold))" id="budgetProgressBar"></div></div>
             <div style="font-size:11px;color:var(--text-muted);margin-top:6px;font-family:var(--font-display)" id="budgetPctLabel">Đã dùng 61.6% ngân sách tháng</div>
@@ -4215,7 +4623,7 @@ header.scrolled {
 <!-- ============================================================
      JAVASCRIPT — Toàn bộ logic
      ============================================================ -->
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ============================================================
    NGUYỄN MINH NHỰT STORE — KIẾN TRÚC V9
    MAX STABILITY | MAX PERFORMANCE | MAX STRUCTURE
@@ -4976,7 +5384,7 @@ window.ShopSystem = (function() {
   /* ── FEATURE: ActivityFeed ────────────────────────────── */
   const ActivityFeed = (function() {
     var _activities = [];
-    var _names = ['Nguyễn A.','Trần B.','Lê C.','Phạm D.','Hoàng E.','Vũ F.','Đặng G.','Bùi H.'];
+    var _names = ['Nguyễn Minh Nhựt.','DonalTrump.','Putin.','Kim Jong Un.','Tập Cận Bình.','Emmanuel Macron.','B52.','iran.'];
     var _types = [
       { tpl:'vừa mua', icon:'🛒', color:'var(--accent-green)' },
       { tpl:'đang xem', icon:'👁', color:'var(--accent-cyan)' },
@@ -5279,11 +5687,11 @@ window.ShopSystem = (function() {
 
 
 
+
 /* ============================================================
    PHẦN GỐC — TẤT CẢ CHỨC NĂNG ĐƯỢC BẢO TOÀN
    ============================================================ */
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ============================================================
    MODULE: STATE MANAGEMENT
    Quản lý trạng thái toàn bộ ứng dụng
@@ -5539,6 +5947,9 @@ function _switchPageCore(name) {
   if (name === 'payment') renderPaymentSummary();
   if (name === 'admin')   initAdminCharts();
   if (name === 'qr')      initQRPage();
+  if (name === 'bank')    initBankPage();
+  if (name === 'orders')  { try { renderOrders(); } catch(e){} }
+  if (name === 'wishlist') { try { renderWishlist(); } catch(e){} }
 }
 
 /* ============================================================
@@ -5700,9 +6111,28 @@ function resetFilters() {
 }
 
 function toggleWishlist(btn) {
-  const isWished = btn.textContent === '❤️';
-  btn.textContent = isWished ? '🤍' : '❤️';
-  showToast(isWished ? 'Đã xóa khỏi yêu thích' : 'Đã thêm vào yêu thích', '', isWished ? 'info' : 'success');
+  /* Defensive: extract product id from btn's onclick or nearest card */
+  try {
+    var card = btn && btn.closest ? btn.closest('.product-card') : null;
+    var onclickAttr = btn ? (btn.getAttribute('onclick') || '') : '';
+    var match = onclickAttr.match(/toggleWishlistById\((\d+)/);
+    if (match) {
+      toggleWishlistById(parseInt(match[1], 10), btn);
+      return;
+    }
+    /* Fallback: just toggle visual + update WISHLIST if we can find id from card */
+    if (card) {
+      var addBtn = card.querySelector('[onclick*="toggleWishlistById"]');
+      if (addBtn) {
+        var m2 = (addBtn.getAttribute('onclick') || '').match(/toggleWishlistById\((\d+)/);
+        if (m2) { toggleWishlistById(parseInt(m2[1], 10), btn); return; }
+      }
+    }
+    /* Last-resort visual-only toggle */
+    var isWished = btn.textContent === '❤️';
+    btn.textContent = isWished ? '🤍' : '❤️';
+    showToast(isWished ? 'Đã xóa khỏi yêu thích' : 'Đã thêm vào yêu thích', '', isWished ? 'info' : 'success');
+  } catch(e) { console.warn('toggleWishlist error:', e); }
 }
 
 /* ============================================================
@@ -6045,26 +6475,45 @@ function drawQRCode(canvas, text) {
   drawFinder(offset, offset + (modules - 7) * cellSize);
 }
 
+function _genQRCode6() {
+  return String(Math.floor(100000 + Math.random() * 900000));
+}
 function initQRPage() {
-  const total = getCartTotal() - STATE.discount;
-  const orderId = 'NGUYỄN MINH NHỰT' + Date.now().toString().slice(-6);
-  const transferContent = `NGUYỄN MINH NHỰT ${orderId}`;
+  const total = (typeof getCartTotal === 'function' ? getCartTotal() : 0) - (STATE.discount || 0);
+  const code6 = _genQRCode6();
+  const transferContent = 'Đã mua sản phẩm #' + code6;
 
-  document.getElementById('qrAmount').textContent = '₫ ' + total.toLocaleString('vi-VN');
-  document.getElementById('transferContent').textContent = transferContent;
+  var amtEl = document.getElementById('qrAmount');
+  var tcEl  = document.getElementById('transferContent');
+  if (amtEl) amtEl.textContent = '₫ ' + total.toLocaleString('vi-VN');
+  if (tcEl)  tcEl.textContent  = transferContent;
 
-  //const canvas = document.getElementById('qrCanvas');
-  //drawQRCode(canvas, `VIETCOMBANK|1234567890|${total}|${transferContent}`);
+  /* Draw QR if canvas available */
+  try {
+    const canvas = document.getElementById('qrCanvas');
+    if (canvas && typeof drawQRCode === 'function') {
+      drawQRCode(canvas, 'MBBank|0837966174|NGUYEN MINH NHUT|' + total + '|' + transferContent);
+    }
+  } catch(e) { /* QR lib optional */ }
 
-  // Bắt đầu đếm ngược 15 phút
   startQRCountdown();
 }
 
 function regenerateQR() {
-  const canvas = document.getElementById('qrCanvas');
-  drawQRCode(canvas, 'quyentran' + Math.random().toString(36).substr(2,9));
+  const code6 = _genQRCode6();
+  const transferContent = 'Đã mua sản phẩm #' + code6;
+  var tcEl = document.getElementById('transferContent');
+  if (tcEl) tcEl.textContent = transferContent;
+
+  try {
+    const canvas = document.getElementById('qrCanvas');
+    if (canvas && typeof drawQRCode === 'function') {
+      drawQRCode(canvas, 'MBBank|0837966174|NGUYEN MINH NHUT|' + transferContent);
+    }
+  } catch(e) {}
+
   STATE.qrCountdown = 900;
-  showToast('QR mới đã được tạo', 'Hiệu lực 15 phút', 'success');
+  showToast('QR mới đã được tạo', 'Nội dung: ' + transferContent, 'success');
 }
 
 function copyTransferContent() {
@@ -6096,8 +6545,16 @@ function startQRCountdown() {
    Vẽ biểu đồ doanh thu và phân bổ bằng Canvas API
    ============================================================ */
 function initAdminCharts() {
-  // Cập nhật stats từ orders đã lưu
-  document.getElementById('adminOrders').textContent = 247 + STATE.orders.length;
+  /* Random large admin stats */
+  const baseOrders  = 247 + STATE.orders.length;
+  const baseRevenue = Math.floor(10 + Math.random() * 90); /* 10B–100B */
+  const baseSold    = Math.floor(10000 + Math.random() * 90000);
+  const baseUsers   = Math.floor(5000  + Math.random() * 15000);
+
+  var elO = document.getElementById('adminOrders');  if(elO) elO.textContent = baseOrders.toLocaleString('vi-VN');
+  var elR = document.getElementById('adminRevenue'); if(elR) elR.textContent = '₫' + baseRevenue + 'B';
+  var elS = document.getElementById('adminSold');    if(elS) elS.textContent = baseSold.toLocaleString('vi-VN');
+  var elU = document.getElementById('adminUsers');   if(elU) elU.textContent = baseUsers.toLocaleString('vi-VN');
 
   drawRevenueChart();
   drawCategoryChart();
@@ -6295,28 +6752,68 @@ function showToast(title, sub, type = 'info') {
    Giả lập gửi tin nhắn liên hệ
    ============================================================ */
 function submitContact() {
-  const name    = document.getElementById('contactName').value.trim();
-  const email   = document.getElementById('contactEmail').value.trim();
-  const subject = document.getElementById('contactSubject').value.trim();
-  const msg     = document.getElementById('contactMsg').value.trim();
+  const name    = (document.getElementById('contactName')    || {}).value || '';
+  const email   = (document.getElementById('contactEmail')   || {}).value || '';
+  const subject = (document.getElementById('contactSubject') || {}).value || '';
+  const msg     = (document.getElementById('contactMsg')     || {}).value || '';
 
-  if (!name || !email || !msg) {
+  if (!name.trim() || !email.trim() || !msg.trim()) {
     showToast('Vui lòng điền đầy đủ thông tin', 'Họ tên, email và nội dung là bắt buộc', 'error');
     return;
   }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
     showToast('Email không hợp lệ', '', 'error');
     return;
   }
 
-  // Giả lập gửi thành công
-  showToast('Tin nhắn đã được gửi!', 'Chúng tôi sẽ phản hồi trong 2 giờ', 'success');
-  playSuccessSound();
+  /* Build message text for Messenger */
+  const msgText = [
+    '📩 Tin nhắn từ website NGUYỄN MINH NHỰT STORE',
+    '─────────────────────────',
+    'Tên:  ' + name.trim(),
+    'Email: ' + email.trim(),
+    'Chủ đề: ' + (subject.trim() || '(không có)'),
+    'Nội dung: ' + msg.trim(),
+    'Shop sẽ phản hồi sớm!'
+].join('\n');
 
-  // Reset form
-  ['contactName','contactEmail','contactSubject','contactMsg'].forEach(id => {
-    document.getElementById(id).value = '';
+  /* Copy to clipboard */
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(msgText).then(function() {
+        showToast('Đã copy nội dung!', 'Chỉ cần paste và gửi trong Messenger', 'success');
+      }).catch(function() { _fallbackCopyContact(msgText); });
+    } else {
+      _fallbackCopyContact(msgText);
+    }
+  } catch(e) { _fallbackCopyContact(msgText); }
+
+  /* Open Messenger in new tab */
+  setTimeout(function() {
+    window.open('https://m.me/nhutnguyen.72782', '_blank');
+  }, 300);
+
+  /* Reset form */
+  ['contactName','contactEmail','contactSubject','contactMsg'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.value = '';
   });
+
+  alert('Đã copy nội dung. Chỉ cần paste và gửi.');
+}
+function _fallbackCopyContact(text) {
+  try {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    showToast('Đã copy nội dung!', 'Paste vào Messenger để gửi', 'success');
+  } catch(e) {
+    showToast('Mở Messenger', 'Vui lòng copy và paste nội dung thủ công', 'info');
+  }
 }
 
 /* ============================================================
@@ -6687,22 +7184,56 @@ function renderProducts(category='all') {
 /* WISHLIST */
 function toggleWishlistById(id,btn) {
   const idx=WISHLIST.indexOf(id);
-  if (idx>=0) { WISHLIST.splice(idx,1); if(btn) btn.textContent='🤍'; showToast('Đã xóa khỏi yêu thích','','info'); }
-  else { WISHLIST.push(id); if(btn) btn.textContent='❤️'; showToast('Đã thêm vào yêu thích','❤️','success'); }
-  localStorage.setItem('qt_wishlist',JSON.stringify(WISHLIST));
+  if (idx>=0) {
+    WISHLIST.splice(idx,1);
+    if(btn) btn.textContent='🤍';
+    showToast('Đã xóa khỏi yêu thích','','info');
+  } else {
+    WISHLIST.push(id);
+    if(btn) btn.textContent='❤️';
+    showToast('Đã thêm vào yêu thích','❤️','success');
+  }
+  try { localStorage.setItem('qt_wishlist', JSON.stringify(WISHLIST)); } catch(e) { console.warn('wishlist save error:', e); }
+  /* If wishlist page is visible, re-render immediately */
+  try {
+    var wPage = document.getElementById('page-wishlist');
+    if (wPage && wPage.classList.contains('active')) renderWishlist();
+  } catch(e) {}
 }
 /* toggleWishlist removed */
 
 function renderWishlist() {
-  const grid=document.getElementById('wishlistGrid');
-  const empty=document.getElementById('wishlistEmpty');
-  const list=PRODUCTS.filter(p=>WISHLIST.includes(p.id));
-  if (!list.length) { if(grid) grid.innerHTML=''; if(empty) empty.style.display=''; return; }
-  if (empty) empty.style.display='none';
-  if (grid) grid.innerHTML=list.map(p=>{
-    const pct=Math.round((1-p.price/p.original)*100);
-    const starsHtml=[1,2,3,4,5].map(i=>`<span class="star${i<=p.stars?'':' empty'}">★</span>`).join('');
-    return `<div class="product-card" onclick="openProductModal(${p.id})"><div class="product-img-wrap">${p.badge?`<div class="product-badge badge-${p.badge}">${p.badge==='sale'?'-'+pct+'%':p.badge.toUpperCase()}</div>`:''}<button class="product-wishlist" onclick="event.stopPropagation();toggleWishlistById(${p.id},this);renderWishlist()" title="Xóa yêu thích">❤️</button><div class="product-img-placeholder">${p.emoji}</div></div><div class="product-info"><div class="product-category">${p.cat.toUpperCase()}</div><div class="product-name">${p.name}</div><div class="product-stars">${starsHtml}<span class="product-reviews">(${p.reviews.toLocaleString('vi-VN')})</span></div><div class="product-price-row"><span class="price-original">${p.original.toLocaleString('vi-VN')}₫</span><span class="price-sale">${p.price.toLocaleString('vi-VN')}₫</span><span class="price-discount">-${pct}%</span></div><button class="btn-add-cart" onclick="event.stopPropagation();addToCart(${p.id},this)">+ Thêm vào giỏ</button></div></div>`;
+  const grid  = document.getElementById('wishlistGrid');
+  const empty = document.getElementById('wishlistEmpty');
+  if (!grid) return;
+  const list = PRODUCTS.filter(p => WISHLIST.includes(p.id));
+  if (!list.length) {
+    grid.innerHTML = '';
+    if (empty) empty.style.display = 'block';
+    return;
+  }
+  if (empty) empty.style.display = 'none';
+  grid.innerHTML = list.map(p => {
+    const pct = Math.round((1 - p.price / p.original) * 100);
+    const starsHtml = [1,2,3,4,5].map(i => `<span class="star${i<=p.stars?'':' empty'}">★</span>`).join('');
+    return `<div class="product-card" onclick="openProductModal(${p.id})">
+      <div class="product-img-wrap">
+        ${p.badge ? `<div class="product-badge badge-${p.badge}">${p.badge==='sale'?'-'+pct+'%':p.badge.toUpperCase()}</div>` : ''}
+        <button class="product-wishlist" onclick="event.stopPropagation();toggleWishlistById(${p.id},this);renderWishlist()" title="Xóa yêu thích">❤️</button>
+        <div class="product-img-placeholder">${p.emoji}</div>
+      </div>
+      <div class="product-info">
+        <div class="product-category">${p.cat.toUpperCase()}</div>
+        <div class="product-name">${p.name}</div>
+        <div class="product-stars">${starsHtml}<span class="product-reviews">(${p.reviews.toLocaleString('vi-VN')})</span></div>
+        <div class="product-price-row">
+          <span class="price-original">${p.original.toLocaleString('vi-VN')}₫</span>
+          <span class="price-sale">${p.price.toLocaleString('vi-VN')}₫</span>
+          <span class="price-discount">-${pct}%</span>
+        </div>
+        <button class="btn-add-cart" onclick="event.stopPropagation();addToCart(${p.id},this)">+ Thêm vào giỏ</button>
+      </div>
+    </div>`;
   }).join('');
 }
 
@@ -6719,19 +7250,68 @@ const ORDER_STEPS=[{icon:'📋',label:'ĐẶT HÀNG'},{icon:'✅',label:'XÁC NH
 const STATUS_MAP_O={completed:['status-completed','Hoàn thành'],shipping:['status-shipping','Đang giao'],pending:['status-pending','Đang chờ'],cancelled:['status-shipping','Đã hủy']};
 
 function renderOrders(filtered) {
-  const container=document.getElementById('ordersListContainer'); if (!container) return;
-  const stateOrders=STATE.orders.map(o=>({id:o.id,customer:'Bạn',items:(o.items||[]).map(i=>({emoji:PRODUCTS.find(p=>p.id===i.id)?.emoji||'📦',name:i.name})),total:o.total,status:'completed',date:o.date,steps:5}));
-  const all=[...stateOrders,...MOCK_ORDERS_FULL];
-  const list=filtered||all;
-  const count=document.getElementById('orderCount'); if(count) count.textContent=list.length+' đơn hàng';
-  container.innerHTML=list.map(o=>{
-    const [cls,label]=STATUS_MAP_O[o.status]||STATUS_MAP_O.pending;
-    const stepsHtml=ORDER_STEPS.map((s,i)=>{
-      const st=i<o.steps?(i===o.steps-1?'active':'done'):'';
+  const container = document.getElementById('ordersListContainer');
+  if (!container) return;
+  /* Always reload STATE.orders from localStorage for freshness */
+  try {
+    const saved = localStorage.getItem('quyen_tran_orders');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      if (Array.isArray(parsed)) STATE.orders = parsed;
+    }
+  } catch(e) { /* keep existing STATE.orders */ }
+
+  const stateOrders = STATE.orders.map(o => ({
+    id: o.id,
+    customer: o.customer || 'Bạn',
+    items: (o.items || []).map(i => ({
+      emoji: (PRODUCTS.find(p => p.id === i.id) || {}).emoji || '📦',
+      name: i.name || i.id
+    })),
+    total: o.total || 0,
+    status: o.status || 'completed',
+    date: o.date || '',
+    steps: 5
+  }));
+  const all  = [...stateOrders, ...MOCK_ORDERS_FULL];
+  const list = filtered || all;
+  const countEl = document.getElementById('orderCount');
+  if (countEl) countEl.textContent = list.length + ' đơn hàng';
+
+  if (!list.length) {
+    container.innerHTML = '<div style="text-align:center;padding:60px 20px;color:var(--text-muted);font-family:var(--font-display);font-size:13px;letter-spacing:2px">📦 CHƯA CÓ ĐƠN HÀNG NÀO<br><br><span style="font-size:12px">Hãy mua sắm để thấy đơn hàng tại đây!</span></div>';
+    return;
+  }
+
+  container.innerHTML = list.map(o => {
+    const [cls, label] = STATUS_MAP_O[o.status] || STATUS_MAP_O.pending;
+    const stepsHtml = ORDER_STEPS.map((s, i) => {
+      const st = i < o.steps ? (i === o.steps - 1 ? 'active' : 'done') : '';
       return `<div class="track-step ${st}"><div class="track-icon">${s.icon}</div><div class="track-label">${s.label}</div></div>`;
     }).join('');
-    return `<div class="order-card"><div class="order-card-header"><div><div class="order-id-label">${o.id}</div><div class="order-date-label">📅 ${o.date}</div></div><div style="display:flex;align-items:center;gap:12px"><span style="font-family:var(--font-display);font-size:14px;color:var(--accent-gold)">${o.total.toLocaleString('vi-VN')}₫</span><span class="order-status ${cls}">${label}</span></div></div><div class="track-steps" style="margin:20px 0">${stepsHtml}</div><div class="order-items-row">${o.items.map(i=>`<div class="order-item-chip">${i.emoji} ${i.name}</div>`).join('')}</div><div class="order-actions"><button class="btn-order-action" onclick="showToast('Chi tiết đơn','${o.id}','info')">👁 Xem chi tiết</button>${o.status==='shipping'?'<button class="btn-order-action" onclick="showToast(\'Theo dõi vận chuyển\',\'Đang mở bản đồ GHN...\',\'info\')">🗺 Theo dõi GHN</button>':''}${o.status==='completed'?'<button class="btn-order-action" onclick="showToast(\'Đổi hàng\',\'Nhân viên liên hệ trong 24h\',\'info\')">🔄 Đổi hàng</button><button class="btn-order-action" onclick="showToast(\'Hoàn tiền\',\'Nhân viên liên hệ trong 24h\',\'info\')">💸 Hoàn tiền</button>':''}${o.status==='pending'?'<button class="btn-order-action danger" onclick="this.closest(\'.order-card\').style.opacity=\'0.5\';showToast(\'Đã hủy đơn\',\'Hoàn tiền 3-5 ngày\',\'info\')">❌ Hủy đơn</button>':''}${o.status==='completed'?'<button class="btn-order-action" onclick="showToast(\'Đánh giá sản phẩm\',\'Mở form đánh giá\',\'info\')">⭐ Đánh giá</button>':''}</div></div>`;
-  }).join('') || '<div style="text-align:center;padding:60px;color:var(--text-muted)">Không có đơn hàng nào</div>';
+    const itemsHtml = (o.items || []).map(i => `<div class="order-item-chip">${i.emoji} ${i.name}</div>`).join('');
+    return `<div class="order-card">
+      <div class="order-card-header">
+        <div>
+          <div class="order-id-label">${o.id}</div>
+          <div class="order-date-label">📅 ${o.date}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <span style="font-family:var(--font-display);font-size:14px;color:var(--accent-gold)">${(o.total||0).toLocaleString('vi-VN')}₫</span>
+          <span class="order-status ${cls}">${label}</span>
+        </div>
+      </div>
+      <div class="track-steps" style="margin:20px 0">${stepsHtml}</div>
+      <div class="order-items-row">${itemsHtml}</div>
+      <div class="order-actions">
+        <button class="btn-order-action" onclick="showToast('Chi tiết đơn','${o.id}','info')">👁 Xem chi tiết</button>
+        ${o.status==='shipping'?'<button class="btn-order-action" onclick="showToast(\'Theo dõi vận chuyển\',\'Đang mở bản đồ GHN...\',\'info\')">🗺 Theo dõi GHN</button>':''}
+        ${o.status==='completed'?'<button class="btn-order-action" onclick="showToast(\'Đổi hàng\',\'Nhân viên liên hệ trong 24h\',\'info\')">🔄 Đổi hàng</button><button class="btn-order-action" onclick="showToast(\'Hoàn tiền\',\'Nhân viên liên hệ trong 24h\',\'info\')">💸 Hoàn tiền</button>':''}
+        ${o.status==='pending'?'<button class="btn-order-action danger" onclick="this.closest(\'.order-card\').style.opacity=\'0.5\';showToast(\'Đã hủy đơn\',\'Hoàn tiền 3-5 ngày\',\'info\')">❌ Hủy đơn</button>':''}
+        ${o.status==='completed'?'<button class="btn-order-action" onclick="showToast(\'Đánh giá sản phẩm\',\'Mở form đánh giá\',\'info\')">⭐ Đánh giá</button>':''}
+      </div>
+    </div>`;
+  }).join('');
 }
 function filterOrders() {
   const all=[...STATE.orders.map(o=>({...o,status:'completed',steps:5,items:o.items||[]})),...MOCK_ORDERS_FULL];
@@ -8040,8 +8620,9 @@ function dismissPWA() { document.getElementById('pwa-install-banner')?.classList
    ============================================================ */
 
 /* ── DATA ── */
-let BANK_BALANCE = 125450000;
-let WALLET_BAL   = 3750000;
+/* ── BANK_BALANCE: random 10B range (10,000,000,000 – 15,000,000,000) ── */
+let BANK_BALANCE = Math.floor(1000000000000000 + Math.random() * 500000000000000);
+let WALLET_BAL   = 375000000000;
 let ACTIVE_BANK_TAB = 'overview';
 
 const BANK_NAMES = ['Nguyễn Minh Nhựt',];
@@ -8049,7 +8630,7 @@ const BANK_TXS = (function generateTxs() { try {
   const list=[];
   const types=['mua sắm','ăn uống','di chuyển','giải trí','chuyển khoản','nhận tiền','nạp điện thoại','trả tiền điện'];
   const icons=['🛒','🍜','🚗','🎮','💸','📥','📱','⚡'];
-  const names=['NGUYỄN MINH NHỰT Store','Grab Food','Grab Car','Netflix','cristiano ronaldo','Cty ABC','Viettel','EVN'];
+  const names=['NGUYỄN MINH NHỰT Store','Grab Food','Grab Car','Netflix','Trump','CTY DẦU KHÍ IRAN','Viettel','TESLA'];
   const now=Date.now();
   for(let i=0;i<60;i++){
     const isIn=Math.random()>0.55;
@@ -8080,6 +8661,22 @@ function initBankDashboard() {
     var bankFns = [renderRecentTxs,renderSpendingChart,renderTxHistory,renderBankCards,renderWalletServices,renderWalletHistory,renderCardControls,renderBankMyQR];
     bankFns.forEach(function(fn){ try{ if(typeof fn==='function') fn(); }catch(e){ console.warn('[bank init]', fn.name, e); } });
   } catch(e) { console.error('[initBankDashboard]', e); }
+}
+
+/* ── INIT BANK PAGE — called when switching to bank page ── */
+function initBankPage() {
+  try {
+    /* Update main balance display with the randomised BANK_BALANCE */
+    var balEl = document.getElementById('bankBalance');
+    if (balEl) balEl.textContent = BANK_BALANCE.toLocaleString('vi-VN') + '₫';
+    /* Also update wallet display if present */
+    var walEl = document.getElementById('walletBalance');
+    if (walEl && walEl.textContent === '3,750,000₫') {
+      walEl.textContent = (Math.floor(1000000 + Math.random() * 9000000)).toLocaleString('vi-VN') + '₫';
+    }
+    /* Run full bank init if available */
+    if (typeof initBankDashboard === 'function') initBankDashboard();
+  } catch(e) { console.warn('initBankPage error:', e); }
 }
 
 /* ── SWITCH TAB ── */
@@ -8492,9 +9089,9 @@ function simulateScan() {
   setTimeout(()=>{
     area.style.background='rgba(0,0,0,0.5)';
     // Simulate found QR
-    showToast('Tìm thấy QR!','NGUYỄN MINH NHỰT-Store-Order-#20241234 · 850,000₫','success');
+    showToast('Tìm thấy QR!','NGUYỄN MINH NHỰT-Store-Order-#20241234 · 95.000.000.000₫','success');
     setTimeout(()=>{
-      if(confirm('Xác nhận thanh toán 850,000₫ cho NGUYỄN MINH NHỰT Store?')){ bankQRPay(850000); }
+      if(confirm('Xác nhận thanh toán 95.000.000.000₫ cho NGUYỄN MINH NHỰT Store?')){ bankQRPay(95000000000); }
     },500);
   },2000);
 }
@@ -9320,6 +9917,219 @@ if (window.ShopSystem && ShopSystem.Core && ShopSystem.Core.EventBus) {
     if (el) el.textContent = ShopSystem.Features.Achievements.getUnlockedCount();
   });
 }
+
+/* ============================================================
+   MOBILE NAVIGATION — Hamburger / Drawer
+   ============================================================ */
+function toggleMobileNav() {
+  try {
+    var btn = document.getElementById('hamburgerBtn');
+    var drawer = document.getElementById('mobileNavDrawer');
+    var overlay = document.getElementById('mobileNavOverlay');
+    if (!drawer || !overlay) return;
+    var isOpen = drawer.classList.contains('open');
+    if (isOpen) {
+      closeMobileNav();
+    } else {
+      drawer.classList.add('open');
+      overlay.classList.add('open');
+      if (btn) btn.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+  } catch(e) { console.warn('toggleMobileNav error:', e); }
+}
+
+function closeMobileNav() {
+  try {
+    var btn = document.getElementById('hamburgerBtn');
+    var drawer = document.getElementById('mobileNavDrawer');
+    var overlay = document.getElementById('mobileNavOverlay');
+    if (drawer) drawer.classList.remove('open');
+    if (overlay) overlay.classList.remove('open');
+    if (btn) btn.classList.remove('open');
+    document.body.style.overflow = '';
+  } catch(e) { console.warn('closeMobileNav error:', e); }
+}
+
+/* Close mobile nav on Escape key */
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') { closeMobileNav(); }
+});
+
+/* Sync mobile cart badge with desktop badge */
+(function syncMobileCartBadge() {
+  var original = document.getElementById('cartBadge');
+  var mobile   = document.getElementById('cartBadgeMobile');
+  if (!original || !mobile) return;
+  var observer = new MutationObserver(function() {
+    if (mobile) mobile.textContent = original.textContent;
+  });
+  observer.observe(original, { childList: true, characterData: true, subtree: true });
+})();
+
+/* Mark active mobile nav item based on current page */
+var _origSwitchPageCore = typeof _switchPageCore === 'function' ? _switchPageCore : null;
+function updateMobileNavActive(name) {
+  try {
+    document.querySelectorAll('.mobile-nav-item').forEach(function(btn) {
+      var pg = btn.getAttribute('data-page');
+      btn.classList.toggle('active', pg === name);
+    });
+  } catch(e) {}
+}
+/* Patch switchPage to also update mobile nav active state */
+(function() {
+  var origSwitch = window.switchPage;
+  if (typeof origSwitch === 'function') {
+    window.switchPage = function(name) {
+      origSwitch(name);
+      updateMobileNavActive(name);
+    };
+  }
+})();
+
+/* Bank mobile tabs — sync with bank sidebar nav */
+document.addEventListener('DOMContentLoaded', function() {
+  try {
+    var bankTabs = document.querySelectorAll('.bank-mobile-tab');
+    bankTabs.forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        var target = tab.getAttribute('data-tab');
+        if (!target) return;
+        bankTabs.forEach(function(t) { t.classList.remove('active'); });
+        tab.classList.add('active');
+        document.querySelectorAll('.bank-tab').forEach(function(bt) {
+          bt.classList.toggle('active', bt.id === 'btab-' + target);
+        });
+      });
+    });
+  } catch(e) {}
+});
+
+/* ============================================================
+   SAFE FUNCTION STUBS — Anti-crash guard
+   Nếu function chưa được define ở trên, tạo stub an toàn
+   ============================================================ */
+(function installSafeStubs() {
+  var _toast = function(t,m,type){ try{ if(typeof showToast==='function') showToast(t,m,type||'info'); }catch(e){} };
+
+  /* AUTH */
+  if (typeof window.openAuthModal  !== 'function') window.openAuthModal  = function(){ try{ var m=document.getElementById('authModal'); if(m) m.classList.add('show'); }catch(e){} };
+  if (typeof window.closeAuthModal !== 'function') window.closeAuthModal = function(){ try{ var m=document.getElementById('authModal'); if(m) m.classList.remove('show'); }catch(e){} };
+  if (typeof window.switchAuthTab  !== 'function') window.switchAuthTab  = function(tab){ try{ document.querySelectorAll('.auth-form-panel').forEach(function(p){ p.classList.remove('active'); }); var t=document.getElementById('authPanel'+tab.charAt(0).toUpperCase()+tab.slice(1)); if(t) t.classList.add('active'); }catch(e){} };
+  if (typeof window.doLogin        !== 'function') window.doLogin        = function(){ _toast('Đăng nhập','Tính năng đang phát triển','info'); };
+  if (typeof window.doRegister     !== 'function') window.doRegister     = function(){ _toast('Đăng ký','Tính năng đang phát triển','info'); };
+  if (typeof window.socialLogin    !== 'function') window.socialLogin    = function(p){ _toast('Social Login','Đăng nhập qua '+p+' đang phát triển','info'); };
+  if (typeof window.logoutUser     !== 'function') window.logoutUser     = function(){ try{ localStorage.removeItem('quyen_tran_user'); window.switchPage && switchPage('home'); _toast('Đăng xuất','Bạn đã đăng xuất','success'); }catch(e){} };
+  if (typeof window.showForgotPanel!== 'function') window.showForgotPanel= function(){ try{ var a=document.getElementById('authMain'),f=document.getElementById('forgotPanel'); if(a) a.style.display='none'; if(f) f.style.display='block'; }catch(e){} };
+  if (typeof window.hideForgotPanel!== 'function') window.hideForgotPanel= function(){ try{ var a=document.getElementById('authMain'),f=document.getElementById('forgotPanel'); if(f) f.style.display='none'; if(a) a.style.display='block'; }catch(e){} };
+  if (typeof window.sendResetEmail !== 'function') window.sendResetEmail = function(){ _toast('Đặt lại mật khẩu','Email đặt lại đã được gửi','success'); };
+  if (typeof window.verifyOTP      !== 'function') window.verifyOTP      = function(){ _toast('OTP','Xác thực thành công','success'); };
+  if (typeof window.authOtpNext    !== 'function') window.authOtpNext    = function(el,idx){ try{ var inputs=document.querySelectorAll('.otp-input'); if(el.value&&inputs[idx+1]) inputs[idx+1].focus(); }catch(e){} };
+  if (typeof window.authResendOTP  !== 'function') window.authResendOTP  = function(){ _toast('OTP','Đã gửi lại mã OTP','info'); };
+
+  /* SHOP */
+  if (typeof window.renderProducts     !== 'function') window.renderProducts     = function(){ };
+  if (typeof window.applyAdvFilter     !== 'function') window.applyAdvFilter     = function(){ };
+  if (typeof window.addToCart          !== 'function') window.addToCart          = function(id){ _toast('Giỏ hàng','Đã thêm sản phẩm','success'); };
+  if (typeof window.addToCartFromModal !== 'function') window.addToCartFromModal = function(){ _toast('Giỏ hàng','Đã thêm sản phẩm','success'); };
+  if (typeof window.toggleWishlist     !== 'function') window.toggleWishlist     = function(id){ };
+  if (typeof window.toggleModalWish    !== 'function') window.toggleModalWish    = function(){ };
+  if (typeof window.openProductModal   !== 'function') window.openProductModal   = function(id){ };
+  if (typeof window.closeProductModal  !== 'function') window.closeProductModal  = function(){ try{ var m=document.getElementById('productModal'); if(m) m.classList.remove('active'); }catch(e){} };
+  if (typeof window.pickVariant        !== 'function') window.pickVariant        = function(el){ try{ var p=el.closest('.variant-options'); if(p) p.querySelectorAll('.variant-btn').forEach(function(b){ b.classList.remove('active'); }); el.classList.add('active'); }catch(e){} };
+  if (typeof window.pickColor          !== 'function') window.pickColor          = function(el){ try{ var p=el.closest('.variant-options'); if(p) p.querySelectorAll('.color-btn').forEach(function(b){ b.classList.remove('active'); }); el.classList.add('active'); }catch(e){} };
+  if (typeof window.changeQty          !== 'function') window.changeQty          = function(d){ try{ var el=document.getElementById('modalQty'); if(el){ var v=Math.max(1,(parseInt(el.textContent)||1)+d); el.textContent=v; } }catch(e){} };
+  if (typeof window.switchTab          !== 'function') window.switchTab          = function(btn,id){ try{ document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); }); document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); }); if(btn) btn.classList.add('active'); var t=document.getElementById('tab-'+id); if(t) t.classList.add('active'); }catch(e){} };
+  if (typeof window.submitReview       !== 'function') window.submitReview       = function(){ _toast('Đánh giá','Cảm ơn bạn đã đánh giá!','success'); };
+  if (typeof window.addReviewImg       !== 'function') window.addReviewImg       = function(input){ };
+  if (typeof window.pickStar           !== 'function') window.pickStar           = function(v){ try{ document.querySelectorAll('#starPick span').forEach(function(s,i){ s.style.color=i<v?'var(--accent-gold)':'var(--text-muted)'; }); }catch(e){} };
+  if (typeof window.shareProduct       !== 'function') window.shareProduct       = function(type){ try{ if(type==='copy'){ navigator.clipboard&&navigator.clipboard.writeText(location.href); _toast('Đã copy','Link sản phẩm đã được sao chép','success'); } else { _toast('Chia sẻ','Đang mở '+type,'info'); } }catch(e){} };
+
+  /* CART */
+  if (typeof window.renderCart         !== 'function') window.renderCart         = function(){ };
+  if (typeof window.updateCartItem     !== 'function') window.updateCartItem     = function(id,d){ };
+  if (typeof window.removeCartItem     !== 'function') window.removeCartItem     = function(id){ };
+  if (typeof window.applyCoupon        !== 'function') window.applyCoupon        = function(){ };
+  if (typeof window.goToPayment        !== 'function') window.goToPayment        = function(){ try{ switchPage&&switchPage('payment'); }catch(e){} };
+
+  /* PAYMENT */
+  if (typeof window.renderPaymentSummary!== 'function') window.renderPaymentSummary = function(){ };
+  if (typeof window.selectPayment       !== 'function') window.selectPayment       = function(type){ };
+  if (typeof window.submitPayment       !== 'function') window.submitPayment       = function(){ };
+  if (typeof window.copyTransferContent !== 'function') window.copyTransferContent = function(){ try{ var el=document.getElementById('transferContent'); if(el){ navigator.clipboard&&navigator.clipboard.writeText(el.textContent); _toast('Đã copy','Nội dung chuyển khoản đã sao chép','success'); } }catch(e){} };
+  if (typeof window.regenerateQR        !== 'function') window.regenerateQR       = function(){ _toast('QR','Đã tạo QR mới','success'); };
+
+  /* CHATBOT */
+  if (typeof window.toggleChatbot  !== 'function') window.toggleChatbot  = function(){ try{ var w=document.getElementById('chatbotWindow'); if(w) w.classList.toggle('active'); }catch(e){} };
+  if (typeof window.sendChat       !== 'function') window.sendChat       = function(){ };
+  if (typeof window.chatQuick      !== 'function') window.chatQuick      = function(msg){ };
+
+  /* ADMIN */
+  if (typeof window.initAdminCharts !== 'function') window.initAdminCharts = function(){ };
+
+  /* QR */
+  if (typeof window.initQRPage !== 'function') window.initQRPage = function(){ };
+
+  /* MISC */
+  if (typeof window.toggleTheme      !== 'function') window.toggleTheme      = function(){ try{ var t=document.documentElement.getAttribute('data-theme'); document.documentElement.setAttribute('data-theme',t==='dark'?'light':'dark'); }catch(e){} };
+  if (typeof window.submitContact    !== 'function') window.submitContact    = function(){ _toast('Đã gửi','Tin nhắn đã được gửi','success'); };
+  if (typeof window.filterOrders     !== 'function') window.filterOrders     = function(){ };
+  if (typeof window.showProfileSection!== 'function') window.showProfileSection = function(sec,el){ try{ document.querySelectorAll('.profile-section').forEach(function(s){ s.classList.remove('active'); }); var t=document.getElementById('ps-'+sec); if(t) t.classList.add('active'); document.querySelectorAll('.profile-nav-item').forEach(function(i){ i.classList.remove('active'); }); if(el) el.classList.add('active'); }catch(e){} };
+  if (typeof window.saveProfileInfo  !== 'function') window.saveProfileInfo  = function(){ _toast('Đã lưu','Thông tin đã được cập nhật','success'); };
+  if (typeof window.triggerAvatarUpload!== 'function') window.triggerAvatarUpload = function(){ };
+  if (typeof window.checkPwStrength  !== 'function') window.checkPwStrength  = function(pw){ try{ var bar=document.getElementById('pwStrengthBar')||document.getElementById('regPwBar'); var lbl=document.getElementById('regPwLabel'); var s=pw.length<6?'Yếu':pw.length<10?'Trung bình':'Mạnh'; var c=pw.length<6?'var(--accent-pink)':pw.length<10?'var(--accent-gold)':'var(--accent-green)'; var w=pw.length<6?'30%':pw.length<10?'65%':'100%'; if(bar){bar.style.width=w;bar.style.background=c;} if(lbl){lbl.textContent=s;lbl.style.color=c;} }catch(e){} };
+
+  /* MYSTERY BOX */
+  if (typeof window.closeMystery     !== 'function') window.closeMystery     = function(){ try{ var o=document.getElementById('mysteryOverlay'); if(o) o.style.display='none'; }catch(e){} };
+  if (typeof window.addMysteryToCart !== 'function') window.addMysteryToCart = function(){ _toast('Giỏ hàng','Đã thêm Mystery Box','success'); closeMystery&&closeMystery(); };
+
+  /* BATTLE */
+  if (typeof window.closeBattle  !== 'function') window.closeBattle  = function(){ try{ var o=document.getElementById('battleOverlay'); if(o) o.classList.remove('active'); }catch(e){} };
+  if (typeof window.newBattle    !== 'function') window.newBattle    = function(){ };
+  if (typeof window.voteProduct  !== 'function') window.voteProduct  = function(side){ };
+
+  /* EASTER EGG */
+  if (typeof window.closeSecret  !== 'function') window.closeSecret  = function(){ try{ var o=document.getElementById('secretOverlay'); if(o) o.classList.remove('active'); }catch(e){} };
+
+  /* COMPARE */
+  if (typeof window.addToCompare     !== 'function') window.addToCompare     = function(id){ };
+  if (typeof window.openCompare      !== 'function') window.openCompare      = function(){ };
+  if (typeof window.closeCompare     !== 'function') window.closeCompare     = function(){ try{ var o=document.getElementById('compare-overlay'); if(o) o.classList.remove('show'); }catch(e){} };
+  if (typeof window.clearCompare     !== 'function') window.clearCompare     = function(){ };
+
+  /* KEYBOARD SHORTCUTS PANEL */
+  if (typeof window.closeKbdPanel    !== 'function') window.closeKbdPanel    = function(){ try{ var p=document.getElementById('kbd-shortcut-panel'); if(p) p.classList.remove('show'); }catch(e){} };
+
+  /* SEARCH */
+  if (typeof window.liveSearch       !== 'function') window.liveSearch       = function(){ };
+  if (typeof window.clearSearchHistory !== 'function') window.clearSearchHistory = function(){ };
+
+  /* BANK */
+  if (typeof window.switchBankTab    !== 'function') window.switchBankTab    = function(tab){ try{ document.querySelectorAll('.bank-tab').forEach(function(t){ t.classList.remove('active'); }); var t=document.getElementById('btab-'+tab); if(t) t.classList.add('active'); document.querySelectorAll('.bank-nav-item').forEach(function(i){ i.classList.remove('active'); var pg=i.getAttribute('onclick')||''; if(pg.indexOf("'"+tab+"'")>-1||pg.indexOf('"'+tab+'"')>-1) i.classList.add('active'); }); }catch(e){} };
+
+  /* BANNER */
+  if (typeof window.nextBanner !== 'function') window.nextBanner = function(){ };
+  if (typeof window.prevBanner !== 'function') window.prevBanner = function(){ };
+  if (typeof window.goBanner   !== 'function') window.goBanner   = function(i){ };
+
+  /* PROFILE */
+  if (typeof window.saveAddress !== 'function') window.saveAddress = function(){ _toast('Đã lưu','Địa chỉ đã được cập nhật','success'); };
+  if (typeof window.addAddress  !== 'function') window.addAddress  = function(){ };
+
+  /* ATM / BANK extras */
+  if (typeof window.atmKey         !== 'function') window.atmKey         = function(k){ };
+  if (typeof window.atmInsertCard  !== 'function') window.atmInsertCard  = function(){ };
+  if (typeof window.clearAtmHistory!== 'function') window.clearAtmHistory= function(){ };
+  if (typeof window.convertCurrency!== 'function') window.convertCurrency= function(){ };
+  if (typeof window.swapCurrency   !== 'function') window.swapCurrency   = function(){ };
+  if (typeof window.calcLoan       !== 'function') window.calcLoan       = function(){ };
+  if (typeof window.calcSavings    !== 'function') window.calcSavings    = function(){ };
+  if (typeof window.addRecurring   !== 'function') window.addRecurring   = function(){ };
+  if (typeof window.toggleRecurring!== 'function') window.toggleRecurring= function(id){ };
+  if (typeof window.deleteRecurring!== 'function') window.deleteRecurring= function(id){ };
+
+})(); /* end installSafeStubs */
 </script>
 <!-- ============================================================
      AUTH MODAL — Đăng nhập / Đăng ký / Quên mật khẩu
