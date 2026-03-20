@@ -1,48 +1,42 @@
 <!DOCTYPE html>
-<html lang="vi" data-theme="dark">
+<html lang="vi" data-theme="light">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>NGUYỄN MINH NHỰT STORE — Thương Mại Điện Tử Cao Cấp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
    CSS VARIABLES & RESET
    Định nghĩa biến màu sắc, font, spacing cho toàn bộ trang
    ============================================================ */
 :root {
-  --bg-primary: #030712;
-  --bg-secondary: #0d1117;
-  --bg-card: #111827;
-  --bg-glass: rgba(17,24,39,0.7);
-  --accent-cyan: #00f5ff;
-  --accent-purple: #bf00ff;
-  --accent-pink: #ff0099;
-  --accent-gold: #ffd700;
-  --accent-green: #00ff88;
-  --text-primary: #f0f6fc;
-  --text-secondary: #8b949e;
-  --text-muted: #484f58;
-  --border-glow: rgba(0,245,255,0.3);
-  --border-subtle: rgba(255,255,255,0.08);
-  --shadow-neon: 0 0 20px rgba(0,245,255,0.4), 0 0 40px rgba(0,245,255,0.2);
-  --shadow-purple: 0 0 20px rgba(191,0,255,0.4), 0 0 40px rgba(191,0,255,0.2);
-  --shadow-pink: 0 0 20px rgba(255,0,153,0.4), 0 0 40px rgba(255,0,153,0.2);
-  --font-display: 'Courier New', monospace;
-  --font-body: Georgia, 'Times New Roman', serif;
-  --radius: 12px;
-  --radius-lg: 20px;
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-[data-theme="light"] {
-  --bg-primary: #f0f4f8;
+  --bg-primary: #f5f5f5;
   --bg-secondary: #ffffff;
   --bg-card: #ffffff;
-  --bg-glass: rgba(255,255,255,0.85);
-  --text-primary: #0d1117;
-  --text-secondary: #444c56;
-  --text-muted: #8b949e;
+  --bg-glass: rgba(255,255,255,0.92);
+  --accent-cyan: #0099cc;
+  --accent-purple: #7b2ff7;
+  --accent-pink: #E30019;
+  --accent-gold: #FFD500;
+  --accent-green: #00a651;
+  --text-primary: #111111;
+  --text-secondary: #444444;
+  --text-muted: #888888;
+  --border-glow: rgba(0,153,204,0.3);
   --border-subtle: rgba(0,0,0,0.1);
+  --shadow-neon: 0 2px 12px rgba(0,0,0,0.12);
+  --shadow-purple: 0 2px 12px rgba(123,47,247,0.2);
+  --shadow-pink: 0 2px 12px rgba(227,0,25,0.2);
+  --font-display: 'Be Vietnam Pro', Arial, sans-serif;
+  --font-body: 'Be Vietnam Pro', Arial, sans-serif;
+  --radius: 12px;
+  --radius-lg: 20px;
+  --transition: all 0.25s ease;
 }
+/* Light mode is the only mode — no dark mode */
 *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
@@ -51,7 +45,8 @@ body {
   color: var(--text-primary);
   min-height: 100vh;
   overflow-x: hidden;
- 
+  font-size: 15px;
+  line-height: 1.6;
 }
 /* ============================================================
    CUSTOM CURSOR
@@ -177,8 +172,8 @@ nav { display: flex; align-items: center; gap: 4px; }
 .nav-btn {
   background: none; border: none;
   color: var(--text-secondary); cursor: pointer;
-  font-family: var(--font-display); font-size: 11px;
-  font-weight: bold; letter-spacing: 2px; text-transform: uppercase;
+  font-family: var(--font-body); font-size: 13px;
+  font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase;
   padding: 8px 14px; border-radius: 8px;
   transition: var(--transition); position: relative; overflow: hidden;
 }
@@ -507,51 +502,50 @@ main { position: relative; z-index: 1; }
 }
 .product-card:hover .product-wishlist { opacity: 1; }
 .product-wishlist:hover { background: rgba(255,0,153,0.2); border-color: var(--accent-pink); transform: scale(1.1); }
-.product-info { padding: 18px; }
+.product-info { padding: 16px; }
 .product-category {
-  font-family: var(--font-display); font-size: 9px;
-  letter-spacing: 3px; text-transform: uppercase;
-  color: var(--accent-cyan); margin-bottom: 6px;
+  font-family: var(--font-body); font-size: 11px;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--accent-cyan); margin-bottom: 5px;
 }
 .product-name {
-  font-family: var(--font-display); font-size: 14px;
-  font-weight: bold; margin-bottom: 8px;
-  color: var(--text-primary); line-height: 1.4;
+  font-family: var(--font-body); font-size: 15px;
+  font-weight: 600; margin-bottom: 8px;
+  color: var(--text-primary); line-height: 1.45;
 }
-.product-stars { display: flex; gap: 2px; margin-bottom: 10px; }
-.star { font-size: 11px; color: var(--accent-gold); }
+.product-stars { display: flex; gap: 2px; margin-bottom: 10px; align-items: center; }
+.star { font-size: 12px; color: var(--accent-gold); }
 .star.empty { color: var(--text-muted); }
-.product-reviews { font-size: 10px; color: var(--text-muted); margin-left: 6px; }
-.product-price-row { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.product-reviews { font-size: 11px; color: var(--text-muted); margin-left: 6px; }
+.product-price-row { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
 .price-original { color: var(--text-muted); text-decoration: line-through; font-size: 13px; }
 .price-sale {
-  font-family: var(--font-display); font-size: 18px;
-  font-weight: bold; color: var(--accent-gold);
+  font-family: var(--font-body); font-size: 17px;
+  font-weight: 700; color: #E30019;
 }
 .price-discount {
-  background: rgba(255,0,153,0.15); color: var(--accent-pink);
-  border: 1px solid rgba(255,0,153,0.3);
-  padding: 2px 8px; border-radius: 10px;
-  font-size: 10px; font-weight: bold;
+  background: rgba(227,0,25,0.1); color: #E30019;
+  border: 1px solid rgba(227,0,25,0.25);
+  padding: 2px 7px; border-radius: 10px;
+  font-size: 11px; font-weight: 700;
 }
 .btn-add-cart {
-  width: 100%; padding: 11px; border-radius: 10px;
-  background: linear-gradient(135deg, rgba(0,245,255,0.1), rgba(191,0,255,0.1));
-  border: 1px solid rgba(0,245,255,0.3);
-  color: var(--accent-cyan); cursor: pointer;
-  font-family: var(--font-display); font-size: 10px;
-  letter-spacing: 2px; text-transform: uppercase; font-weight: bold;
+  width: 100%; padding: 11px; border-radius: 8px;
+  background: #E30019;
+  border: none;
+  color: #fff; cursor: pointer;
+  font-family: var(--font-body); font-size: 13px;
+  font-weight: 600; letter-spacing: 0.3px;
   transition: var(--transition); position: relative; overflow: hidden;
 }
 .btn-add-cart:hover {
-  background: linear-gradient(135deg, rgba(0,245,255,0.2), rgba(191,0,255,0.2));
-  border-color: var(--accent-cyan);
-  box-shadow: var(--shadow-neon);
+  background: #c20015;
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(227,0,25,0.3);
 }
 .btn-add-cart.added {
-  background: linear-gradient(135deg, rgba(0,255,136,0.2), rgba(0,255,136,0.1));
-  border-color: var(--accent-green); color: var(--accent-green);
+  background: #00a651;
+  border-color: #00a651; color: #fff;
 }
 
 /* ============================================================
@@ -2992,6 +2986,1630 @@ header.scrolled {
 }
 .vd-feat-desc { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
 
+
+/* ============================================================
+   BANK BILL / RECEIPT MODAL
+   Phong cách biên lai ngân hàng Việt Nam thật
+   ============================================================ */
+.bill-overlay {
+  display: none;
+  position: fixed; inset: 0; z-index: 99000;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(8px);
+  align-items: center; justify-content: center;
+  padding: 16px;
+  overflow-y: auto;
+}
+.bill-overlay.show {
+  display: flex;
+  animation: billFadeIn 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+@keyframes billFadeIn {
+  from { opacity:0; transform:scale(0.93) translateY(20px); }
+  to   { opacity:1; transform:scale(1) translateY(0); }
+}
+
+/* ── PAPER ─────────────────────────────────── */
+.bill-paper {
+  background: #ffffff;
+  color: #1a1a1a;
+  width: 100%; max-width: 420px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(0,0,0,0.08),
+    0 20px 60px rgba(0,0,0,0.5),
+    0 4px 16px rgba(0,0,0,0.3);
+  position: relative;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* ── BANK HEADER ─────────────────────────────────── */
+.bill-bank-header {
+  background: linear-gradient(135deg, #004d26 0%, #00803d 60%, #00a651 100%);
+  padding: 18px 22px 16px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.bill-bank-logo {
+  display: flex; align-items: center; gap: 10px;
+}
+.bill-bank-logo-icon {
+  width: 42px; height: 42px; border-radius: 10px;
+  background: rgba(255,255,255,0.18);
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid rgba(255,255,255,0.25);
+  backdrop-filter: blur(4px);
+}
+.bill-bank-logo-icon svg path { stroke: #ffffff !important; }
+.bill-bank-name {
+  font-size: 15px; font-weight: 700;
+  color: #ffffff; letter-spacing: 1.5px;
+  line-height: 1.2;
+}
+.bill-bank-sub {
+  font-size: 9px; color: rgba(255,255,255,0.7);
+  letter-spacing: 0.8px; text-transform: uppercase;
+  margin-top: 2px;
+}
+.bill-bank-secure {
+  display: flex; align-items: center; gap: 4px;
+  font-size: 9px; color: rgba(255,255,255,0.8);
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 20px; padding: 4px 10px;
+  letter-spacing: 0.3px;
+}
+
+/* ── SUCCESS ZONE ─────────────────────────────────── */
+.bill-success-zone {
+  background: linear-gradient(180deg, #f0fdf4 0%, #ffffff 100%);
+  padding: 28px 24px 20px;
+  text-align: center;
+  border-bottom: 1px solid #e8f5e9;
+}
+.bill-check-ring {
+  width: 72px; height: 72px; margin: 0 auto 16px;
+  border-radius: 50%;
+  background: rgba(0,128,61,0.08);
+  display: flex; align-items: center; justify-content: center;
+  animation: billCheckRing 0.6s ease 0.1s both;
+}
+@keyframes billCheckRing {
+  from { transform: scale(0); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+.bill-check-circle {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: linear-gradient(135deg, #00a651, #00803d);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 16px rgba(0,128,61,0.35);
+  animation: billCheckScale 0.4s cubic-bezier(0.34,1.56,0.64,1) 0.3s both;
+}
+@keyframes billCheckScale {
+  from { transform: scale(0.5); }
+  to   { transform: scale(1); }
+}
+.bill-success-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 2.5px;
+  color: #00803d; text-transform: uppercase; margin-bottom: 10px;
+}
+.bill-txn-amount {
+  font-size: 32px; font-weight: 800; color: #1a1a1a;
+  letter-spacing: -0.5px; line-height: 1;
+  margin-bottom: 4px;
+  animation: billAmountIn 0.5s ease 0.4s both;
+}
+@keyframes billAmountIn {
+  from { opacity:0; transform:translateY(8px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.bill-txn-sublabel {
+  font-size: 11px; color: #9e9e9e; letter-spacing: 0.5px;
+}
+
+/* ── DIVIDERS ─────────────────────────────────── */
+.bill-divider-dash {
+  height: 1px; margin: 0 16px;
+  border-top: 2px dashed #e0e0e0;
+  position: relative;
+}
+.bill-divider-dash::before,
+.bill-divider-dash::after {
+  content: '';
+  position: absolute; top: -9px;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: rgba(0,0,0,0.72);
+}
+.bill-divider-dash::before { left: -24px; }
+.bill-divider-dash::after  { right: -24px; }
+.bill-divider-solid {
+  height: 1px; background: #f0f0f0; margin: 0;
+}
+
+/* ── INFO BLOCKS ─────────────────────────────────── */
+.bill-info-block {
+  padding: 14px 22px;
+}
+.bill-info-title {
+  font-size: 9px; font-weight: 700; letter-spacing: 2.5px;
+  color: #9e9e9e; text-transform: uppercase;
+  margin-bottom: 10px; padding-bottom: 6px;
+  border-bottom: 1px solid #f5f5f5;
+}
+.bill-info-row {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  padding: 5px 0; gap: 12px;
+}
+.bill-info-key {
+  font-size: 12px; color: #757575;
+  flex-shrink: 0; min-width: 110px;
+}
+.bill-info-val {
+  font-size: 12px; font-weight: 600; color: #212121;
+  text-align: right; word-break: break-word;
+}
+.bill-mono { font-family: 'Courier New', monospace; letter-spacing: 0.5px; }
+.bill-status-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: #e8f5e9; color: #00803d;
+  border: 1px solid #a5d6a7;
+  border-radius: 20px; padding: 3px 10px;
+  font-size: 11px; font-weight: 700;
+}
+
+/* ── ITEMS LIST ─────────────────────────────────── */
+.bill-item-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 7px 0;
+  border-bottom: 1px dashed #f5f5f5;
+}
+.bill-item-row:last-child { border-bottom: none; }
+.bill-item-emoji { font-size: 22px; flex-shrink: 0; }
+.bill-item-info { flex: 1; }
+.bill-item-name { font-size: 12px; font-weight: 600; color: #212121; line-height: 1.3; }
+.bill-item-qty  { font-size: 11px; color: #9e9e9e; margin-top: 2px; }
+.bill-item-price { font-size: 12px; font-weight: 700; color: #212121; white-space: nowrap; }
+
+/* ── SUMMARY BLOCK ─────────────────────────────────── */
+.bill-summary-block {
+  padding: 12px 22px 16px;
+  background: #fafafa;
+}
+.bill-summary-row {
+  display: flex; justify-content: space-between;
+  font-size: 12px; color: #616161; padding: 4px 0;
+}
+.bill-total-row {
+  font-size: 15px !important; font-weight: 800 !important;
+  color: #00803d !important; margin-top: 4px;
+}
+.bill-total-row span { color: #00803d !important; }
+
+/* ── FOOTER ZONE ─────────────────────────────────── */
+.bill-footer-zone {
+  padding: 14px 22px 12px;
+  display: flex; align-items: center; gap: 14px;
+  background: #ffffff;
+}
+.bill-qr-mini {
+  flex-shrink: 0;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 4px; background: #fff;
+}
+.bill-qr-mini canvas { display: block; }
+.bill-footer-note { flex: 1; }
+.bill-footer-store {
+  font-size: 11px; font-weight: 700; color: #212121;
+  letter-spacing: 0.8px;
+}
+.bill-footer-addr, .bill-footer-hotline {
+  font-size: 10px; color: #9e9e9e; margin-top: 2px;
+}
+.bill-footer-thanks {
+  font-size: 10px; color: #00803d; margin-top: 5px;
+  font-style: italic;
+}
+
+/* ── WATERMARK ─────────────────────────────────── */
+.bill-watermark {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%,-50%) rotate(-30deg);
+  font-size: 52px; font-weight: 900;
+  color: rgba(0,128,61,0.045);
+  letter-spacing: 4px; pointer-events: none;
+  white-space: nowrap; z-index: 0;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+/* ── ACTIONS ─────────────────────────────────── */
+.bill-actions {
+  display: flex; gap: 8px; padding: 0 16px 18px;
+  justify-content: center; flex-wrap: wrap;
+  position: relative; z-index: 1;
+}
+.bill-btn-print, .bill-btn-orders, .bill-btn-home {
+  display: flex; align-items: center; gap: 6px;
+  border: none; border-radius: 10px;
+  padding: 10px 16px;
+  font-size: 12px; font-weight: 600; cursor: pointer;
+  transition: all 0.2s ease; letter-spacing: 0.3px;
+}
+.bill-btn-print {
+  background: #00803d; color: #ffffff;
+  flex: 1;
+}
+.bill-btn-print:hover { background: #006d34; transform: translateY(-1px); }
+.bill-btn-orders {
+  background: #e8f5e9; color: #00803d;
+  border: 1px solid #a5d6a7;
+  flex: 1;
+}
+.bill-btn-orders:hover { background: #d4edda; transform: translateY(-1px); }
+.bill-btn-home {
+  background: #f5f5f5; color: #616161;
+  border: 1px solid #e0e0e0;
+}
+.bill-btn-home:hover { background: #eeeeee; transform: translateY(-1px); }
+
+/* ── PRINT STYLES ─────────────────────────────────── */
+@media print {
+  body > *:not(.bill-overlay) { display: none !important; }
+  .bill-overlay {
+    position: static !important; background: none !important;
+    padding: 0 !important;
+  }
+  .bill-paper {
+    box-shadow: none !important;
+    border: 1px solid #ccc;
+    border-radius: 0 !important;
+    max-width: 100% !important;
+  }
+  .bill-actions { display: none !important; }
+  .bill-watermark { color: rgba(0,128,61,0.06) !important; }
+}
+
+/* ── DARK MODE OVERRIDE — bill LUÔN trắng ─────── */
+[data-theme="light"] .bill-divider-dash::before,
+[data-theme="light"] .bill-divider-dash::after {
+  background: rgba(240,244,248,0.95);
+}
+
+
+/* ============================================================
+   VCB DIGIBANK THEME — Bank page + Cart page
+   Màu chuẩn VCB: xanh lá đậm + nền tối navy
+   ============================================================ */
+
+/* ── VCB CSS VARIABLES ──────────────────────────── */
+:root {
+  --vcb-green:      #00803d;
+  --vcb-green-lt:   #00a651;
+  --vcb-green-dk:   #005f30;
+  --vcb-navy:       #0a0e1a;
+  --vcb-navy2:      #0f1624;
+  --vcb-navy3:      #151d2e;
+  --vcb-border:     rgba(0,128,61,0.18);
+  --vcb-border-lt:  rgba(0,166,81,0.3);
+  --vcb-text:       #ffffff;
+  --vcb-text2:      rgba(255,255,255,0.65);
+  --vcb-text3:      rgba(255,255,255,0.38);
+  --vcb-gold:       #f5c842;
+  --vcb-red:        #e53935;
+  --vcb-shadow:     0 4px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(0,128,61,0.12);
+}
+
+/* ══════════════════════════════════════════════════
+   BANK PAGE — VCB FULL RETHEME
+   ══════════════════════════════════════════════════ */
+
+/* Overall page background */
+#page-bank {
+  background: var(--vcb-navy) !important;
+  padding: 0 !important;
+}
+#page-bank .bank-layout {
+  background: var(--vcb-navy) !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+/* ── VCB SIDEBAR ───────────────────────────── */
+#page-bank .bank-sidebar.vcb-sidebar {
+  background: var(--vcb-navy2) !important;
+  border-right: 1px solid var(--vcb-border) !important;
+}
+
+/* VCB Logo bar top */
+.vcb-header-bar {
+  padding: 20px 18px 16px;
+  border-bottom: 1px solid var(--vcb-border);
+  margin-bottom: 8px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.vcb-logo-wrap {
+  display: flex; align-items: center; gap: 10px;
+}
+.vcb-logo-icon {
+  width: 38px; height: 38px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--vcb-green-dk), var(--vcb-green));
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 14px rgba(0,128,61,0.4);
+  flex-shrink: 0;
+}
+.vcb-logo-name {
+  font-size: 17px; font-weight: 800; color: #fff;
+  letter-spacing: 0.5px; line-height: 1.1;
+}
+.vcb-logo-name span {
+  color: var(--vcb-green-lt);
+}
+.vcb-logo-sub {
+  font-size: 9px; color: var(--vcb-text3);
+  letter-spacing: 1.5px; text-transform: uppercase;
+  margin-top: 2px;
+}
+.vcb-header-notif {
+  position: relative; cursor: pointer;
+  width: 34px; height: 34px; border-radius: 8px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--vcb-border);
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s;
+}
+.vcb-header-notif:hover { background: rgba(0,128,61,0.15); border-color: var(--vcb-border-lt); }
+.vcb-notif-dot {
+  position: absolute; top: 6px; right: 6px;
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #e53935;
+  border: 1.5px solid var(--vcb-navy2);
+}
+
+/* Bank user row */
+#page-bank .bank-user-row {
+  padding: 12px 18px 14px;
+  background: rgba(0,128,61,0.06);
+  border-bottom: 1px solid var(--vcb-border);
+  margin-bottom: 6px;
+}
+#page-bank .bank-user-name { color: var(--vcb-text) !important; font-weight: 700 !important; }
+#page-bank .bank-user-id { color: var(--vcb-text3) !important; font-size: 10px; }
+#page-bank .bank-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--vcb-green-dk), var(--vcb-green-lt)) !important;
+  border: 2px solid var(--vcb-green) !important;
+}
+
+/* Nav items */
+#page-bank .bank-nav-item {
+  color: var(--vcb-text2) !important;
+  border-radius: 8px !important;
+  margin: 2px 10px !important;
+  padding: 10px 12px !important;
+  font-size: 12.5px !important;
+  transition: all 0.18s !important;
+}
+#page-bank .bank-nav-item:hover {
+  background: rgba(0,128,61,0.12) !important;
+  color: var(--vcb-green-lt) !important;
+}
+#page-bank .bank-nav-item.active {
+  background: linear-gradient(90deg, rgba(0,128,61,0.2), rgba(0,128,61,0.08)) !important;
+  color: #ffffff !important;
+  border-left: 3px solid var(--vcb-green-lt) !important;
+  font-weight: 700 !important;
+}
+#page-bank .bank-nav-item span { margin-right: 8px; }
+
+/* Sidebar footer */
+#page-bank .bank-sidebar-footer {
+  border-top: 1px solid var(--vcb-border) !important;
+}
+
+/* ── VCB MAIN AREA ───────────────────────────── */
+#page-bank .bank-main {
+  background: var(--vcb-navy) !important;
+}
+
+/* Topbar */
+#page-bank .bank-topbar {
+  background: var(--vcb-navy2) !important;
+  border-bottom: 1px solid var(--vcb-border) !important;
+}
+#page-bank .bank-page-title { color: var(--vcb-text) !important; }
+#page-bank .bank-page-sub   { color: var(--vcb-text2) !important; }
+#page-bank .bank-notif-btn {
+  color: var(--vcb-text2) !important;
+  border-color: var(--vcb-border) !important;
+}
+
+/* ── VCB BALANCE CARDS ──────────────────────── */
+#page-bank .bank-balance-card.main-card {
+  background: linear-gradient(135deg, #004d26 0%, #007a3d 60%, #009e4f 100%) !important;
+  box-shadow: 0 8px 32px rgba(0,128,61,0.35) !important;
+  border: none !important;
+}
+#page-bank .bank-balance-card.saving-card {
+  background: linear-gradient(135deg, #0d2137 0%, #1a3a5c 60%, #1f4a73 100%) !important;
+  box-shadow: 0 8px 32px rgba(0,96,180,0.3) !important;
+  border: none !important;
+}
+#page-bank .bank-balance-card.ewallet-card {
+  background: linear-gradient(135deg, #2d0f44 0%, #4a1a72 60%, #5f21a0 100%) !important;
+  box-shadow: 0 8px 32px rgba(95,33,160,0.3) !important;
+  border: none !important;
+}
+
+/* ── VCB SECTION TITLES ──────────────────────── */
+#page-bank .bank-section-title {
+  color: var(--vcb-text) !important;
+}
+
+/* ── VCB QUICK ACTIONS ──────────────────────── */
+#page-bank .bank-qa-btn {
+  background: var(--vcb-navy3) !important;
+  border: 1px solid var(--vcb-border) !important;
+  color: var(--vcb-text2) !important;
+  border-radius: 12px !important;
+  transition: all 0.18s !important;
+}
+#page-bank .bank-qa-btn:hover {
+  background: rgba(0,128,61,0.15) !important;
+  border-color: var(--vcb-green) !important;
+  color: var(--vcb-text) !important;
+  transform: translateY(-2px) !important;
+}
+#page-bank .bank-qa-btn span {
+  font-size: 20px;
+  display: block; margin-bottom: 6px;
+}
+
+/* ── VCB CARD BOXES ──────────────────────────── */
+#page-bank .bank-card-box {
+  background: var(--vcb-navy2) !important;
+  border: 1px solid var(--vcb-border) !important;
+  border-radius: 14px !important;
+}
+#page-bank .bank-card-box:hover {
+  border-color: var(--vcb-border-lt) !important;
+  box-shadow: 0 4px 20px rgba(0,128,61,0.12) !important;
+}
+
+/* ── VCB TRANSACTION ROWS ───────────────────── */
+#page-bank .bank-tx-row {
+  border-bottom: 1px solid var(--vcb-border) !important;
+}
+#page-bank .bank-tx-row:hover {
+  background: rgba(0,128,61,0.06) !important;
+}
+#page-bank .tx-dir-out { color: var(--vcb-red) !important; }
+#page-bank .tx-dir-in  { color: var(--vcb-green-lt) !important; }
+
+/* ── VCB BUTTONS ──────────────────────────── */
+#page-bank .bank-btn-primary {
+  background: linear-gradient(135deg, var(--vcb-green-dk), var(--vcb-green-lt)) !important;
+  border: none !important;
+  box-shadow: 0 4px 16px rgba(0,128,61,0.35) !important;
+  border-radius: 10px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.5px !important;
+  color: #fff !important;
+  transition: all 0.2s !important;
+}
+#page-bank .bank-btn-primary:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 24px rgba(0,128,61,0.5) !important;
+}
+#page-bank .bank-btn-outline {
+  border-color: var(--vcb-border-lt) !important;
+  color: var(--vcb-green-lt) !important;
+  background: rgba(0,128,61,0.06) !important;
+}
+#page-bank .bank-btn-outline:hover {
+  background: rgba(0,128,61,0.15) !important;
+  border-color: var(--vcb-green) !important;
+}
+
+/* ── VCB TRANSFER SUCCESS SCREEN ──────────────── */
+#page-bank .transfer-success-screen {
+  background: var(--vcb-navy2) !important;
+  border: 1px solid var(--vcb-border) !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+}
+#page-bank .transfer-success-amount {
+  color: #ffffff !important;
+  font-size: 36px !important;
+  font-weight: 800 !important;
+}
+#page-bank .bank-confirm-row {
+  border-bottom: 1px solid var(--vcb-border) !important;
+  padding: 11px 0 !important;
+}
+#page-bank .bank-confirm-row:last-child { border-bottom: none !important; }
+#page-bank .bank-confirm-label { color: var(--vcb-text2) !important; font-size: 12px !important; }
+#page-bank .bank-confirm-val   { color: var(--vcb-text) !important; font-weight: 600 !important; }
+
+/* VCB SUCCESS BADGE trong transfer */
+#page-bank #tr-step-4 .transfer-success-icon,
+#page-bank .transfer-success-check {
+  background: linear-gradient(135deg, var(--vcb-green-dk), var(--vcb-green-lt)) !important;
+  box-shadow: 0 0 28px rgba(0,166,81,0.5) !important;
+}
+#page-bank .transfer-success-label {
+  color: var(--vcb-green-lt) !important;
+}
+
+/* VCB step indicators */
+#page-bank .bank-step-item[data-step].active .bank-step-num {
+  background: var(--vcb-green) !important;
+  box-shadow: 0 0 12px rgba(0,128,61,0.5) !important;
+}
+#page-bank .bank-step-item[data-step].done .bank-step-num {
+  background: var(--vcb-green-dk) !important;
+  color: #fff !important;
+}
+
+/* ── VCB FORM INPUTS ──────────────────────── */
+#page-bank .bank-input {
+  background: var(--vcb-navy) !important;
+  border: 1px solid var(--vcb-border) !important;
+  color: var(--vcb-text) !important;
+  border-radius: 10px !important;
+}
+#page-bank .bank-input:focus {
+  border-color: var(--vcb-green) !important;
+  box-shadow: 0 0 0 3px rgba(0,128,61,0.15) !important;
+}
+#page-bank .bank-select {
+  background: var(--vcb-navy) !important;
+  border: 1px solid var(--vcb-border) !important;
+  color: var(--vcb-text) !important;
+}
+
+/* ── VCB TABS ──────────────────────────────── */
+#page-bank .bank-tab { background: var(--vcb-navy) !important; }
+
+/* VCB COMPLETE TRANSFER SUCCESS — full VCB style */
+#page-bank #tr-step-4 {
+  background: var(--vcb-navy) !important;
+}
+/* Override the success green circle */
+#page-bank .ts-circle {
+  background: linear-gradient(135deg, #005f30, #00a651) !important;
+  box-shadow: 0 0 0 12px rgba(0,128,61,0.15), 0 0 0 24px rgba(0,128,61,0.06) !important;
+}
+
+/* ── VCB CHART LEGEND ──────────────────────── */
+#page-bank .bank-legend-item span {
+  border-radius: 3px;
+}
+
+/* ══════════════════════════════════════════════════
+   CART PAGE — VCB PAY PANEL
+   ══════════════════════════════════════════════════ */
+
+/* Override cart-layout để accommodate vcb panel */
+#page-cart .cart-layout {
+  grid-template-columns: 1fr 360px;
+}
+
+/* ── VCB CART PANEL OUTER ───────────────────── */
+.vcb-cart-panel {
+  background: var(--vcb-navy2);
+  border: 1px solid var(--vcb-border);
+  border-radius: 16px;
+  overflow: hidden;
+  position: sticky; top: 90px;
+  box-shadow: var(--vcb-shadow);
+}
+
+/* ── VCB CART HEADER ───────────────────────── */
+.vcb-cart-header {
+  background: linear-gradient(135deg, var(--vcb-green-dk) 0%, var(--vcb-green) 60%, var(--vcb-green-lt) 100%);
+  padding: 16px 20px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.vcb-cart-logo {
+  display: flex; align-items: center; gap: 10px;
+}
+.vcb-cart-logo-icon {
+  width: 36px; height: 36px; border-radius: 9px;
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.25);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.vcb-cart-logo-name {
+  font-size: 15px; font-weight: 800; color: #fff;
+  letter-spacing: 0.5px;
+}
+.vcb-cart-logo-name span { color: rgba(255,255,255,0.85); font-weight: 400; }
+.vcb-cart-logo-sub {
+  font-size: 9px; color: rgba(255,255,255,0.65);
+  letter-spacing: 1px; text-transform: uppercase; margin-top: 1px;
+}
+.vcb-ssl-badge {
+  display: flex; align-items: center; gap: 4px;
+  background: rgba(255,255,255,0.14);
+  border: 1px solid rgba(255,255,255,0.22);
+  border-radius: 20px; padding: 4px 10px;
+  font-size: 9px; font-weight: 700; color: #fff; letter-spacing: 1px;
+}
+
+/* ── VCB RECEIPT BODY ───────────────────────── */
+.vcb-receipt-body {
+  padding: 18px 20px 0;
+}
+.vcb-receipt-label {
+  font-size: 9px; font-weight: 700; letter-spacing: 2.5px;
+  color: var(--vcb-text3); text-transform: uppercase;
+  margin-bottom: 12px; padding-bottom: 8px;
+  border-bottom: 1px solid var(--vcb-border);
+}
+.vcb-receipt-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.vcb-rk { font-size: 12.5px; color: var(--vcb-text2); }
+.vcb-rv {
+  font-size: 13px; font-weight: 600; color: var(--vcb-text);
+  font-variant-numeric: tabular-nums;
+}
+.vcb-rv-green { color: var(--vcb-green-lt) !important; }
+.vcb-rv-red   { color: #ef5350 !important; }
+.vcb-receipt-divider {
+  height: 1px; background: var(--vcb-border);
+  margin: 6px 0;
+}
+.vcb-receipt-total-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 0;
+  font-size: 14px; font-weight: 800; color: #fff;
+}
+.vcb-total-amt {
+  font-size: 22px; font-weight: 800;
+  color: var(--vcb-green-lt);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── VCB COUPON SECTION ─────────────────────── */
+.vcb-coupon-wrap {
+  padding: 14px 0;
+  border-top: 1px solid var(--vcb-border);
+  margin-top: 4px;
+}
+.vcb-coupon-label {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+  color: var(--vcb-text3); text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.vcb-coupon-input-row {
+  display: flex; gap: 8px;
+}
+.vcb-coupon-input {
+  flex: 1; background: var(--vcb-navy);
+  border: 1px solid var(--vcb-border); border-radius: 8px;
+  padding: 10px 14px; color: var(--vcb-text);
+  font-size: 12px; letter-spacing: 1px;
+  transition: border 0.2s;
+}
+.vcb-coupon-input:focus {
+  outline: none;
+  border-color: var(--vcb-green);
+  box-shadow: 0 0 0 3px rgba(0,128,61,0.12);
+}
+.vcb-coupon-input::placeholder { color: var(--vcb-text3); }
+.vcb-coupon-btn {
+  background: rgba(0,128,61,0.15);
+  border: 1px solid var(--vcb-border-lt);
+  color: var(--vcb-green-lt); cursor: pointer;
+  padding: 10px 14px; border-radius: 8px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.5px;
+  transition: all 0.18s; white-space: nowrap;
+}
+.vcb-coupon-btn:hover {
+  background: rgba(0,128,61,0.28);
+  border-color: var(--vcb-green);
+}
+.vcb-coupon-pills {
+  display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px;
+}
+.vcb-pill {
+  background: rgba(0,128,61,0.1);
+  border: 1px solid var(--vcb-border);
+  border-radius: 20px; padding: 4px 10px;
+  font-size: 10px; color: var(--vcb-green-lt);
+  cursor: pointer; transition: all 0.15s;
+  letter-spacing: 0.3px;
+}
+.vcb-pill:hover {
+  background: rgba(0,128,61,0.22);
+  border-color: var(--vcb-green);
+}
+
+/* ── VCB PAY FOOTER ─────────────────────────── */
+.vcb-cart-footer {
+  padding: 14px 20px 18px;
+  background: rgba(0,0,0,0.2);
+  border-top: 1px solid var(--vcb-border);
+}
+.vcb-pay-btn {
+  width: 100%; padding: 15px;
+  background: linear-gradient(135deg, var(--vcb-green-dk), var(--vcb-green-lt));
+  border: none; border-radius: 12px;
+  color: #fff; cursor: pointer;
+  font-size: 14px; font-weight: 700; letter-spacing: 0.5px;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  transition: all 0.2s;
+  box-shadow: 0 4px 20px rgba(0,128,61,0.4);
+}
+.vcb-pay-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(0,128,61,0.55);
+}
+.vcb-pay-btn:active { transform: translateY(0); }
+.vcb-cart-secure-note {
+  display: flex; align-items: center; justify-content: center; gap: 5px;
+  font-size: 10px; color: var(--vcb-text3);
+  margin-top: 10px; letter-spacing: 0.2px;
+}
+
+/* ── CART ITEM ROWS — VCB toned ─────────────── */
+#page-cart .cart-item {
+  background: var(--vcb-navy2) !important;
+  border-color: var(--vcb-border) !important;
+}
+#page-cart .cart-item:hover {
+  border-color: var(--vcb-border-lt) !important;
+  box-shadow: 0 2px 12px rgba(0,128,61,0.1) !important;
+}
+#page-cart .cart-item-price { color: var(--vcb-green-lt) !important; }
+#page-cart .cart-item-cat   { color: var(--vcb-green-lt) !important; }
+#page-cart .qty-btn {
+  background: var(--vcb-navy) !important;
+  border-color: var(--vcb-border) !important;
+}
+#page-cart .qty-btn:hover {
+  border-color: var(--vcb-green) !important;
+  color: var(--vcb-green-lt) !important;
+}
+
+/* Cart page title green accent */
+#page-cart .section-title span {
+  background: linear-gradient(135deg, var(--vcb-green-lt), #00d4ff) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* ── VCB TRANSFER SUCCESS OVERRIDE ──────────── */
+/* Patch completeTransfer receipt to VCB green */
+#page-bank #bankTxReceipt {
+  background: var(--vcb-navy2);
+  border-radius: 12px;
+  overflow: hidden;
+}
+#page-bank #bankTxReceipt .bank-confirm-row {
+  padding: 11px 16px !important;
+  border-bottom: 1px solid var(--vcb-border) !important;
+}
+#page-bank #bankTxReceipt .bank-confirm-label { 
+  font-size: 12px; color: var(--vcb-text2) !important; 
+}
+#page-bank #bankTxReceipt .bank-confirm-val { 
+  color: var(--vcb-text) !important; font-weight: 600 !important; 
+}
+
+/* VCB Transfer success amount */
+#page-bank .transfer-success-amount,
+#page-bank #trSuccessAmt {
+  background: linear-gradient(135deg, var(--vcb-green-lt), #ffffff);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 38px !important; font-weight: 900 !important;
+}
+
+/* VCB "Chuyển khoản thành công" label */
+#page-bank #trSuccessMsg,
+#page-bank .transfer-success-msg {
+  color: rgba(255,255,255,0.75) !important;
+  font-size: 13px !important;
+}
+
+/* "Thực hiện giao dịch mới" button — VCB style */
+#page-bank #tr-step-4 button.bank-btn-primary,
+#page-bank .btn-new-transfer {
+  background: linear-gradient(135deg, var(--vcb-green-dk), var(--vcb-green-lt)) !important;
+  border-radius: 10px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.3px !important;
+  padding: 14px 24px !important;
+  font-size: 13px !important;
+  box-shadow: 0 4px 16px rgba(0,128,61,0.4) !important;
+}
+
+/* Savings, loan, analytics sections */
+#page-bank .savings-plan-card,
+#page-bank .bank-card-box,
+#page-bank .loan-card {
+  background: var(--vcb-navy2) !important;
+  border-color: var(--vcb-border) !important;
+}
+
+/* VCB horizontal scrollbar */
+#page-bank .bank-main::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--vcb-green-dk), var(--vcb-green)) !important;
+}
+
+/* ============================================================
+   TGDD THEME LAYER — CSS additions only, zero destruction
+   ============================================================ */
+:root {
+  --tgdd-yellow: #FFD500;
+  --tgdd-yellow-dark: #E6BE00;
+  --tgdd-yellow-light: rgba(255,213,0,0.12);
+  --tgdd-red: #E30019;
+  --tgdd-black: #111;
+  --tgdd-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  --tgdd-radius: 8px;
+}
+header {
+  background: #FFD500 !important;
+  backdrop-filter: none !important;
+  border-bottom: none !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important;
+}
+header.scrolled { box-shadow: 0 4px 16px rgba(0,0,0,0.2) !important; }
+.logo { color: #000 !important; text-shadow: none !important; }
+.logo-icon { background: rgba(0,0,0,0.12) !important; }
+.nav-btn { color: #222 !important; }
+.nav-btn:hover, .nav-btn.active {
+  background: rgba(0,0,0,0.1) !important;
+  color: #000 !important; text-shadow: none !important;
+}
+.nav-btn::before { background: #000 !important; box-shadow: none !important; }
+.search-bar-wrap input, #searchInput {
+  border-radius: 20px !important;
+  background: rgba(0,0,0,0.08) !important;
+  border: 1px solid rgba(0,0,0,0.15) !important;
+  color: #000 !important;
+}
+.search-bar-wrap input:focus, #searchInput:focus {
+  border-color: rgba(0,0,0,0.5) !important;
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.08) !important;
+  outline: none;
+}
+.search-bar-wrap input::placeholder, #searchInput::placeholder { color: rgba(0,0,0,0.45) !important; }
+.led-ticker { background: #000 !important; border-color: #FFD500 !important; }
+.product-card { border-radius: var(--tgdd-radius) !important; }
+.product-card:hover {
+  transform: translateY(-4px) scale(1.01) !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15) !important;
+  border-color: var(--tgdd-yellow) !important;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--tgdd-yellow), #ffb300) !important;
+  color: #000 !important;
+  box-shadow: 0 4px 12px rgba(255,213,0,0.35) !important;
+}
+.btn-primary:hover { box-shadow: 0 6px 20px rgba(255,213,0,0.5) !important; }
+.btn-add-cart {
+  background: linear-gradient(135deg, rgba(255,213,0,0.08), rgba(255,213,0,0.04)) !important;
+  border-color: rgba(255,213,0,0.5) !important;
+  color: var(--tgdd-yellow) !important;
+}
+.btn-add-cart:hover {
+  background: linear-gradient(135deg, var(--tgdd-yellow), #ffb300) !important;
+  color: #000 !important;
+  border-color: var(--tgdd-yellow) !important;
+  box-shadow: 0 4px 12px rgba(255,213,0,0.4) !important;
+}
+.filter-btn:hover, .filter-btn.active {
+  background: rgba(255,213,0,0.1) !important;
+  border-color: var(--tgdd-yellow) !important;
+  color: var(--tgdd-yellow) !important;
+}
+.price-sale { color: #E30019 !important; }
+
+/* ── FLOATING BANK PANEL ── */
+#tgddFloatingBank {
+  position: fixed; right: 16px; bottom: 80px; width: 240px;
+  background: var(--bg-card); border: 1px solid var(--border-subtle);
+  border-radius: 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  z-index: 9000; overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.3s;
+}
+#tgddFloatingBank.hidden { transform: translateX(260px); opacity: 0; pointer-events: none; }
+.fb-header {
+  background: linear-gradient(135deg, #006241 0%, #00a651 100%);
+  padding: 11px 14px; display: flex; align-items: center; justify-content: space-between;
+}
+.fb-logo { font-size: 11px; font-weight: 800; color: #fff; letter-spacing: 0.5px; }
+.fb-logo span { font-weight: 400; }
+.fb-close-btn { background:none; border:none; color:rgba(255,255,255,0.7); cursor:pointer; font-size:13px; padding:0; }
+.fb-body { padding: 12px 14px; }
+.fb-label { font-size: 10px; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+.fb-balance {
+  font-size: 19px; font-weight: 700; color: var(--text-primary);
+  font-variant-numeric: tabular-nums; transition: color 0.4s;
+  letter-spacing: -0.5px;
+}
+.fb-balance.up { color: #00a651 !important; }
+.fb-balance.down { color: #e30019 !important; }
+.fb-meta { display:flex; justify-content:space-between; margin-top:8px; padding-top:8px; border-top:1px solid var(--border-subtle); }
+.fb-meta-item { font-size: 10px; color: var(--text-muted); }
+.fb-meta-val { font-size: 11px; font-weight: 600; color: var(--text-secondary); margin-top: 1px; }
+.fb-actions { display:flex; gap:6px; margin-top:10px; }
+.fb-btn {
+  flex:1; padding:6px 4px; border-radius:8px; font-size:10px; font-weight:600;
+  cursor:pointer; border:1px solid var(--border-subtle); background:var(--bg-secondary);
+  color:var(--text-secondary); transition:all 0.2s; text-align:center;
+}
+.fb-btn:hover { border-color:var(--tgdd-yellow); background:rgba(255,213,0,0.08); color:var(--text-primary); }
+.fb-mini-tx { margin-top:8px; }
+.fb-tx { display:flex; justify-content:space-between; align-items:center; padding:4px 0; font-size:11px; border-bottom:1px solid var(--border-subtle); }
+.fb-tx:last-child { border-bottom:none; }
+.fb-tx-name { color:var(--text-secondary); max-width:130px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; }
+.fb-tx-amt.p { color:#00a651; font-weight:600; }
+.fb-tx-amt.n { color:#e30019; font-weight:600; }
+#tgddFloatingToggle {
+  position:fixed; right:16px; bottom:30px; width:44px; height:44px; border-radius:50%;
+  background:linear-gradient(135deg,#006241,#00a651); border:none; cursor:pointer; z-index:9001;
+  display:flex; align-items:center; justify-content:center; font-size:20px;
+  box-shadow:0 4px 14px rgba(0,100,60,0.45); transition:transform 0.2s, box-shadow 0.2s;
+}
+#tgddFloatingToggle:hover { transform:scale(1.1); box-shadow:0 6px 20px rgba(0,100,60,0.55); }
+
+/* ── TX HISTORY POPUP ── */
+#tgddTxPopup {
+  position:fixed; right:270px; bottom:80px; width:320px; max-height:420px;
+  background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:16px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.3); z-index:9000; overflow:hidden;
+  display:none; flex-direction:column;
+}
+#tgddTxPopup.show { display:flex; }
+.txp-header {
+  padding:13px 16px; border-bottom:1px solid var(--border-subtle);
+  display:flex; align-items:center; justify-content:space-between;
+  background:var(--bg-secondary);
+}
+.txp-title { font-size:13px; font-weight:700; color:var(--text-primary); }
+.txp-close { background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:16px; padding:0; }
+.txp-list { overflow-y:auto; flex:1; }
+.txp-item {
+  display:flex; align-items:center; gap:10px; padding:9px 14px;
+  border-bottom:1px solid var(--border-subtle);
+  animation:txSlideIn 0.3s ease;
+}
+@keyframes txSlideIn { from{opacity:0;transform:translateX(10px)} to{opacity:1;transform:translateX(0)} }
+.txp-item:last-child { border-bottom:none; }
+.txp-icon { width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; flex-shrink:0; }
+.txp-icon.p { background:rgba(0,166,81,0.12); }
+.txp-icon.n { background:rgba(227,0,25,0.12); }
+.txp-info { flex:1; min-width:0; }
+.txp-name { font-size:12px; font-weight:600; color:var(--text-primary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.txp-time { font-size:10px; color:var(--text-muted); margin-top:1px; }
+.txp-amt { font-size:12px; font-weight:700; flex-shrink:0; }
+.txp-amt.p { color:#00a651; }
+.txp-amt.n { color:#e30019; }
+.txp-new { font-size:8px; background:var(--tgdd-yellow); color:#000; border-radius:4px; padding:1px 5px; font-weight:700; flex-shrink:0; }
+
+/* ── ADMIN CONTROL PANEL ── */
+#tgddAdminPanel {
+  position:fixed; left:50%; top:50%;
+  transform:translate(-50%,-50%) scale(0.95);
+  width:min(480px,94vw);
+  background:var(--bg-secondary); border:1px solid var(--tgdd-yellow); border-radius:16px;
+  box-shadow:0 0 0 4px rgba(255,213,0,0.12), 0 20px 60px rgba(0,0,0,0.5);
+  z-index:99999; overflow:hidden; opacity:0; pointer-events:none;
+  transition:all 0.25s cubic-bezier(0.4,0,0.2,1);
+}
+#tgddAdminPanel.show { opacity:1; pointer-events:all; transform:translate(-50%,-50%) scale(1); }
+#tgddAdminOverlay { position:fixed; inset:0; z-index:99998; background:rgba(0,0,0,0.6); backdrop-filter:blur(4px); opacity:0; pointer-events:none; transition:opacity 0.25s; }
+#tgddAdminOverlay.show { opacity:1; pointer-events:all; }
+.adm-header { background:linear-gradient(135deg,#1a1200,#332500); border-bottom:1px solid var(--tgdd-yellow); padding:14px 18px; display:flex; align-items:center; justify-content:space-between; }
+.adm-title { font-size:12px; font-weight:700; color:var(--tgdd-yellow); letter-spacing:2px; text-transform:uppercase; display:flex; align-items:center; gap:8px; }
+.adm-close { background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:18px; padding:0; transition:color 0.2s; }
+.adm-close:hover { color:var(--tgdd-yellow); }
+.adm-body { padding:16px 18px; max-height:68vh; overflow-y:auto; }
+.adm-sec { font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--text-muted); margin:14px 0 8px; font-weight:600; }
+.adm-sec:first-child { margin-top:0; }
+.adm-row { display:flex; align-items:center; gap:8px; margin-bottom:8px; flex-wrap:wrap; }
+.adm-input { flex:1; min-width:90px; padding:8px 12px; background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:8px; color:var(--text-primary); font-size:13px; }
+.adm-input:focus { border-color:var(--tgdd-yellow); outline:none; }
+.adm-btn { padding:8px 14px; border-radius:8px; border:none; cursor:pointer; font-size:12px; font-weight:600; transition:all 0.2s; }
+.adm-btn-y { background:var(--tgdd-yellow); color:#000; }
+.adm-btn-y:hover { background:var(--tgdd-yellow-dark); transform:translateY(-1px); }
+.adm-btn-r { background:rgba(227,0,25,0.12); color:#e30019; border:1px solid rgba(227,0,25,0.3); }
+.adm-btn-g { background:var(--bg-card); color:var(--text-secondary); border:1px solid var(--border-subtle); }
+.adm-btn-g:hover { border-color:var(--tgdd-yellow); color:var(--text-primary); }
+.adm-toggle-row { display:flex; align-items:center; justify-content:space-between; padding:8px 12px; background:var(--bg-card); border-radius:8px; margin-bottom:6px; }
+.adm-toggle-lbl { font-size:12px; color:var(--text-secondary); }
+.adm-toggle { width:40px; height:22px; border-radius:11px; background:var(--border-subtle); border:none; cursor:pointer; position:relative; transition:background 0.3s; }
+.adm-toggle.on { background:var(--tgdd-yellow); }
+.adm-toggle::after { content:''; position:absolute; width:16px; height:16px; border-radius:50%; background:#fff; top:3px; left:3px; transition:transform 0.3s; }
+.adm-toggle.on::after { transform:translateX(18px); }
+.adm-select { flex:1; padding:8px 12px; background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:8px; color:var(--text-primary); font-size:13px; }
+.adm-select:focus { border-color:var(--tgdd-yellow); outline:none; }
+.adm-live-badge { display:inline-flex; align-items:center; gap:4px; font-size:9px; font-weight:700; color:#00a651; background:rgba(0,166,81,0.12); border-radius:6px; padding:2px 7px; }
+.adm-mini-chart { margin-top:8px; height:52px; display:flex; align-items:flex-end; gap:2px; }
+.adm-chart-bar { flex:1; border-radius:3px 3px 0 0; background:linear-gradient(180deg,var(--tgdd-yellow),rgba(255,213,0,0.2)); transition:height 0.8s cubic-bezier(0.4,0,0.2,1); min-height:4px; }
+#tgddAdminBadge {
+  position:fixed; left:10px; top:50%; transform:translateY(-50%);
+  width:24px; height:24px; border-radius:50%; background:var(--tgdd-yellow);
+  border:none; cursor:pointer; z-index:8999;
+  display:flex; align-items:center; justify-content:center;
+  font-size:11px; box-shadow:0 2px 8px rgba(255,213,0,0.3);
+  opacity:0.35; transition:opacity 0.2s;
+}
+#tgddAdminBadge:hover { opacity:1; }
+
+/* ── BANK LOGIN OVERLAY ── */
+#tgddBankLogin {
+  position:fixed; inset:0;
+  background:linear-gradient(135deg,#001a0d,#003320,#001a0d);
+  z-index:999999; display:flex; align-items:center; justify-content:center;
+  opacity:0; pointer-events:none; transition:opacity 0.4s;
+}
+#tgddBankLogin.show { opacity:1; pointer-events:all; }
+.bkl-card { width:min(380px,90vw); background:rgba(0,0,0,0.65); border:1px solid rgba(0,166,81,0.3); border-radius:20px; padding:32px; backdrop-filter:blur(20px); }
+.bkl-logo { text-align:center; margin-bottom:22px; }
+.bkl-logo-icon { width:52px; height:52px; border-radius:13px; background:linear-gradient(135deg,#006241,#00a651); margin:0 auto 10px; display:flex; align-items:center; justify-content:center; font-size:24px; box-shadow:0 6px 20px rgba(0,100,60,0.4); }
+.bkl-title { font-size:17px; font-weight:700; color:#fff; }
+.bkl-sub { font-size:11px; color:rgba(255,255,255,0.45); margin-top:3px; }
+.bkl-field { margin-bottom:12px; }
+.bkl-label { font-size:10px; color:rgba(255,255,255,0.5); text-transform:uppercase; letter-spacing:1px; margin-bottom:5px; }
+.bkl-input { width:100%; padding:11px 13px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:9px; color:#fff; font-size:14px; transition:border-color 0.2s; outline:none; }
+.bkl-input:focus { border-color:#00a651; }
+.bkl-btn { width:100%; padding:13px; background:linear-gradient(135deg,#006241,#00a651); border:none; border-radius:9px; color:#fff; font-size:14px; font-weight:700; cursor:pointer; margin-top:4px; transition:all 0.2s; letter-spacing:1px; }
+.bkl-btn:hover { transform:translateY(-1px); box-shadow:0 4px 14px rgba(0,166,81,0.4); }
+.bkl-skip { text-align:center; margin-top:13px; font-size:11px; color:rgba(255,255,255,0.3); cursor:pointer; transition:color 0.2s; }
+.bkl-skip:hover { color:rgba(255,255,255,0.6); }
+.bkl-secure { display:flex; align-items:center; justify-content:center; gap:5px; margin-top:18px; font-size:10px; color:rgba(255,255,255,0.25); }
+
+body.stealth-mode #tgddFloatingBank,
+body.stealth-mode #tgddFloatingToggle,
+body.stealth-mode #tgddTxPopup { display:none !important; }
+
+/* ============================================================
+   TGDD RETAIL FIX — Force light mode + retail look
+   Applied after all other rules to ensure priority
+   ============================================================ */
+
+/* ============================================================
+   LIGHT MODE LOCK + READABILITY FIRST
+   Toàn bộ trang chỉ dùng light mode — text ưu tiên rõ ràng
+   ============================================================ */
+
+/* === GLOBAL LIGHT LOCK === */
+html, body { background: #f5f5f5 !important; color: #111 !important; }
+body {
+  font-family: 'Be Vietnam Pro', Arial, sans-serif !important;
+  font-size: 15px !important;
+  line-height: 1.65 !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+}
+main, .page { background: transparent !important; color: #111 !important; }
+
+/* Force any bg-primary/secondary to white/light */
+[style*="background: var(--bg-primary)"],
+[style*="background:var(--bg-primary)"] { background: #f5f5f5 !important; }
+[style*="background: var(--bg-secondary)"],
+[style*="background:var(--bg-secondary)"] { background: #fff !important; }
+[style*="background: var(--bg-card)"],
+[style*="background:var(--bg-card)"] { background: #fff !important; }
+
+/* === HEADER === */
+header {
+  background: #fff !important;
+  border-bottom: 2px solid #E30019 !important;
+  height: 60px !important;
+  padding: 0 28px !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08) !important;
+  backdrop-filter: none !important;
+}
+.logo {
+  font-family: 'Be Vietnam Pro', Arial, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 900 !important;
+  color: #E30019 !important;
+  letter-spacing: 0.3px !important;
+  text-shadow: none !important;
+}
+.logo-icon {
+  background: linear-gradient(135deg, #E30019, #FFD500) !important;
+  animation: none !important;
+  box-shadow: none !important;
+}
+.nav-btn {
+  font-family: 'Be Vietnam Pro', Arial, sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #333 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  padding: 6px 11px !important;
+  border-radius: 6px !important;
+  text-shadow: none !important;
+}
+.nav-btn:hover, .nav-btn.active {
+  color: #E30019 !important;
+  background: rgba(227,0,25,0.08) !important;
+  text-shadow: none !important;
+}
+.nav-btn::before { background: #E30019 !important; box-shadow: none !important; }
+.cart-badge {
+  background: #E30019 !important;
+  animation: none !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+}
+
+/* === CARDS & CONTAINERS === */
+.product-card, .cart-item, .feature-card,
+.cart-summary, .order-card, .bank-card-box,
+.admin-stat, .stat-card, .qr-card, .payment-form-card,
+.order-summary-card, .flash-card, .reco-card {
+  background: #fff !important;
+  border-color: #e8e8e8 !important;
+  color: #111 !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07) !important;
+}
+.product-card:hover {
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12) !important;
+  border-color: #FFD500 !important;
+}
+
+/* === PRODUCT GRID === */
+.product-img-wrap { background: #f8f8f8 !important; }
+.product-img-placeholder { filter: none !important; }
+
+.product-category {
+  font-size: 11px !important; font-weight: 700 !important;
+  text-transform: uppercase !important; letter-spacing: 0.5px !important;
+  color: #E30019 !important; margin-bottom: 4px !important;
+}
+.product-name {
+  font-size: 14px !important; font-weight: 600 !important;
+  color: #111 !important; line-height: 1.45 !important;
+  display: -webkit-box !important; -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important; overflow: hidden !important;
+  margin-bottom: 5px !important;
+}
+.product-reviews { font-size: 12px !important; color: #888 !important; }
+.product-stars .star { color: #FFD500 !important; font-size: 13px !important; }
+.product-stars .star.empty { color: #ddd !important; }
+
+.price-original {
+  font-size: 12px !important; color: #aaa !important;
+  text-decoration: line-through !important; font-weight: 400 !important;
+}
+.price-sale {
+  font-size: 16px !important; font-weight: 800 !important; color: #E30019 !important;
+}
+.price-discount {
+  font-size: 11px !important; font-weight: 700 !important;
+  background: rgba(227,0,25,0.1) !important; color: #E30019 !important;
+  padding: 2px 6px !important; border-radius: 4px !important; border: none !important;
+}
+
+.btn-add-cart {
+  font-family: 'Be Vietnam Pro', Arial, sans-serif !important;
+  font-size: 13px !important; font-weight: 700 !important;
+  background: #FFD500 !important; color: #111 !important;
+  border: none !important; border-radius: 6px !important;
+  width: 100% !important; padding: 9px !important; margin-top: 8px !important;
+}
+.btn-add-cart:hover { background: #e6c800 !important; transform: translateY(-1px) !important; box-shadow: 0 3px 8px rgba(0,0,0,0.15) !important; }
+.btn-add-cart.added { background: #00a651 !important; color: #fff !important; }
+
+/* product badges */
+.product-badge { font-size: 10px !important; font-weight: 700 !important; }
+.product-badge.badge-sale { background: #E30019 !important; color: #fff !important; }
+.product-badge.badge-hot { background: #FFD500 !important; color: #111 !important; }
+.product-badge.badge-new { background: #00a651 !important; color: #fff !important; }
+
+/* === SECTION TITLE === */
+.section-title {
+  font-family: 'Be Vietnam Pro', Arial, sans-serif !important;
+  font-size: 22px !important; font-weight: 800 !important;
+  color: #111 !important; letter-spacing: -0.3px !important;
+}
+.section-title span {
+  background: linear-gradient(135deg, #E30019, #c8a000) !important;
+  -webkit-background-clip: text !important; background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* === HERO === */
+.hero { background: transparent !important; }
+.hero-title {
+  font-family: 'Be Vietnam Pro', Arial, sans-serif !important;
+  font-size: clamp(30px, 5vw, 60px) !important;
+  font-weight: 900 !important; line-height: 1.1 !important; letter-spacing: -1px !important;
+}
+.hero-title .line1 {
+  background: linear-gradient(135deg, #111 0%, #E30019 60%, #c8a000 100%) !important;
+  -webkit-background-clip: text !important; background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+.hero-title .line2 {
+  background: linear-gradient(135deg, #E30019 0%, #c8a000 100%) !important;
+  -webkit-background-clip: text !important; background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+.hero-sub {
+  font-size: 16px !important; font-weight: 400 !important;
+  color: #555 !important; line-height: 1.7 !important;
+}
+.hero-badge {
+  font-size: 12px !important; font-weight: 600 !important;
+  background: rgba(255,213,0,0.15) !important;
+  border-color: rgba(227,0,25,0.3) !important; color: #111 !important;
+}
+.hero-badge-dot { background: #E30019 !important; animation: none !important; }
+
+/* === BUTTONS GLOBAL === */
+.btn {
+  font-family: 'Be Vietnam Pro', Arial, sans-serif !important;
+  font-size: 14px !important; font-weight: 700 !important;
+  text-transform: none !important; letter-spacing: 0 !important;
+}
+.btn-primary {
+  background: linear-gradient(135deg, #E30019, #b80015) !important;
+  color: #fff !important; box-shadow: 0 3px 10px rgba(227,0,25,0.3) !important;
+}
+.btn-primary:hover { transform: translateY(-2px) !important; box-shadow: 0 6px 16px rgba(227,0,25,0.4) !important; }
+.btn-outline {
+  background: #fff !important; border: 1.5px solid #ddd !important; color: #333 !important;
+}
+.btn-outline:hover { border-color: #E30019 !important; color: #E30019 !important; box-shadow: none !important; }
+
+/* === FILTER BUTTONS === */
+.filter-btn {
+  font-family: 'Be Vietnam Pro', Arial, sans-serif !important;
+  font-size: 13px !important; font-weight: 600 !important;
+  background: #fff !important; border-color: #ddd !important; color: #444 !important;
+  padding: 7px 16px !important; border-radius: 20px !important; letter-spacing: 0 !important;
+}
+.filter-btn:hover, .filter-btn.active {
+  background: rgba(227,0,25,0.08) !important;
+  border-color: #E30019 !important; color: #E30019 !important;
+}
+
+/* === BANNER === */
+.banner-title {
+  font-family: 'Be Vietnam Pro', Arial, sans-serif !important;
+  font-size: clamp(20px, 3.5vw, 40px) !important;
+  font-weight: 800 !important; letter-spacing: -0.5px !important;
+}
+.banner-desc { font-size: 14px !important; line-height: 1.6 !important; color: rgba(255,255,255,0.85) !important; }
+.banner-dot.active { background: #E30019 !important; box-shadow: none !important; }
+
+/* === FORM INPUTS === */
+.form-label {
+  font-family: 'Be Vietnam Pro', Arial, sans-serif !important;
+  font-size: 13px !important; font-weight: 600 !important;
+  color: #333 !important; letter-spacing: 0 !important;
+  text-transform: none !important; margin-bottom: 6px !important; display: block !important;
+}
+.form-input {
+  font-family: 'Be Vietnam Pro', Arial, sans-serif !important;
+  font-size: 15px !important; color: #111 !important;
+  background: #f8f8f8 !important; border-color: #ddd !important;
+  border-radius: 8px !important; padding: 12px 14px !important;
+}
+.form-input::placeholder { color: #bbb !important; }
+.form-input:focus { border-color: #E30019 !important; box-shadow: 0 0 0 3px rgba(227,0,25,0.12) !important; background: #fff !important; }
+
+/* === CART PAGE === */
+.cart-item-name {
+  font-size: 15px !important; font-weight: 600 !important;
+  color: #111 !important; line-height: 1.4 !important;
+}
+.cart-item-cat {
+  font-size: 11px !important; font-weight: 700 !important;
+  text-transform: uppercase !important; color: #E30019 !important;
+}
+.cart-item-price {
+  font-size: 16px !important; font-weight: 800 !important; color: #E30019 !important;
+}
+.cart-item:hover { border-color: #FFD500 !important; background: #fffef5 !important; }
+.qty-btn { background: #f0f0f0 !important; border-color: #ddd !important; color: #111 !important; border-radius: 6px !important; }
+.qty-btn:hover { background: #FFD500 !important; border-color: #FFD500 !important; }
+.qty-num { font-size: 15px !important; font-weight: 700 !important; color: #111 !important; }
+
+/* VCB cart panel */
+.vcb-rk { font-size: 13px !important; color: rgba(255,255,255,0.75) !important; }
+.vcb-rv { font-size: 14px !important; font-weight: 700 !important; }
+.vcb-total-amt { font-size: 22px !important; font-weight: 900 !important; }
+.vcb-pay-btn {
+  font-family: 'Be Vietnam Pro', Arial, sans-serif !important;
+  font-size: 15px !important; font-weight: 800 !important; letter-spacing: 0.2px !important;
+}
+
+/* === PAYMENT PAGE === */
+.card-title {
+  font-family: 'Be Vietnam Pro', Arial, sans-serif !important;
+  font-size: 15px !important; font-weight: 700 !important;
+  color: #111 !important; letter-spacing: 0 !important; text-transform: none !important;
+}
+.payment-method {
+  background: #fff !important; border-color: #e0e0e0 !important; color: #111 !important;
+}
+.payment-method.selected { border-color: #E30019 !important; background: rgba(227,0,25,0.04) !important; }
+.payment-method-name { font-size: 13px !important; font-weight: 600 !important; color: #111 !important; letter-spacing: 0 !important; }
+.payment-method-sub { font-size: 11px !important; color: #888 !important; }
+.btn-pay {
+  font-family: 'Be Vietnam Pro', Arial, sans-serif !important;
+  font-size: 15px !important; font-weight: 800 !important;
+  background: linear-gradient(135deg, #E30019, #b80015) !important;
+  box-shadow: 0 4px 14px rgba(227,0,25,0.35) !important;
+}
+.btn-checkout {
+  font-family: 'Be Vietnam Pro', Arial, sans-serif !important;
+  font-size: 15px !important; font-weight: 800 !important;
+}
+
+/* === FLASH SALE === */
+.flash-sale-section, .flash-card {
+  background: #fff !important; border-color: #eee !important;
+}
+.flash-name { font-size: 13px !important; font-weight: 600 !important; color: #111 !important; line-height: 1.4 !important; }
+.flash-price { font-size: 16px !important; font-weight: 800 !important; color: #E30019 !important; }
+.flash-orig { font-size: 12px !important; color: #aaa !important; text-decoration: line-through !important; }
+.flash-card-badge { background: #E30019 !important; font-size: 11px !important; font-weight: 700 !important; }
+
+/* === RECOMMENDATIONS === */
+.reco-name { font-size: 12px !important; font-weight: 600 !important; color: #111 !important; }
+.reco-price { font-size: 14px !important; font-weight: 800 !important; color: #E30019 !important; }
+
+/* === ORDERS === */
+.order-card { background: #fff !important; border-color: #eee !important; color: #111 !important; }
+.order-id-label { font-size: 14px !important; font-weight: 700 !important; color: #111 !important; }
+.order-date-label { font-size: 13px !important; color: #666 !important; }
+.order-status { font-size: 12px !important; font-weight: 700 !important; padding: 4px 10px !important; border-radius: 20px !important; }
+.track-label { font-size: 10px !important; font-weight: 600 !important; color: #555 !important; }
+
+/* === PRODUCT MODAL === */
+.product-modal { background: #fff !important; color: #111 !important; }
+.product-modal-name { font-size: 20px !important; font-weight: 800 !important; color: #111 !important; line-height: 1.3 !important; }
+.product-modal-cat { font-size: 11px !important; font-weight: 700 !important; color: #E30019 !important; text-transform: uppercase !important; }
+.modal-price-sale { font-size: 28px !important; font-weight: 900 !important; color: #E30019 !important; }
+.modal-price-orig { font-size: 16px !important; color: #aaa !important; text-decoration: line-through !important; }
+.product-desc { font-size: 14px !important; line-height: 1.75 !important; color: #444 !important; }
+.tab-btn { font-size: 12px !important; font-weight: 600 !important; color: #555 !important; border-color: #ddd !important; background: #fff !important; }
+.tab-btn.active { color: #E30019 !important; border-color: #E30019 !important; background: rgba(227,0,25,0.06) !important; }
+.variant-btn { background: #f5f5f5 !important; border-color: #ddd !important; color: #111 !important; font-size: 13px !important; font-weight: 600 !important; }
+.variant-btn.active { background: #E30019 !important; border-color: #E30019 !important; color: #fff !important; }
+
+/* === AUTH MODAL === */
+.auth-modal { background: #fff !important; color: #111 !important; }
+.auth-modal-title { font-size: 20px !important; font-weight: 800 !important; color: #111 !important; }
+.auth-tab { color: #666 !important; font-size: 14px !important; font-weight: 600 !important; }
+.auth-tab.active { color: #E30019 !important; border-color: #E30019 !important; }
+.btn-auth {
+  font-family: 'Be Vietnam Pro', Arial, sans-serif !important;
+  font-size: 14px !important; font-weight: 800 !important;
+  background: linear-gradient(135deg, #E30019, #b80015) !important;
+}
+
+/* === TOAST === */
+.toast-title { font-size: 14px !important; font-weight: 700 !important; letter-spacing: 0 !important; }
+.toast-sub { font-size: 13px !important; color: #555 !important; }
+
+/* === FEATURE CARDS === */
+.feature-card { background: #fff !important; border-color: #eee !important; }
+.feature-card:hover { border-color: #FFD500 !important; box-shadow: 0 6px 20px rgba(255,213,0,0.2) !important; }
+.feature-title { font-size: 16px !important; font-weight: 700 !important; color: #111 !important; letter-spacing: 0 !important; }
+.feature-desc { font-size: 14px !important; color: #555 !important; line-height: 1.65 !important; }
+
+/* === STATS === */
+.stat-num { font-size: 28px !important; font-weight: 900 !important; color: #E30019 !important; text-shadow: none !important; }
+.stat-label { font-size: 13px !important; font-weight: 500 !important; color: #666 !important; }
+
+/* === ADMIN === */
+.admin-stat { background: #fff !important; border-color: #eee !important; }
+.admin-table td, .admin-table th { font-size: 13px !important; }
+.admin-table th { font-weight: 700 !important; color: #444 !important; font-size: 12px !important; text-transform: uppercase !important; letter-spacing: 0.5px !important; }
+
+/* === CHATBOT === */
+.chatbot-window { background: #fff !important; color: #111 !important; }
+.chatbot-header { background: #E30019 !important; color: #fff !important; }
+.chatbot-name { font-size: 14px !important; font-weight: 700 !important; color: #fff !important; }
+.chatbot-status { font-size: 12px !important; color: rgba(255,255,255,0.85) !important; }
+.chat-bubble { background: #f0f0f0 !important; color: #111 !important; font-size: 14px !important; line-height: 1.55 !important; }
+.chat-msg.user .chat-bubble { background: #FFD500 !important; color: #111 !important; }
+.chatbot-input { font-size: 14px !important; background: #f8f8f8 !important; border-color: #ddd !important; color: #111 !important; }
+.chatbot-send { background: #E30019 !important; color: #fff !important; }
+.chatbot-quick-btn { font-size: 12px !important; font-weight: 600 !important; background: #f5f5f5 !important; border-color: #ddd !important; color: #333 !important; }
+.chatbot-quick-btn:hover { background: #FFD500 !important; color: #111 !important; border-color: #FFD500 !important; }
+
+/* === BANK PAGE === */
+.bank-page-title { font-size: 18px !important; font-weight: 800 !important; }
+.bank-balance-main { font-size: 32px !important; font-weight: 900 !important; }
+.bank-tx-name { font-size: 14px !important; font-weight: 600 !important; color: #fff !important; }
+.bank-tx-amount { font-size: 14px !important; font-weight: 700 !important; }
+.bank-sidebar { background: #fff !important; border-color: #eee !important; }
+.bank-nav-btn, .bank-nav-item { color: #444 !important; }
+.bank-nav-btn.active, .bank-nav-item.active { background: rgba(227,0,25,0.08) !important; color: #E30019 !important; }
+
+/* === SCROLLBAR === */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #f0f0f0 !important; }
+::-webkit-scrollbar-thumb { background: linear-gradient(#E30019, #FFD500) !important; border-radius: 3px; }
+
+/* === LED TICKER === */
+.led-ticker { background: #111 !important; border-color: #E30019 !important; box-shadow: none !important; }
+.led-item { font-family: 'Be Vietnam Pro', Arial, sans-serif !important; font-size: 12px !important; font-weight: 700 !important; letter-spacing: 0.5px !important; }
+.led-item { color: #fff !important; text-shadow: none !important; }
+.led-item.gold { color: #FFD500 !important; text-shadow: none !important; }
+.led-item.pink { color: #ff6666 !important; text-shadow: none !important; }
+.led-item.green { color: #00cc66 !important; text-shadow: none !important; }
+
+/* === CANVAS BG - very subtle === */
+#canvas-bg { opacity: 0.06 !important; }
+[data-theme="light"] #canvas-bg { opacity: 0.06 !important; }
+
+/* === PAGE BACKGROUNDS === */
+#page-shop, #page-cart, #page-payment,
+#page-orders, #page-wishlist, #page-about,
+#page-contact, #page-profile, #page-admin,
+#page-bank, #page-qr, #page-home { background: #f5f5f5 !important; }
+
+/* TGDD CAT NAV */
+.tgdd-cat-nav { background: #fff !important; border-color: #eee !important; }
+.tgdd-cat-label { font-family: 'Be Vietnam Pro', Arial, sans-serif !important; font-size: 11px !important; font-weight: 600 !important; color: #333 !important; }
+.tgdd-cat-item:hover { background: rgba(227,0,25,0.08) !important; }
+.tgdd-cat-item.active { background: rgba(227,0,25,0.12) !important; }
+
+/* ORDER CARD CHIPS */
+.order-item-chip { font-size: 12px !important; font-weight: 500 !important; background: #f5f5f5 !important; color: #333 !important; border-color: #e0e0e0 !important; }
+
+/* ABOUT PAGE */
+#page-about p { font-size: 15px !important; line-height: 1.75 !important; color: #444 !important; }
+#page-about h2, #page-about h3 { font-weight: 800 !important; color: #111 !important; }
+
+/* CONTACT */
+#page-contact .form-label { font-size: 13px !important; font-weight: 600 !important; color: #333 !important; }
+
+/* WISHLIST */
+#wishlistGrid .price-sale { font-size: 16px !important; font-weight: 800 !important; }
+#wishlistGrid .product-name { font-size: 14px !important; font-weight: 600 !important; }
+
+/* TGDD NAV ACTIVE */
+.nav-btn.active { background: rgba(227,0,25,0.09) !important; color: #E30019 !important; font-weight: 700 !important; }
+
+/* MISC LIGHT FIXES */
+.summary-row { font-size: 14px !important; color: #555 !important; }
+.summary-row.total { font-size: 18px !important; font-weight: 800 !important; color: #111 !important; }
+.coupon-input, .vcb-coupon-input { font-size: 14px !important; background: #f8f8f8 !important; color: #111 !important; border-color: #ddd !important; }
+
+/* PROFILE */
+.profile-name { font-size: 20px !important; font-weight: 800 !important; color: #111 !important; }
+
+/* QR PAGE */
+.qr-card { background: #fff !important; color: #111 !important; }
+.qr-card h2, .qr-card h3 { font-weight: 800 !important; color: #111 !important; }
+
+/* MOBILE NAV */
+.mobile-nav-drawer { background: #fff !important; }
+.mobile-nav-item { color: #333 !important; font-size: 15px !important; font-weight: 600 !important; }
+.mobile-nav-item:hover, .mobile-nav-item.active { background: rgba(227,0,25,0.08) !important; color: #E30019 !important; }
+
+/* TOAST CONTAINER */
+.toast-container { z-index: 999000 !important; }
+.toast { background: #fff !important; border-radius: 10px !important; box-shadow: 0 4px 20px rgba(0,0,0,0.15) !important; }
+.toast-icon { font-size: 20px !important; }
+
+/* FOOTER */
+footer { background: #111 !important; color: #fff !important; }
+footer h4 { font-size: 15px !important; font-weight: 700 !important; color: #fff !important; }
+footer p, footer a, footer li { font-size: 13px !important; color: rgba(255,255,255,0.75) !important; }
+.tgdd-promo-strip {
+  background: #E30019;
+  color: #fff;
+  padding: 8px 40px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 600;
+  overflow: hidden;
+}
+.tgdd-promo-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.tgdd-promo-item::after {
+  content: '|';
+  margin-left: 20px;
+  opacity: 0.4;
+}
+.tgdd-promo-item:last-child::after { display: none; }
+
+/* TGDD CATEGORY QUICK NAV */
+.tgdd-cat-nav {
+  display: flex;
+  gap: 8px;
+  padding: 14px 40px;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tgdd-cat-nav::-webkit-scrollbar { display: none; }
+.tgdd-cat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+  min-width: 64px;
+  border: none;
+  background: transparent;
+}
+.tgdd-cat-item:hover { background: rgba(255,213,0,0.12); }
+.tgdd-cat-item.active { background: rgba(255,213,0,0.2); }
+.tgdd-cat-icon { font-size: 24px; }
+.tgdd-cat-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: #333;
+  white-space: nowrap;
+  font-family: Arial, sans-serif;
+}
+
+/* ORDER CARD */
+.order-card { background: #fff !important; border-color: #eee !important; color: #111 !important; }
+.order-id, .order-date { color: #666 !important; }
+.order-status { color: #00a651 !important; }
+
+/* PAYMENT PAGE */
+.payment-method-btn { background: #fff !important; border-color: #ddd !important; color: #111 !important; }
+.payment-method-btn.active { border-color: #FFD500 !important; background: rgba(255,213,0,0.08) !important; }
+
+/* SECTION LABEL / BADGE */
+.product-badge.badge-sale { background: #E30019 !important; }
+.product-badge.badge-new { background: #00a651 !important; }
+.product-badge.badge-hot { background: #FFD500 !important; color: #000 !important; }
+
+/* BANK PAGE LIGHT */
+.bank-sidebar { background: #fff !important; border-color: #eee !important; }
+.bank-nav-btn { color: #444 !important; }
+.bank-nav-btn.active, .bank-nav-btn:hover { background: rgba(255,213,0,0.12) !important; color: #000 !important; }
+.bank-card-box { background: #fff !important; border-color: #eee !important; }
+
+/* QTY BUTTONS */
+.qty-btn { background: #f0f0f0 !important; border-color: #ddd !important; color: #111 !important; }
+.qty-btn:hover { background: #FFD500 !important; border-color: #FFD500 !important; }
+
+/* CANVAS background lighter */
+#canvas-bg { opacity: 0.08 !important; }
+
+/* FORCE override any remaining dark backgrounds */
+[data-theme="light"] body,
+[data-theme="light"] main {
+  background: #f5f5f5 !important;
+  color: #111 !important;
+}
+[data-theme="light"] .bg-card,
+[data-theme="light"] .product-card,
+[data-theme="light"] .cart-item,
+[data-theme="light"] .feature-card {
+  background: #fff !important;
+}
 </style>
 </head>
 <body>
@@ -3170,7 +4788,7 @@ if (typeof window.switchPage !== 'function') {
       <span>⌨️</span>
       <kbd>Ctrl</kbd><kbd>K</kbd>
     </button>
-    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle Dark/Light Mode"></button>
+    <!-- Theme toggle removed - light mode only -->
     <!-- HAMBURGER MENU — mobile only -->
     <button class="hamburger-btn" id="hamburgerBtn" onclick="toggleMobileNav()" aria-label="Menu" title="Menu">
       <span class="hamburger-line"></span>
@@ -3219,6 +4837,56 @@ if (typeof window.switchPage !== 'function') {
        HOME PAGE
        ════════════════════════════════════════════════════════ -->
   <div class="page active" id="page-home">
+
+    <!-- TGDD PROMO STRIP -->
+    <div class="tgdd-promo-strip">
+      <div class="tgdd-promo-item">🚀 Giao hàng siêu tốc trong 2 giờ</div>
+      <div class="tgdd-promo-item">🎁 Giảm thêm 5% khi thanh toán online</div>
+      <div class="tgdd-promo-item">🔒 Bảo hành chính hãng 12–24 tháng</div>
+      <div class="tgdd-promo-item">💳 Trả góp 0% lãi suất qua thẻ tín dụng</div>
+      <div class="tgdd-promo-item">📞 Hỗ trợ 24/7 — 1800 000 999</div>
+    </div>
+
+    <!-- TGDD CATEGORY QUICK NAV -->
+    <div class="tgdd-cat-nav" id="tgddCatNav">
+      <button class="tgdd-cat-item active" onclick="switchPage('shop');filterCat('tech')" data-cat="tech">
+        <span class="tgdd-cat-icon">💻</span>
+        <span class="tgdd-cat-label">Điện thoại</span>
+      </button>
+      <button class="tgdd-cat-item" onclick="switchPage('shop');filterCat('tech')" data-cat="tech">
+        <span class="tgdd-cat-icon">🖥️</span>
+        <span class="tgdd-cat-label">Laptop</span>
+      </button>
+      <button class="tgdd-cat-item" onclick="switchPage('shop');filterCat('tech')" data-cat="tech">
+        <span class="tgdd-cat-icon">⌚</span>
+        <span class="tgdd-cat-label">Đồng hồ</span>
+      </button>
+      <button class="tgdd-cat-item" onclick="switchPage('shop');filterCat('fashion')" data-cat="fashion">
+        <span class="tgdd-cat-icon">👗</span>
+        <span class="tgdd-cat-label">Thời trang</span>
+      </button>
+      <button class="tgdd-cat-item" onclick="switchPage('shop');filterCat('beauty')" data-cat="beauty">
+        <span class="tgdd-cat-icon">💄</span>
+        <span class="tgdd-cat-label">Làm đẹp</span>
+      </button>
+      <button class="tgdd-cat-item" onclick="switchPage('shop');filterCat('home')" data-cat="home">
+        <span class="tgdd-cat-icon">🏠</span>
+        <span class="tgdd-cat-label">Nhà cửa</span>
+      </button>
+      <button class="tgdd-cat-item" onclick="switchPage('shop');filterCat('sport')" data-cat="sport">
+        <span class="tgdd-cat-icon">⚽</span>
+        <span class="tgdd-cat-label">Thể thao</span>
+      </button>
+      <button class="tgdd-cat-item" onclick="switchPage('shop');filterCat('food')" data-cat="food">
+        <span class="tgdd-cat-icon">🍜</span>
+        <span class="tgdd-cat-label">Thực phẩm</span>
+      </button>
+      <button class="tgdd-cat-item" onclick="switchPage('shop');filterCat('all')" data-cat="all">
+        <span class="tgdd-cat-icon">🛒</span>
+        <span class="tgdd-cat-label">Tất cả</span>
+      </button>
+    </div>
+
     <div class="hero">
       <div class="hero-badge">
         <div class="hero-badge-dot"></div>
@@ -3383,20 +5051,20 @@ if (typeof window.switchPage !== 'function') {
     <div class="hashtag-section">
       <div class="hashtag-title">🔖 Khám phá theo chủ đề</div>
       <div class="hashtag-cloud">
-        <a class="hashtag-tag tag-tech"    onclick="hashtagNav('tech')">#CôngNghệ</a>
-        <a class="hashtag-tag tag-fashion" onclick="hashtagNav('fashion')">#ThoiTrang</a>
-        <a class="hashtag-tag tag-home"    onclick="hashtagNav('home')">#GiaDung</a>
-        <a class="hashtag-tag tag-beauty"  onclick="hashtagNav('beauty')">#LamDep</a>
-        <a class="hashtag-tag tag-sport"   onclick="hashtagNav('sport')">#TheThao</a>
-        <a class="hashtag-tag tag-sale"    onclick="hashtagNav('all')">#FlashSale</a>
-        <a class="hashtag-tag tag-new"     onclick="hashtagNav('all')">#HangMoiVe</a>
-        <a class="hashtag-tag tag-hot"     onclick="hashtagNav('all')">#BanChay</a>
-        <a class="hashtag-tag tag-vip"     onclick="switchPage('payment')">#ThanhToan</a>
-        <a class="hashtag-tag tag-cart"    onclick="switchPage('cart')">#GioHang</a>
-        <a class="hashtag-tag tag-qr"      onclick="switchPage('qr')">#QRPay</a>
-        <a class="hashtag-tag tag-about"   onclick="switchPage('about')">#VeChungToi</a>
-        <a class="hashtag-tag tag-contact" onclick="switchPage('contact')">#LienHe</a>
-        <a class="hashtag-tag tag-admin"   onclick="switchPage('admin')">#QuanTri</a>
+        <a class="hashtag-tag tag-tech"    onclick="hashtagNav('tech')">CôngNghệ</a>
+        <a class="hashtag-tag tag-fashion" onclick="hashtagNav('fashion')">ThoiTrang</a>
+        <a class="hashtag-tag tag-home"    onclick="hashtagNav('home')">GiaDung</a>
+        <a class="hashtag-tag tag-beauty"  onclick="hashtagNav('beauty')">LamDep</a>
+        <a class="hashtag-tag tag-sport"   onclick="hashtagNav('sport')">TheThao</a>
+        <a class="hashtag-tag tag-sale"    onclick="hashtagNav('all')">FlashSale</a>
+        <a class="hashtag-tag tag-new"     onclick="hashtagNav('all')">HangMoiVe</a>
+        <a class="hashtag-tag tag-hot"     onclick="hashtagNav('all')">BanChay</a>
+        <a class="hashtag-tag tag-vip"     onclick="switchPage('payment')">ThanhToan</a>
+        <a class="hashtag-tag tag-cart"    onclick="switchPage('cart')">GioHang</a>
+        <a class="hashtag-tag tag-qr"      onclick="switchPage('qr')">QRPay</a>
+        <a class="hashtag-tag tag-about"   onclick="switchPage('about')">VeChungToi</a>
+        <a class="hashtag-tag tag-contact" onclick="switchPage('contact')">LienHe</a>
+        <a class="hashtag-tag tag-admin"   onclick="switchPage('admin')">QuanTri</a>
       </div>
     </div>
   </div>
@@ -3445,15 +5113,15 @@ if (typeof window.switchPage !== 'function') {
         <button class="filter-btn" onclick="filterProducts(this,'sport')">⚽ Thể thao</button>
       </div>
       <div class="hashtag-cloud" style="margin-top:12px">
-        <a class="hashtag-tag tag-tech"    onclick="hashtagNav('tech')">#CôngNghệ</a>
-        <a class="hashtag-tag tag-fashion" onclick="hashtagNav('fashion')">#ThoiTrang</a>
-        <a class="hashtag-tag tag-home"    onclick="hashtagNav('home')">#GiaDung</a>
-        <a class="hashtag-tag tag-beauty"  onclick="hashtagNav('beauty')">#LamDep</a>
-        <a class="hashtag-tag tag-sport"   onclick="hashtagNav('sport')">#TheThao</a>
-        <a class="hashtag-tag tag-sale"    onclick="hashtagNav('all')">#TatCa</a>
-        <a class="hashtag-tag tag-hot"     onclick="hashtagNav('all')">#BanChay</a>
-        <a class="hashtag-tag tag-cart"    onclick="switchPage('cart')">#XemGioHang</a>
-        <a class="hashtag-tag tag-vip"     onclick="switchPage('payment')">#ThanhToanNgay</a>
+        <a class="hashtag-tag tag-tech"    onclick="hashtagNav('tech')">CôngNghệ</a>
+        <a class="hashtag-tag tag-fashion" onclick="hashtagNav('fashion')">ThoiTrang</a>
+        <a class="hashtag-tag tag-home"    onclick="hashtagNav('home')">GiaDung</a>
+        <a class="hashtag-tag tag-beauty"  onclick="hashtagNav('beauty')">LamDep</a>
+        <a class="hashtag-tag tag-sport"   onclick="hashtagNav('sport')">TheThao</a>
+        <a class="hashtag-tag tag-sale"    onclick="hashtagNav('all')">TatCa</a>
+        <a class="hashtag-tag tag-hot"     onclick="hashtagNav('all')">BanChay</a>
+        <a class="hashtag-tag tag-cart"    onclick="switchPage('cart')">XemGioHang</a>
+        <a class="hashtag-tag tag-vip"     onclick="switchPage('payment')">ThanhToanNgay</a>
       </div>
     </div>
     <!-- Controls Bar -->
@@ -3479,27 +5147,88 @@ if (typeof window.switchPage !== 'function') {
     <div class="section-title" style="margin-bottom:30px">Giỏ hàng <span>của bạn</span></div>
     <div class="cart-layout">
       <div id="cartItemsContainer" data-alias="cart-list"></div>
-      <div class="cart-summary">
-        <div class="summary-title">📋 TÓM TẮT ĐƠN HÀNG</div>
-        <div class="summary-row"><span>Tạm tính</span><span id="summarySubtotal">0₫</span></div>
-        <div class="summary-row"><span>Phí giao hàng</span><span id="summaryShipping" style="color:var(--accent-green)">Miễn phí</span></div>
-        <div class="summary-row"><span>Giảm giá</span><span id="summaryDiscount" style="color:var(--accent-pink)">-0₫</span></div>
-        <div class="summary-row total"><span>Tổng cộng</span><span id="summaryTotal">0₫</span></div>
-        <div class="summary-coupon">
-          <input class="coupon-input" id="couponInput" placeholder="Nhập mã giảm giá..."/>
-          <button class="btn-coupon" onclick="applyCoupon()">Áp dụng</button>
+      <!-- VCB-STYLE CART SUMMARY -->
+      <div class="vcb-cart-panel">
+        <!-- VCB Header -->
+        <div class="vcb-cart-header">
+          <div class="vcb-cart-logo">
+            <div class="vcb-cart-logo-icon">
+              <svg width="18" height="18" viewBox="0 0 22 22" fill="none">
+                <path d="M11 2L2 7v4c0 5 3.8 9.7 9 11 5.2-1.3 9-6 9-11V7L11 2z" fill="rgba(255,255,255,0.15)"/>
+                <path d="M7 11l3 3 5-6" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div>
+              <div class="vcb-cart-logo-name">NMN<span>Pay</span></div>
+              <div class="vcb-cart-logo-sub">Thanh toán an toàn</div>
+            </div>
+          </div>
+          <div class="vcb-ssl-badge">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M12 2L4 6v6c0 5.25 3.5 10.15 8 11.5C16.5 22.15 20 17.25 20 12V6L12 2z" fill="#fff"/></svg>
+            SSL
+          </div>
         </div>
-        <div id="coupon-hint">
-          <span class="coupon-pill" onclick="quickCoupon('WELCOME10')">WELCOME10 -10%</span>
-          <span class="coupon-pill" onclick="quickCoupon('SALE20')">SALE20 -20%</span>
-          <span class="coupon-pill" onclick="quickCoupon('VIP30')">VIP30 -30%</span>
-          <span class="coupon-pill" onclick="quickCoupon('FLASH50')">FLASH50 -50%</span>
-          <span class="coupon-pill" onclick="quickCoupon('MN2026')">MN2026 -25%</span>
+
+        <!-- Order summary rows - bank receipt style -->
+        <div class="vcb-receipt-body">
+          <div class="vcb-receipt-label">CHI TIẾT ĐƠN HÀNG</div>
+          <div class="vcb-receipt-row">
+            <span class="vcb-rk">Tạm tính</span>
+            <span class="vcb-rv" id="summarySubtotal">0₫</span>
+          </div>
+          <div class="vcb-receipt-row">
+            <span class="vcb-rk">Phí giao hàng</span>
+            <span class="vcb-rv vcb-rv-green" id="summaryShipping">Miễn phí</span>
+          </div>
+          <div class="vcb-receipt-row">
+            <span class="vcb-rk">Giảm giá</span>
+            <span class="vcb-rv vcb-rv-red" id="summaryDiscount">-0₫</span>
+          </div>
+          <div class="vcb-receipt-divider"></div>
+          <div class="vcb-receipt-total-row">
+            <span>TỔNG CỘNG</span>
+            <span id="summaryTotal" class="vcb-total-amt">0₫</span>
+          </div>
+
+          <!-- Coupon section -->
+          <div class="vcb-coupon-wrap">
+            <div class="vcb-coupon-label">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M7 7h.01M7 3h5l9.7 9.7a1 1 0 010 1.4l-6.6 6.6a1 1 0 01-1.4 0L5 11.3V7a4 4 0 014-4z" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-linecap="round"/></svg>
+              Mã giảm giá
+            </div>
+            <div class="vcb-coupon-input-row">
+              <input class="vcb-coupon-input" id="couponInput" placeholder="Nhập mã..."/>
+              <button class="vcb-coupon-btn" onclick="applyCoupon()">Áp dụng</button>
+            </div>
+            <div class="vcb-coupon-pills" id="coupon-hint">
+              <span class="vcb-pill" onclick="quickCoupon('WELCOME10')">WELCOME10 -10%</span>
+              <span class="vcb-pill" onclick="quickCoupon('SALE20')">SALE20 -20%</span>
+              <span class="vcb-pill" onclick="quickCoupon('VIP30')">VIP30 -30%</span>
+              <span class="vcb-pill" onclick="quickCoupon('FLASH50')">FLASH50 -50%</span>
+              <span class="vcb-pill" onclick="quickCoupon('MN2026')">MN2026 -25%</span>
+            </div>
+          </div>
         </div>
+
+        <!-- VCB Green CTA Button -->
+        <div class="vcb-cart-footer">
+          <button class="vcb-pay-btn" onclick="switchPage('payment')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="1" y="4" width="22" height="16" rx="2" stroke="currentColor" stroke-width="2"/><path d="M1 10h22" stroke="currentColor" stroke-width="2"/></svg>
+            Thanh toán ngay
+          </button>
+          <div class="vcb-cart-secure-note">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M12 2L4 6v6c0 5.25 3.5 10.15 8 11.5C16.5 22.15 20 17.25 20 12V6L12 2z" fill="rgba(0,166,81,0.8)"/></svg>
+            Giao dịch được mã hóa 256-bit · Bảo mật tuyệt đối
+          </div>
         </div>
-        <button class="btn-checkout" onclick="switchPage('payment')">Thanh toán ngay →</button>
-      </div>
-  </div>
+
+        <!-- Keep old .cart-summary ref for JS compatibility -->
+        <div class="cart-summary" style="display:none">
+          <span id="summarySubtotal_hidden"></span>
+        </div>
+      </div><!-- /vcb-cart-panel -->
+    </div><!-- /cart-layout -->
+  </div><!-- /page-cart -->
 
   <!-- ════════════════════════════════════════════════════════
        PAYMENT PAGE — Thanh toán
@@ -3932,7 +5661,7 @@ if (typeof window.switchPage !== 'function') {
             <div class="contact-method-icon">📧</div>
             <div>
               <div class="contact-method-title">Email</div>
-              <div class="contact-method-value">nhutnguyen06092021@gmail.com</div>
+              <div class="contact-method-value"><a href="https://mail.google.com/mail/u/0/#inbox " class="__cf_email__" data-cfemail="3e50564b4a50594b475b500e080e070c0e0c0f7e59535f5752105d5153">[nhutnguyen06092021@gmail.com]</a></div>
             </div>
           </div>
           <div class="contact-method">
@@ -4017,7 +5746,7 @@ if (typeof window.switchPage !== 'function') {
           <div class="profile-avatar-edit">✏️</div>
         </div>
         <div class="profile-name" id="profileDisplayName">Nguyễn Minh Nhựt</div>
-        <div class="profile-email" id="profileDisplayEmail">nhutnguyen06092021@gmail.com</div>
+        <div class="profile-email" id="profileDisplayEmail"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4d23253839232a383428237d7b7d747f7d7f7c0d2a202c2421632e2220">[email&#160;protected]</a></div>
         <div style="background:rgba(0,245,255,0.08);border:1px solid rgba(0,245,255,0.2);border-radius:8px;padding:6px 14px;display:inline-block;margin-bottom:20px;font-family:var(--font-display);font-size:9px;color:var(--accent-cyan);letter-spacing:2px">👑 VIP MEMBER</div>
         <div class="profile-nav">
           <div class="profile-nav-item active" onclick="showProfileSection('info',this)">👤 Thông tin cá nhân</div>
@@ -4087,7 +5816,7 @@ if (typeof window.switchPage !== 'function') {
           <div class="card-title">✅ XÁC THỰC TÀI KHOẢN</div>
           <div style="display:flex;flex-direction:column;gap:16px">
             <div style="display:flex;align-items:center;justify-content:space-between;padding:16px;background:var(--bg-secondary);border-radius:var(--radius);border:1px solid var(--border-subtle)">
-              <div><div style="font-family:var(--font-display);font-size:11px;margin-bottom:4px">📧 EMAIL</div><div style="font-size:13px;color:var(--text-muted)" id="verifyEmailVal">nhutnguyen06092021@gmail.com</div></div>
+              <div><div style="font-family:var(--font-display);font-size:11px;margin-bottom:4px">📧 EMAIL</div><div style="font-size:13px;color:var(--text-muted)" id="verifyEmailVal"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="37595f42435950424e52590701070e0507050677505a565e5b1954585a">[email&#160;protected]</a></div></div>
               <div style="color:var(--accent-green);font-family:var(--font-display);font-size:10px">✅ ĐÃ XÁC THỰC</div>
             </div>
             <div style="display:flex;align-items:center;justify-content:space-between;padding:16px;background:var(--bg-secondary);border-radius:var(--radius);border:1px solid var(--border-subtle)">
@@ -4121,9 +5850,27 @@ if (typeof window.switchPage !== 'function') {
   <div class="page" id="page-bank">
     <div class="bank-layout">
 
-      <!-- LEFT SIDEBAR -->
-      <div class="bank-sidebar">
-        <div class="bank-brand">
+      <!-- LEFT SIDEBAR — VCB STYLE -->
+      <div class="bank-sidebar vcb-sidebar">
+        <div class="vcb-header-bar">
+          <div class="vcb-logo-wrap">
+            <div class="vcb-logo-icon">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                <path d="M11 2L2 7v4c0 5 3.8 9.7 9 11 5.2-1.3 9-6 9-11V7L11 2z" fill="#fff" opacity="0.15"/>
+                <path d="M7 11l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div>
+              <div class="vcb-logo-name">NMN<span>Digibank</span></div>
+              <div class="vcb-logo-sub">NGUYỄN MINH NHỰT</div>
+            </div>
+          </div>
+          <div class="vcb-header-notif" onclick="switchBankTab('notifications',null)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-linecap="round"/></svg>
+            <span class="vcb-notif-dot"></span>
+          </div>
+        </div>
+        <div class="bank-brand" style="display:none">
           <div class="bank-brand-icon"> MN</div>
           <div>
             <div class="bank-brand-name">MN Bank</div>
@@ -4279,9 +6026,23 @@ if (typeof window.switchPage !== 'function') {
                 </div>
                 <div class="bank-form-group" style="grid-column:1/-1">
                   <label class="bank-form-label">Tên người nhận</label>
-                  <div class="bank-name-lookup" id="trNameResult">
-                    <span id="trNameText" style="color:var(--text-muted)">— Nhập số tài khoản để tra cứu —</span>
+                  <div style="position:relative">
+                    <input class="bank-form-input" id="trNameInput"
+                      placeholder="Tự động tra cứu hoặc nhập tên..."
+                      oninput="TR_DATA.name=this.value"
+                      style="padding-right:90px"
+                    />
+                    <button onclick="bankLookupName()" style="
+                      position:absolute;right:6px;top:50%;transform:translateY(-50%);
+                      background:linear-gradient(135deg,#00803d,#00a651);
+                      border:none;border-radius:6px;color:#fff;font-size:11px;
+                      font-weight:700;padding:6px 12px;cursor:pointer;
+                      font-family:'Be Vietnam Pro',Arial,sans-serif;
+                    ">🔍 Tra cứu</button>
+                  </div>
+                  <div id="trNameResult" style="margin-top:6px;min-height:20px;font-size:12px;color:#888;display:flex;align-items:center;gap:6px">
                     <span id="trNameSpin" style="display:none" class="bank-spin"></span>
+                    <span id="trNameText" style="color:#aaa">— Nhập STK rồi bấm Tra cứu, hoặc nhập tên trực tiếp —</span>
                   </div>
                 </div>
                 <div class="bank-form-group">
@@ -4348,15 +6109,67 @@ if (typeof window.switchPage !== 'function') {
 
             <!-- STEP 4: SUCCESS -->
             <div class="transfer-panel" id="tr-step-4" style="display:none">
-              <div style="text-align:center;padding:48px 0">
-                <div class="bank-success-ring">✅</div>
-                <div style="font-family:var(--font-display);font-size:22px;color:var(--accent-green);margin:20px 0 8px;text-shadow:0 0 20px var(--accent-green)">CHUYỂN TIỀN THÀNH CÔNG!</div>
-                <div style="color:var(--text-secondary);font-size:14px" id="trSuccessMsg"></div>
-                <div class="bank-tx-receipt" id="bankTxReceipt" style="margin:24px auto;max-width:380px;text-align:left"></div>
-                <div style="display:flex;gap:12px;justify-content:center;margin-top:12px">
-                  <button class="bank-btn-outline" onclick="downloadReceipt()">📄 Lưu biên lai</button>
-                  <button class="bank-btn-primary" onclick="transferStep(1)">+ Giao dịch mới</button>
-                </div>
+              <div style="display:flex;justify-content:center;padding:24px 16px 32px">
+
+                <!-- ════ BILL CARD ════ -->
+                <div id="bankBillCard" style="
+                  width:100%;max-width:460px;
+                  background:#fff;
+                  border-radius:16px;
+                  overflow:hidden;
+                  box-shadow:0 8px 40px rgba(0,0,0,0.18),0 0 0 1px rgba(0,128,61,0.12);
+                  font-family:'Be Vietnam Pro',Arial,sans-serif;
+                ">
+
+                  <!-- ── HEADER VCB ── -->
+                  <div style="background:linear-gradient(135deg,#004d26 0%,#00803d 55%,#00a651 100%);padding:18px 24px;display:flex;align-items:center;justify-content:space-between">
+                    <div style="display:flex;align-items:center;gap:10px">
+                      <div style="width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,0.18);border:1px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                        <svg width="18" height="18" viewBox="0 0 22 22" fill="none"><path d="M11 2L2 7v4c0 5 3.8 9.7 9 11 5.2-1.3 9-6 9-11V7L11 2z" fill="rgba(255,255,255,0.2)"/><path d="M7 11l3 3 5-6" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      </div>
+                      <div>
+                        <div style="font-size:16px;font-weight:800;color:#fff;letter-spacing:0.3px">NMN<span style="font-weight:400">Digibank</span></div>
+                        <div style="font-size:10px;color:rgba(255,255,255,0.65);letter-spacing:1px;text-transform:uppercase;margin-top:1px">NGUYỄN MINH NHỰT</div>
+                      </div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:5px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);border-radius:20px;padding:5px 12px;font-size:11px;font-weight:700;color:#fff">
+                      🔒 SSL
+                    </div>
+                  </div>
+
+                  <!-- ── SUCCESS ZONE ── -->
+                  <div style="background:#f0faf4;padding:28px 24px 20px;text-align:center;border-bottom:2px dashed #c8e6c9">
+                    <div style="display:inline-flex;width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#00803d,#00c853);align-items:center;justify-content:center;margin-bottom:14px;box-shadow:0 4px 20px rgba(0,128,61,0.3)">
+                      <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <div style="font-size:11px;font-weight:700;letter-spacing:2px;color:#00803d;text-transform:uppercase;margin-bottom:10px">CHUYỂN KHOẢN THÀNH CÔNG</div>
+                    <div id="billAmountDisplay" style="font-size:32px;font-weight:900;color:#111;line-height:1.1;margin-bottom:6px;letter-spacing:-1px">0 ₫</div>
+                    <div style="font-size:13px;color:#888;font-weight:400" id="billDateDisplay"></div>
+                  </div>
+
+                  <!-- ── DETAIL ROWS ── -->
+                  <div style="background:#fff;padding:8px 0 4px" id="billDetailRows"></div>
+
+                  <!-- ── FOOTER ── -->
+                  <div style="background:#f8fffe;border-top:1px solid #e8f5e9;padding:14px 24px;display:flex;align-items:center;gap:10px">
+                    <div style="width:32px;height:32px;border-radius:8px;background:#e8f5e9;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px">🏦</div>
+                    <div style="flex:1">
+                      <div style="font-size:12px;font-weight:700;color:#111">NGUYỄN MINH NHỰT Store</div>
+                      <div style="font-size:11px;color:#888;margin-top:1px">Giao dịch được mã hóa 256-bit · Bảo mật tuyệt đối</div>
+                    </div>
+                  </div>
+
+                  <!-- ── ACTION BUTTONS ── -->
+                  <div style="padding:16px 24px;display:flex;gap:10px;background:#fff;border-top:1px solid #f0f0f0">
+                    <button onclick="downloadReceipt()" style="flex:1;padding:11px;background:#f5f5f5;border:1.5px solid #ddd;border-radius:8px;font-family:'Be Vietnam Pro',Arial,sans-serif;font-size:13px;font-weight:700;color:#333;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all 0.2s" onmouseover="this.style.background='#eee'" onmouseout="this.style.background='#f5f5f5'">
+                      📄 Lưu biên lai
+                    </button>
+                    <button onclick="transferStep(1)" style="flex:1;padding:11px;background:linear-gradient(135deg,#00803d,#00a651);border:none;border-radius:8px;font-family:'Be Vietnam Pro',Arial,sans-serif;font-size:13px;font-weight:700;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 3px 10px rgba(0,128,61,0.35);transition:all 0.2s" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
+                      + Giao dịch mới
+                    </button>
+                  </div>
+
+                </div><!-- /billCard -->
               </div>
             </div>
           </div>
@@ -4856,17 +6669,17 @@ if (typeof window.switchPage !== 'function') {
     </div>
   </div>
   <div class="footer-hashtag-row" style="border-top:1px solid var(--border-subtle);padding:20px 40px;display:flex;flex-wrap:wrap;gap:10px;justify-content:center;">
-    <a class="hashtag-tag tag-tech"    onclick="hashtagNav('tech')"    style="font-size:10px;padding:5px 14px">#CôngNghệ</a>
-    <a class="hashtag-tag tag-fashion" onclick="hashtagNav('fashion')" style="font-size:10px;padding:5px 14px">#ThoiTrang</a>
-    <a class="hashtag-tag tag-home"    onclick="hashtagNav('home')"    style="font-size:10px;padding:5px 14px">#GiaDung</a>
-    <a class="hashtag-tag tag-beauty"  onclick="hashtagNav('beauty')"  style="font-size:10px;padding:5px 14px">#LamDep</a>
-    <a class="hashtag-tag tag-sport"   onclick="hashtagNav('sport')"   style="font-size:10px;padding:5px 14px">#TheThao</a>
-    <a class="hashtag-tag tag-cart"    onclick="switchPage('cart')"    style="font-size:10px;padding:5px 14px">#GioHang</a>
-    <a class="hashtag-tag tag-vip"     onclick="switchPage('payment')" style="font-size:10px;padding:5px 14px">#ThanhToan</a>
-    <a class="hashtag-tag tag-qr"      onclick="switchPage('qr')"      style="font-size:10px;padding:5px 14px">#QRPay</a>
-    <a class="hashtag-tag tag-about"   onclick="switchPage('about')"   style="font-size:10px;padding:5px 14px">#VeChungToi</a>
-    <a class="hashtag-tag tag-contact" onclick="switchPage('contact')" style="font-size:10px;padding:5px 14px">#LienHe</a>
-    <a class="hashtag-tag tag-admin"   onclick="switchPage('admin')"   style="font-size:10px;padding:5px 14px">#QuanTri</a>
+    <a class="hashtag-tag tag-tech"    onclick="hashtagNav('tech')"    style="font-size:10px;padding:5px 14px">CôngNghệ</a>
+    <a class="hashtag-tag tag-fashion" onclick="hashtagNav('fashion')" style="font-size:10px;padding:5px 14px">ThoiTrang</a>
+    <a class="hashtag-tag tag-home"    onclick="hashtagNav('home')"    style="font-size:10px;padding:5px 14px">GiaDung</a>
+    <a class="hashtag-tag tag-beauty"  onclick="hashtagNav('beauty')"  style="font-size:10px;padding:5px 14px">LamDep</a>
+    <a class="hashtag-tag tag-sport"   onclick="hashtagNav('sport')"   style="font-size:10px;padding:5px 14px">TheThao</a>
+    <a class="hashtag-tag tag-cart"    onclick="switchPage('cart')"    style="font-size:10px;padding:5px 14px">GioHang</a>
+    <a class="hashtag-tag tag-vip"     onclick="switchPage('payment')" style="font-size:10px;padding:5px 14px">ThanhToan</a>
+    <a class="hashtag-tag tag-qr"      onclick="switchPage('qr')"      style="font-size:10px;padding:5px 14px">QRPay</a>
+    <a class="hashtag-tag tag-about"   onclick="switchPage('about')"   style="font-size:10px;padding:5px 14px">VeChungToi</a>
+    <a class="hashtag-tag tag-contact" onclick="switchPage('contact')" style="font-size:10px;padding:5px 14px">LienHe</a>
+    <a class="hashtag-tag tag-admin"   onclick="switchPage('admin')"   style="font-size:10px;padding:5px 14px">QuanTri</a>
   </div>
   <div class="footer-bottom">
     <span>© 2026 NGUYỄN MINH NHỰT STORE. All rights reserved. Made with ❤️ in Vietnam</span>
@@ -4877,13 +6690,155 @@ if (typeof window.switchPage !== 'function') {
 <!-- ============================================================
      SUCCESS MODAL — Hiện sau khi thanh toán thành công
      ============================================================ -->
-<div class="modal-overlay" id="successModal">
-  <div class="modal-box">
-    <div class="modal-icon">🎉</div>
-    <div class="modal-title">ĐẶT HÀNG THÀNH CÔNG!</div>
-    <p class="modal-sub">Cảm ơn bạn đã mua hàng tại NGUYỄN MINH NHỰT STORE.<br>Đơn hàng sẽ được xử lý và giao trong 24 giờ.</p>
-    <div class="modal-order-id" id="orderIdDisplay">Mã giao dịch: #000000</div>
-    <button class="btn btn-primary" onclick="closeSuccessModal()">🏠 Về trang chủ</button>
+<!-- BANK BILL MODAL -->
+<div class="bill-overlay" id="successModal">
+  <div class="bill-paper" id="billPaper">
+
+    <!-- BANK HEADER -->
+    <div class="bill-bank-header">
+      <div class="bill-bank-logo">
+        <div class="bill-bank-logo-icon">
+          <svg width="28" height="28" viewBox="0 0 22 22" fill="none">
+            <defs><linearGradient id="billLg" x1="0" y1="0" x2="22" y2="22"><stop offset="0%" stop-color="#00803d"/><stop offset="100%" stop-color="#005a2b"/></linearGradient></defs>
+            <path d="M3 19V3L11 14L19 3V19" stroke="url(#billLg)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div>
+          <div class="bill-bank-name">NMN STORE</div>
+          <div class="bill-bank-sub">NGUYỄN MINH NHỰT COMMERCIAL</div>
+        </div>
+      </div>
+      <div class="bill-bank-secure">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 2L4 6v6c0 5.25 3.5 10.15 8 11.5C16.5 22.15 20 17.25 20 12V6L12 2z" fill="#00803d"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Giao dịch bảo mật SSL
+      </div>
+    </div>
+
+    <!-- SUCCESS STAMP -->
+    <div class="bill-success-zone">
+      <div class="bill-check-ring">
+        <div class="bill-check-circle">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none">
+            <path d="M5 13l4 4L19 7" stroke="white" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+      <div class="bill-success-label">GIAO DỊCH THÀNH CÔNG</div>
+      <div class="bill-txn-amount" id="billAmount">0 ₫</div>
+      <div class="bill-txn-sublabel">Số tiền giao dịch</div>
+    </div>
+
+    <!-- DIVIDER DASHED -->
+    <div class="bill-divider-dash"></div>
+
+    <!-- TRANSACTION INFO TABLE -->
+    <div class="bill-info-block">
+      <div class="bill-info-title">THÔNG TIN GIAO DỊCH</div>
+      <div class="bill-info-row">
+        <span class="bill-info-key">Mã giao dịch</span>
+        <span class="bill-info-val bill-mono" id="billTxnId">—</span>
+      </div>
+      <div class="bill-info-row">
+        <span class="bill-info-key">Thời gian</span>
+        <span class="bill-info-val" id="billDateTime">—</span>
+      </div>
+      <div class="bill-info-row">
+        <span class="bill-info-key">Phương thức</span>
+        <span class="bill-info-val" id="billMethod">—</span>
+      </div>
+      <div class="bill-info-row">
+        <span class="bill-info-key">Trạng thái</span>
+        <span class="bill-info-val">
+          <span class="bill-status-badge">✓ Hoàn thành</span>
+        </span>
+      </div>
+    </div>
+
+    <div class="bill-divider-solid"></div>
+
+    <!-- NGƯỜI NHẬN INFO -->
+    <div class="bill-info-block">
+      <div class="bill-info-title">THÔNG TIN NGƯỜI ĐẶT</div>
+      <div class="bill-info-row">
+        <span class="bill-info-key">Họ tên</span>
+        <span class="bill-info-val" id="billName">—</span>
+      </div>
+      <div class="bill-info-row">
+        <span class="bill-info-key">Số điện thoại</span>
+        <span class="bill-info-val bill-mono" id="billPhone">—</span>
+      </div>
+      <div class="bill-info-row">
+        <span class="bill-info-key">Địa chỉ</span>
+        <span class="bill-info-val" id="billAddress">—</span>
+      </div>
+    </div>
+
+    <div class="bill-divider-solid"></div>
+
+    <!-- SẢN PHẨM ĐÃ MUA -->
+    <div class="bill-info-block">
+      <div class="bill-info-title">SẢN PHẨM ĐÃ ĐẶT</div>
+      <div id="billItemsList"></div>
+    </div>
+
+    <div class="bill-divider-solid"></div>
+
+    <!-- TỔNG KẾT -->
+    <div class="bill-summary-block">
+      <div class="bill-summary-row">
+        <span>Tạm tính</span>
+        <span id="billSubtotal">0 ₫</span>
+      </div>
+      <div class="bill-summary-row">
+        <span>Phí vận chuyển</span>
+        <span id="billShipping" style="color:#00803d">Miễn phí</span>
+      </div>
+      <div class="bill-summary-row" id="billDiscountRow" style="display:none">
+        <span>Giảm giá</span>
+        <span id="billDiscount" style="color:#e53935">—</span>
+      </div>
+      <div class="bill-divider-solid" style="margin:10px 0"></div>
+      <div class="bill-summary-row bill-total-row">
+        <span>TỔNG CỘNG</span>
+        <span id="billTotal">0 ₫</span>
+      </div>
+    </div>
+
+    <!-- DIVIDER DASHED BOTTOM -->
+    <div class="bill-divider-dash"></div>
+
+    <!-- QR MINI + NOTE -->
+    <div class="bill-footer-zone">
+      <div class="bill-qr-mini">
+        <canvas id="billQrCanvas" width="72" height="72"></canvas>
+      </div>
+      <div class="bill-footer-note">
+        <div class="bill-footer-store">NGUYỄN MINH NHỰT STORE</div>
+        <div class="bill-footer-addr">Định Mỹ, Thoại Sơn, An Giang</div>
+        <div class="bill-footer-hotline">Hotline: 0837 966 174</div>
+        <div class="bill-footer-thanks">Cảm ơn bạn đã tin tưởng mua hàng!</div>
+      </div>
+    </div>
+
+    <!-- WATERMARK -->
+    <div class="bill-watermark">ĐÃ THANH TOÁN</div>
+
+    <!-- ACTION BUTTONS -->
+    <div class="bill-actions">
+      <button class="bill-btn-print" onclick="printBill()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6v-8z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        In biên lai
+      </button>
+      <button class="bill-btn-orders" onclick="closeSuccessModal();switchPage('orders')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        Xem đơn hàng
+      </button>
+      <button class="bill-btn-home" onclick="closeSuccessModal()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Về trang chủ
+      </button>
+    </div>
+
   </div>
 </div>
 
@@ -4968,7 +6923,7 @@ if (typeof window.switchPage !== 'function') {
 <!-- ============================================================
      JAVASCRIPT — Toàn bộ logic
      ============================================================ -->
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 /* ============================================================
    NGUYỄN MINH NHỰT STORE — KIẾN TRÚC V9
    MAX STABILITY | MAX PERFORMANCE | MAX STRUCTURE
@@ -5256,24 +7211,10 @@ window.ShopSystem = (function() {
       });
     },
 
-    /* Page transition wipe */
+    /* Page transition wipe — disabled to prevent switchPage chain breakage */
     initPageTransition: function() {
-      ErrorGuard.run('AnimationSystem:pageTransition', function() {
-        var overlay = document.getElementById('page-transition-overlay');
-        if (!overlay) return;
-        var orig = window.switchPage;
-        window.switchPage = function(name) {
-          overlay.classList.remove('wipe-out');
-          overlay.classList.add('wipe-in');
-          setTimeout(function() {
-            if (orig) orig(name);
-            overlay.classList.add('wipe-out');
-            setTimeout(function() {
-              overlay.classList.remove('wipe-in','wipe-out');
-            }, 420);
-          }, 250);
-        };
-      });
+      /* Skip page-transition wrap — causes switchPage chain issues */
+      /* The CSS animation on .page.active handles transitions cleanly */
     },
 
     /* Inject shine vào product card khi render */
@@ -5497,8 +7438,7 @@ window.ShopSystem = (function() {
             var kp = document.getElementById('kbd-shortcut-panel');
             if (kp) kp.classList.toggle('show'); return;
           }
-          // D → toggle theme
-          if (k==='d'||k==='D') { if(typeof toggleTheme==='function') toggleTheme(); return; }
+          // D → theme toggle disabled
           // G + S/C/H combos
           var now = Date.now();
           if (now - lastKey < 600) {
@@ -5582,7 +7522,7 @@ window.ShopSystem = (function() {
       { icon:'💳', label:'Thanh toán', action: function() { if(typeof switchPage==='function') switchPage('payment'); } },
       { icon:'🏦', label:'Ngân hàng', action: function() { if(typeof switchPage==='function') switchPage('bank'); } },
       { icon:'👤', label:'Tài khoản', action: function() { if(typeof openAuthModal==='function') openAuthModal(); } },
-      { icon:'🌗', label:'Chuyển giao diện sáng/tối', action: function() { if(typeof toggleTheme==='function') toggleTheme(); } },
+      { icon:'☀️', label:'Giao diện sáng (mặc định)', action: function() { showToast('Light Mode','Đang dùng giao diện sáng','info'); } },
       { icon:'⚡', label:'Flash Sale hôm nay', action: function() { if(typeof switchPage==='function') switchPage('home'); } },
       { icon:'🎁', label:'Mystery Box', action: function() { if(typeof openMysteryBox==='function') openMysteryBox(); } },
       { icon:'⚔️', label:'Product Battle', action: function() { if(typeof openBattle==='function') openBattle(); } },
@@ -5928,26 +7868,20 @@ window.ShopSystem = (function() {
       });
     },
 
-    /* Patch switchPage để emit sự kiện */
+    /* Patch switchPage để emit sự kiện — KHÔNG wrap switchPage, chỉ emit events sau khi page thay đổi */
     patchSwitchPage: function() {
       ErrorGuard.run('Integration:patchSwitchPage', function() {
-        var origSwitch = window._switchPageCore || window.switchPage;
-        if (!origSwitch) return;
-        // Đặt _switchPageCore là gốc an toàn
-        window._switchPageCore = origSwitch;
-        window.switchPage = function(name) {
-          ErrorGuard.run('switchPage:'+name, function() {
-            origSwitch(name);
-            StateManager.set('currentPage', name);
-            EventBus.emit('page:switch', { page: name });
-            if (name === 'shop') {
-              setTimeout(function() {
-                AnimationSystem.initScrollReveal();
-                AnimationSystem.injectShine();
-              }, 200);
-            }
-          });
-        };
+        /* Không wrap switchPage nữa — gây conflict với FinalFix override */
+        /* Chỉ emit EventBus events thông qua STATE change listener */
+        EventBus.on('state:currentPage', function(d) {
+          EventBus.emit('page:switch', { page: d.value });
+          if (d.value === 'shop') {
+            setTimeout(function() {
+              try { AnimationSystem.initScrollReveal(); } catch(e) {}
+              try { AnimationSystem.injectShine(); } catch(e) {}
+            }, 250);
+          }
+        });
       });
     },
 
@@ -6002,7 +7936,7 @@ window.ShopSystem = (function() {
         AnimationSystem.initParallax();
         AnimationSystem.applyDecorators();
         UISystem.initCursor();
-        AnimationSystem.initPageTransition();
+        /* AnimationSystem.initPageTransition() — disabled, wraps switchPage causing conflicts */
       });
     });
   } else {
@@ -6016,7 +7950,7 @@ window.ShopSystem = (function() {
       AnimationSystem.initParallax();
       AnimationSystem.applyDecorators();
       UISystem.initCursor();
-      AnimationSystem.initPageTransition();
+      /* AnimationSystem.initPageTransition() — disabled */
     });
   }
 
@@ -6346,14 +8280,12 @@ function playSuccessSound() {
    Chuyển đổi theme và lưu vào localStorage
    ============================================================ */
 function toggleTheme() {
-  const current = document.documentElement.getAttribute('data-theme');
-  const next = current === 'dark' ? 'light' : 'dark';
-  document.documentElement.setAttribute('data-theme', next);
-  localStorage.setItem('quyen_tran_theme', next);
+  /* Dark mode removed — always light mode */
+  showToast('Light Mode', 'Giao diện sáng duy nhất', 'info');
 }
-// Khôi phục theme đã lưu
-const savedTheme = localStorage.getItem('quyen_tran_theme');
-if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
+/* Always force light mode */
+document.documentElement.setAttribute('data-theme', 'light');
+localStorage.setItem('quyen_tran_theme', 'light');
 
 /* ============================================================
    MODULE: BANNER AUTO SLIDE
@@ -6563,47 +8495,61 @@ function getCartTotal() {
    ============================================================ */
 function renderCart() {
   try {
-  const container = document.getElementById('cartItemsContainer');
+  var container = document.getElementById('cartItemsContainer');
   if (!container) return;
   if (!STATE || !STATE.cart) return;
-  if (STATE.cart.length === 0) {
-    container.innerHTML = `
-      <div class="cart-empty">
-        <div class="cart-empty-icon">🛒</div>
-        <h3>Giỏ hàng trống</h3>
-        <p>Chưa có sản phẩm nào trong giỏ hàng của bạn</p>
-        <button class="btn btn-primary" style="margin-top:20px" onclick="switchPage('shop')">Tiếp tục mua sắm →</button>
-      </div>`;
+
+  var cart = STATE.cart;
+  if (cart.length === 0) {
+    container.innerHTML = '<div class="cart-empty">'
+      + '<div class="cart-empty-icon">🛒</div>'
+      + '<h3>Giỏ hàng trống</h3>'
+      + '<p>Chưa có sản phẩm nào trong giỏ hàng của bạn</p>'
+      + '<button class="btn btn-primary" style="margin-top:20px" onclick="goPage(\'shop\')">Tiếp tục mua sắm →</button>'
+      + '</div>';
   } else {
-    container.innerHTML = `<div class="cart-items">${
-      STATE.cart.map(item => `
-      <div class="cart-item" id="cartItem_${item.id}">
-        <div class="cart-item-img">${item.emoji}</div>
-        <div class="cart-item-info">
-          <div class="cart-item-cat">${item.cat.toUpperCase()}</div>
-          <div class="cart-item-name">${item.name}</div>
-          <div class="cart-item-price">${(item.price * item.qty).toLocaleString('vi-VN')}₫</div>
-        </div>
-        <div class="qty-control">
-          <button class="qty-btn" onclick="updateQty(${item.id},-1)">−</button>
-          <span class="qty-num">${item.qty}</span>
-          <button class="qty-btn" onclick="updateQty(${item.id},1)">+</button>
-        </div>
-        <button class="cart-item-remove" onclick="removeFromCart(${item.id})">✕</button>
-      </div>`).join('')
-    }</div>`;
+    var html = '<div class="cart-items">';
+    for (var ci = 0; ci < cart.length; ci++) {
+      var item = cart[ci];
+      html += '<div class="cart-item" id="cartItem_' + item.id + '">'
+        + '<div class="cart-item-img">' + item.emoji + '</div>'
+        + '<div class="cart-item-info">'
+        + '<div class="cart-item-cat">' + item.cat.toUpperCase() + '</div>'
+        + '<div class="cart-item-name">' + item.name + '</div>'
+        + '<div class="cart-item-price">' + (item.price * item.qty).toLocaleString('vi-VN') + '₫</div>'
+        + '</div>'
+        + '<div class="qty-control">'
+        + '<button class="qty-btn" onclick="updateQty(' + item.id + ',-1)">−</button>'
+        + '<span class="qty-num">' + item.qty + '</span>'
+        + '<button class="qty-btn" onclick="updateQty(' + item.id + ',1)">+</button>'
+        + '</div>'
+        + '<button class="cart-item-remove" onclick="removeFromCart(' + item.id + ')">✕</button>'
+        + '</div>';
+    }
+    html += '</div>';
+    container.innerHTML = html;
   }
 
-  // Cập nhật summary
-  const subtotal = getCartTotal();
-  const discount = STATE.discount;
-  const shipping = subtotal >= 500000 ? 0 : 30000;
-  const total = subtotal - discount + shipping;
+  /* Cập nhật summary */
+  var subtotal = 0;
+  for (var si = 0; si < cart.length; si++) subtotal += cart[si].price * cart[si].qty;
+  var discount = STATE.discount || 0;
+  var shipping = subtotal >= 500000 ? 0 : (subtotal > 0 ? 30000 : 0);
+  var total = subtotal - discount + shipping;
 
-  const sub = document.getElementById('summarySubtotal'); if(sub) sub.textContent = subtotal.toLocaleString('vi-VN') + '₫';
-  const shp = document.getElementById('summaryShipping'); if(shp) shp.textContent = shipping === 0 ? 'Miễn phí ✨' : shipping.toLocaleString('vi-VN') + '₫';
-  const dis = document.getElementById('summaryDiscount'); if(dis) dis.textContent = '-' + discount.toLocaleString('vi-VN') + '₫';
-  const tot = document.getElementById('summaryTotal'); if(tot) tot.textContent = total.toLocaleString('vi-VN') + '₫';
+  var sub = document.getElementById('summarySubtotal');
+  if (sub) sub.textContent = subtotal.toLocaleString('vi-VN') + '₫';
+  var shp = document.getElementById('summaryShipping');
+  if (shp) shp.textContent = shipping === 0 ? 'Miễn phí ✨' : shipping.toLocaleString('vi-VN') + '₫';
+  var dis = document.getElementById('summaryDiscount');
+  if (dis) dis.textContent = '-' + discount.toLocaleString('vi-VN') + '₫';
+  var tot = document.getElementById('summaryTotal');
+  if (tot) tot.textContent = total.toLocaleString('vi-VN') + '₫';
+
+  /* VCB total */
+  var vcbTot = document.getElementById('vcbCartTotal');
+  if (vcbTot) vcbTot.textContent = total.toLocaleString('vi-VN') + '₫';
+
   } catch(e) { console.error('renderCart:', e); }
 }
 
@@ -6722,8 +8668,58 @@ async function processPayment() {
   saveCart();
   updateCartBadge();
 
-  // Hiện modal thành công
-  document.getElementById('orderIdDisplay').textContent = 'Mã giao dịch: #' + orderId;
+  // Populate bank bill với dữ liệu thật
+  try {
+    const subtotal = newOrder.total + (STATE.discount || 0);
+    const discount = STATE.discount || 0;
+    const shipping  = subtotal >= 500000 ? 0 : 30000;
+
+    const setEl = (id, val) => { const e = document.getElementById(id); if(e) e.textContent = val; };
+
+    setEl('billAmount',  newOrder.total.toLocaleString('vi-VN') + ' ₫');
+    setEl('billTxnId',   orderId);
+    setEl('billDateTime', newOrder.date);
+    setEl('billName',    newOrder.customer || '—');
+    setEl('billPhone',   newOrder.phone || '—');
+    setEl('billAddress', newOrder.address || '—');
+    setEl('billSubtotal', subtotal.toLocaleString('vi-VN') + ' ₫');
+    setEl('billTotal',   newOrder.total.toLocaleString('vi-VN') + ' ₫');
+    setEl('billShipping', shipping === 0 ? 'Miễn phí ✓' : shipping.toLocaleString('vi-VN') + ' ₫');
+
+    const methodMap = { transfer:'Chuyển khoản ngân hàng', cod:'COD — Thanh toán khi nhận', momo:'Ví MoMo' };
+    setEl('billMethod', methodMap[newOrder.method] || newOrder.method || 'Chuyển khoản');
+
+    // Discount row
+    const discRow = document.getElementById('billDiscountRow');
+    const discEl  = document.getElementById('billDiscount');
+    if (discount > 0 && discRow && discEl) {
+      discRow.style.display = 'flex';
+      discEl.textContent = '-' + discount.toLocaleString('vi-VN') + ' ₫';
+    } else if (discRow) { discRow.style.display = 'none'; }
+
+    // Items list
+    const itemsEl = document.getElementById('billItemsList');
+    if (itemsEl && newOrder.items && newOrder.items.length) {
+      itemsEl.innerHTML = newOrder.items.map(item => {
+        const p = (item.price || 0) * (item.qty || 1);
+        return '<div class="bill-item-row">' +
+          '<div class="bill-item-emoji">' + (item.emoji || '📦') + '</div>' +
+          '<div class="bill-item-info">' +
+            '<div class="bill-item-name">' + (item.name || '') + '</div>' +
+            '<div class="bill-item-qty">SL: ' + (item.qty || 1) + '</div>' +
+          '</div>' +
+          '<div class="bill-item-price">' + p.toLocaleString('vi-VN') + '₫</div>' +
+        '</div>';
+      }).join('');
+    }
+
+    // Mini QR code cho biên lai
+    const qcEl = document.getElementById('billQrCanvas');
+    if (qcEl && typeof drawQRCode === 'function') {
+      drawQRCode(qcEl, 'NMN-' + orderId);
+    }
+  } catch(billErr) { console.warn('bill populate error:', billErr); }
+
   document.getElementById('successModal').classList.add('show');
   playSuccessSound();
 
@@ -6735,8 +8731,87 @@ async function processPayment() {
 }
 
 function closeSuccessModal() {
-  document.getElementById('successModal').classList.remove('show');
+  const modal = document.getElementById('successModal');
+  if (modal) modal.classList.remove('show');
   switchPage('home');
+}
+
+/* ============================================================
+   PRINT BILL — In biên lai kiểu ngân hàng
+   ============================================================ */
+function printBill() {
+  try {
+    // Tạo iframe ẩn để in không ảnh hưởng layout chính
+    const billPaper = document.getElementById('billPaper');
+    if (!billPaper) { window.print(); return; }
+
+    const printWin = window.open('', '_blank', 'width=480,height=700');
+    if (!printWin) { window.print(); return; }
+
+    const billHTML = billPaper.outerHTML;
+
+    printWin.document.write('<!DOCTYPE html><html><head>' +
+      '<meta charset="UTF-8">' +
+      '<title>Biên Lai Giao Dịch — NMN STORE</title>' +
+      '<style>' +
+      'body { margin:0; padding:16px; background:#fff; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif; }' +
+      '.bill-paper { max-width:400px; margin:0 auto; border:1px solid #e0e0e0; border-radius:12px; overflow:hidden; position:relative; color:#1a1a1a; }' +
+      '.bill-bank-header { background:linear-gradient(135deg,#004d26,#00803d,#00a651); padding:18px 22px 16px; display:flex; align-items:center; justify-content:space-between; }' +
+      '.bill-bank-logo { display:flex; align-items:center; gap:10px; }' +
+      '.bill-bank-logo-icon { width:42px; height:42px; border-radius:10px; background:rgba(255,255,255,0.18); display:flex; align-items:center; justify-content:center; border:1px solid rgba(255,255,255,0.25); }' +
+      '.bill-bank-logo-icon svg path { stroke:#ffffff !important; }' +
+      '.bill-bank-name { font-size:15px; font-weight:700; color:#fff; letter-spacing:1.5px; line-height:1.2; }' +
+      '.bill-bank-sub { font-size:9px; color:rgba(255,255,255,0.7); letter-spacing:0.8px; text-transform:uppercase; margin-top:2px; }' +
+      '.bill-bank-secure { display:flex; align-items:center; gap:4px; font-size:9px; color:rgba(255,255,255,0.8); background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2); border-radius:20px; padding:4px 10px; }' +
+      '.bill-success-zone { background:linear-gradient(180deg,#f0fdf4,#fff); padding:28px 24px 20px; text-align:center; border-bottom:1px solid #e8f5e9; }' +
+      '.bill-check-ring { width:72px; height:72px; margin:0 auto 16px; border-radius:50%; background:rgba(0,128,61,0.08); display:flex; align-items:center; justify-content:center; }' +
+      '.bill-check-circle { width:56px; height:56px; border-radius:50%; background:linear-gradient(135deg,#00a651,#00803d); display:flex; align-items:center; justify-content:center; box-shadow:0 4px 16px rgba(0,128,61,0.35); }' +
+      '.bill-success-label { font-size:11px; font-weight:700; letter-spacing:2.5px; color:#00803d; text-transform:uppercase; margin-bottom:10px; }' +
+      '.bill-txn-amount { font-size:32px; font-weight:800; color:#1a1a1a; letter-spacing:-0.5px; line-height:1; margin-bottom:4px; }' +
+      '.bill-txn-sublabel { font-size:11px; color:#9e9e9e; letter-spacing:0.5px; }' +
+      '.bill-divider-dash { height:1px; margin:0 16px; border-top:2px dashed #e0e0e0; position:relative; }' +
+      '.bill-divider-dash::before,.bill-divider-dash::after { content:""; position:absolute; top:-9px; width:16px; height:16px; border-radius:50%; background:#fff; }' +
+      '.bill-divider-dash::before { left:-24px; } .bill-divider-dash::after { right:-24px; }' +
+      '.bill-divider-solid { height:1px; background:#f0f0f0; margin:0; }' +
+      '.bill-info-block { padding:14px 22px; }' +
+      '.bill-info-title { font-size:9px; font-weight:700; letter-spacing:2.5px; color:#9e9e9e; text-transform:uppercase; margin-bottom:10px; padding-bottom:6px; border-bottom:1px solid #f5f5f5; }' +
+      '.bill-info-row { display:flex; justify-content:space-between; align-items:flex-start; padding:5px 0; gap:12px; }' +
+      '.bill-info-key { font-size:12px; color:#757575; flex-shrink:0; min-width:110px; }' +
+      '.bill-info-val { font-size:12px; font-weight:600; color:#212121; text-align:right; }' +
+      '.bill-mono { font-family:"Courier New",monospace; letter-spacing:0.5px; }' +
+      '.bill-status-badge { display:inline-flex; align-items:center; gap:4px; background:#e8f5e9; color:#00803d; border:1px solid #a5d6a7; border-radius:20px; padding:3px 10px; font-size:11px; font-weight:700; }' +
+      '.bill-item-row { display:flex; align-items:center; gap:10px; padding:7px 0; border-bottom:1px dashed #f5f5f5; }' +
+      '.bill-item-row:last-child { border-bottom:none; }' +
+      '.bill-item-emoji { font-size:22px; flex-shrink:0; }' +
+      '.bill-item-info { flex:1; }' +
+      '.bill-item-name { font-size:12px; font-weight:600; color:#212121; line-height:1.3; }' +
+      '.bill-item-qty { font-size:11px; color:#9e9e9e; margin-top:2px; }' +
+      '.bill-item-price { font-size:12px; font-weight:700; color:#212121; white-space:nowrap; }' +
+      '.bill-summary-block { padding:12px 22px 16px; background:#fafafa; }' +
+      '.bill-summary-row { display:flex; justify-content:space-between; font-size:12px; color:#616161; padding:4px 0; }' +
+      '.bill-total-row { font-size:15px !important; font-weight:800 !important; color:#00803d !important; margin-top:4px; }' +
+      '.bill-total-row span { color:#00803d !important; }' +
+      '.bill-footer-zone { padding:14px 22px 12px; display:flex; align-items:center; gap:14px; background:#fff; }' +
+      '.bill-qr-mini { flex-shrink:0; border:1px solid #e0e0e0; border-radius:8px; padding:4px; background:#fff; }' +
+      '.bill-footer-store { font-size:11px; font-weight:700; color:#212121; letter-spacing:0.8px; }' +
+      '.bill-footer-addr,.bill-footer-hotline { font-size:10px; color:#9e9e9e; margin-top:2px; }' +
+      '.bill-footer-thanks { font-size:10px; color:#00803d; margin-top:5px; font-style:italic; }' +
+      '.bill-watermark { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%) rotate(-30deg); font-size:52px; font-weight:900; color:rgba(0,128,61,0.05); letter-spacing:4px; pointer-events:none; white-space:nowrap; text-transform:uppercase; user-select:none; }' +
+      '.bill-actions { display:none !important; }' +
+      '</style>' +
+    '</head><body>' + billHTML + '</body></html>');
+
+    printWin.document.close();
+    printWin.onload = function() {
+      setTimeout(function() {
+        printWin.print();
+        setTimeout(function() { printWin.close(); }, 500);
+      }, 300);
+    };
+  } catch(e) {
+    console.error('printBill error:', e);
+    window.print();
+  }
 }
 
 /* ============================================================
@@ -7818,13 +9893,31 @@ function renderRecommendations() {
    COUPONS UPGRADE
    ============================================================ */
 const VALID_COUPONS={'WELCOME10':10,'SALE20':20,'VIP30':30,'NEWUSER':15,'FLASH50':50,'QT2026':25};
+function quickCoupon(code) {
+  try {
+    var inp = document.getElementById('couponInput');
+    if (inp) inp.value = code;
+    applyCoupon();
+  } catch(e) { console.warn('quickCoupon:', e); }
+}
+
 function applyCoupon() {
-  const code=document.getElementById('couponInput').value.trim().toUpperCase();
-  if (VALID_COUPONS[code]) {
-    STATE.discount=VALID_COUPONS[code];
-    showToast('Mã '+code+' hợp lệ!','Giảm '+VALID_COUPONS[code]+'% cho đơn hàng 🎉','success');
-    renderCart();
-  } else { showToast('Mã không hợp lệ','Thử: WELCOME10 · SALE20 · VIP30 · FLASH50','error'); }
+  try {
+    var couponInputEl = document.getElementById('couponInput');
+    if (!couponInputEl) { showToast('Lỗi','Không tìm thấy ô nhập mã','error'); return; }
+    var code = couponInputEl.value.trim().toUpperCase();
+    if (!code) { showToast('Vui lòng nhập mã giảm giá','','error'); return; }
+    if (VALID_COUPONS[code]) {
+      var pct = VALID_COUPONS[code];
+      var subtotal = STATE.cart.reduce(function(s,i){ return s + i.price*i.qty; }, 0);
+      STATE.discount = Math.round(subtotal * pct / 100);
+      showToast('Mã ' + code + ' hợp lệ!', 'Giảm ' + pct + '% → -' + STATE.discount.toLocaleString('vi-VN') + '₫ 🎉', 'success');
+      renderCart();
+    } else {
+      STATE.discount = 0;
+      showToast('Mã không hợp lệ', 'Thử: WELCOME10 · SALE20 · VIP30 · FLASH50', 'error');
+    }
+  } catch(e) { console.error('applyCoupon:', e); }
 }
 
 /* EVENT LISTENERS */
@@ -8716,11 +10809,7 @@ function hideMiniCart() { document.getElementById('mini-cart-preview')?.classLis
 /* ============================================================
    [NEW] MODULE: QUICK COUPON PILLS (#12)
    ============================================================ */
-function quickCoupon(code) {
-  const input = document.getElementById('couponInput');
-  if (input) { input.value = code; }
-  applyCoupon();
-}
+/* quickCoupon defined above (line ~9682) */
 
 /* ============================================================
    [NEW] MODULE: STOCK INDICATOR ON CARDS (#14)
@@ -8945,9 +11034,7 @@ function shareProduct(platform) {
     if (inInput) return;
     if (e.key==='?') { document.getElementById('kbd-shortcut-panel')?.classList.toggle('show'); return; }
     if ((e.key==='d'||e.key==='D') && !e.ctrlKey && !e.metaKey) {
-      toggleTheme();
-      showToast('Đổi giao diện',document.documentElement.getAttribute('data-theme')==='dark'?'🌙 Dark Mode':'☀️ Light Mode','info'); return;
-    }
+      /* Dark mode removed */ return; }
     if (e.key==='g'||e.key==='G') { gBuffer='g'; clearTimeout(gTimer); gTimer=setTimeout(()=>{gBuffer='';},1000); return; }
     if (gBuffer==='g') {
       const map={s:'shop',c:'cart',h:'home',w:'wishlist',a:'admin',p:'payment'};
@@ -9253,23 +11340,28 @@ function _doTransferStep(step) {
 
 function bankLookupName() {
   try {
-    const accEl = document.getElementById('trAccNum');
-    const txt   = document.getElementById('trNameText');
-    const spin  = document.getElementById('trNameSpin');
+    const accEl  = document.getElementById('trAccNum');
+    const nameEl = document.getElementById('trNameInput');
+    const txt    = document.getElementById('trNameText');
+    const spin   = document.getElementById('trNameSpin');
     if (!accEl || !txt || !spin) return;
-    const acc = accEl.value;
+    const acc = accEl.value.trim();
     if (acc.length < 6) {
-      txt.textContent = '— Nhập số tài khoản để tra cứu —';
-      txt.style.color = 'var(--text-muted)';
-      spin.style.display = 'none'; return;
+      txt.textContent = '⚠️ Vui lòng nhập ít nhất 6 số tài khoản';
+      txt.style.color = '#e57373';
+      return;
     }
-    spin.style.display = 'inline-block'; txt.textContent = '';
-    setTimeout(() => {
+    spin.style.display = 'inline-block';
+    txt.textContent = 'Đang tra cứu...';
+    txt.style.color = '#888';
+    setTimeout(function() {
       spin.style.display = 'none';
       const name = BANK_NAMES[acc.charCodeAt(acc.length - 1) % BANK_NAMES.length];
-      txt.textContent = name.toUpperCase();
-      txt.style.color = 'var(--accent-green)';
+      const nameUC = name.toUpperCase();
       TR_DATA.name = name;
+      if (nameEl) { nameEl.value = nameUC; }
+      txt.textContent = '✓ Tra cứu thành công — bạn có thể sửa tên nếu cần';
+      txt.style.color = '#00803d';
     }, 900);
   } catch(e) {}
 }
@@ -9286,7 +11378,8 @@ function buildConfirm(){
   const acc   = document.getElementById('trAccNum')?.value || '';
   const amt   = parseInt(document.getElementById('trAmount')?.value) || 0;
   const note  = document.getElementById('trNote')?.value || '';
-  const name  = TR_DATA.name || BANK_NAMES[0];
+  const nameInput = document.getElementById('trNameInput');
+  const name  = (nameInput && nameInput.value.trim()) || TR_DATA.name || BANK_NAMES[0];
   const method= document.querySelector('input[name="trMethod"]:checked')?.value || 'fast';
   const fee   = 0; // Miễn phí giao dịch
   const total = amt + fee;
@@ -9352,6 +11445,15 @@ function otpKeydown(el, idx, e) {
   } catch(e2) {}
 }
 
+
+/* VCB receipt row helper */
+function _vcbRow(label, value, valColor, bold) {
+  return '<div style="display:flex;justify-content:space-between;align-items:flex-start;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04)">' +
+    '<span style="font-size:12px;color:rgba(255,255,255,0.55);flex-shrink:0;min-width:130px">' + label + '</span>' +
+    '<span style="font-size:12px;font-weight:' + (bold?'700':'600') + ';color:' + (valColor||'#fff') + ';text-align:right;word-break:break-word;max-width:180px">' + value + '</span>' +
+  '</div>';
+}
+
 function completeTransfer(){
   try {
   clearInterval(OTP_TIMER);
@@ -9367,13 +11469,10 @@ function completeTransfer(){
   // Animate balance update
   const balEl = document.getElementById('bankBalance');
   if (balEl) {
-    balEl.style.transition = 'color 0.3s';
-    balEl.style.color = 'var(--accent-pink)';
     balEl.textContent = BANK_BALANCE.toLocaleString('vi-VN') + '₫';
-    setTimeout(() => { if(balEl) balEl.style.color = ''; }, 1500);
   }
 
-  // Save to localStorage transfer history
+  // Save history
   try {
     const history = JSON.parse(localStorage.getItem('qt_transfer_history') || '[]');
     history.unshift({id:txId, name:name||'', bank:bank||'', acc:acc||'', amt:safeAmt, fee:safeFee, total:safeAmt+safeFee, note:note||'', date:now.toLocaleString('vi-VN'), status:'success'});
@@ -9381,24 +11480,40 @@ function completeTransfer(){
     localStorage.setItem('qt_transfer_history', JSON.stringify(history));
   } catch(se) {}
 
-  const msgEl = document.getElementById('trSuccessMsg');
-  if(msgEl) msgEl.textContent = `Đã chuyển ${safeAmt.toLocaleString('vi-VN')}₫ đến ${(name||'').toUpperCase()}`;
+  // ── Populate new bill card ──
+  const amtFmt  = safeAmt.toLocaleString('vi-VN') + ' ₫';
+  const balFmt  = BANK_BALANCE.toLocaleString('vi-VN') + ' ₫';
+  const nowFmt  = now.toLocaleString('vi-VN', {hour:'2-digit',minute:'2-digit',second:'2-digit',day:'2-digit',month:'2-digit',year:'numeric'});
+  const nameUC  = (name||'Người nhận').toUpperCase();
 
-  const recEl = document.getElementById('bankTxReceipt');
-  if(recEl){
-    recEl.innerHTML = `
-      <div class="bank-confirm-row"><span class="bank-confirm-label">Mã giao dịch</span><span class="bank-confirm-val" style="color:var(--accent-cyan);font-family:var(--font-display)">${txId}</span></div>
-      <div class="bank-confirm-row"><span class="bank-confirm-label">Thời gian</span><span class="bank-confirm-val">${now.toLocaleString('vi-VN')}</span></div>
-      <div class="bank-confirm-row"><span class="bank-confirm-label">Người nhận</span><span class="bank-confirm-val" style="color:var(--accent-green)">${(name||'').toUpperCase()}</span></div>
-      <div class="bank-confirm-row"><span class="bank-confirm-label">Ngân hàng</span><span class="bank-confirm-val">${bank||''}</span></div>
-      <div class="bank-confirm-row"><span class="bank-confirm-label">Số tài khoản</span><span class="bank-confirm-val">${acc||''}</span></div>
-      <div class="bank-confirm-row"><span class="bank-confirm-label">Số tiền</span><span class="bank-confirm-val" style="color:var(--accent-gold)">${safeAmt.toLocaleString('vi-VN')}₫</span></div>
-      <div class="bank-confirm-row"><span class="bank-confirm-label">Phí giao dịch</span><span class="bank-confirm-val" style="color:var(--accent-green)">Miễn phí</span></div>
-      <div class="bank-confirm-row"><span class="bank-confirm-label">Nội dung</span><span class="bank-confirm-val">${note||'—'}</span></div>
-      <div class="bank-confirm-row"><span class="bank-confirm-label">Trạng thái</span><span class="bank-confirm-val" style="color:var(--accent-green)">✅ THÀNH CÔNG</span></div>
-      <div class="bank-confirm-row"><span class="bank-confirm-label">Số dư sau GD</span><span class="bank-confirm-val" style="color:var(--accent-cyan)">${BANK_BALANCE.toLocaleString('vi-VN')}₫</span></div>`;
+  const amtEl = document.getElementById('billAmountDisplay');
+  if (amtEl) amtEl.textContent = amtFmt;
+  const dateEl = document.getElementById('billDateDisplay');
+  if (dateEl) dateEl.textContent = nowFmt;
+
+  // Build detail rows
+  const rows = [
+    { label: 'Tên người thụ hưởng', value: nameUC,        bold: true,  color: '#111'    },
+    { label: 'Tài khoản thụ hưởng', value: acc||'—',     bold: false, color: '#111'    },
+    { label: 'Ngân hàng thụ hưởng', value: bank||'—',    bold: false, color: '#555'    },
+    { label: 'Mã giao dịch',        value: txId,          bold: false, color: '#00803d' },
+    { label: 'Nội dung',            value: note||'—',     bold: false, color: '#555'    },
+    { label: 'Phí giao dịch',       value: 'Miễn phí ✓', bold: false, color: '#00803d' },
+    { label: 'Số dư sau GD',        value: balFmt,        bold: true,  color: '#111'    },
+  ];
+
+  const rowsEl = document.getElementById('billDetailRows');
+  if (rowsEl) {
+    rowsEl.innerHTML = rows.map(function(r, i) {
+      return '<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 24px;' +
+        (i < rows.length - 1 ? 'border-bottom:1px solid #f0f0f0;' : '') + '">' +
+        '<span style="font-size:13px;color:#888;font-weight:400;flex-shrink:0;margin-right:16px">' + r.label + '</span>' +
+        '<span style="font-size:13px;color:' + r.color + ';font-weight:' + (r.bold ? '700' : '500') + ';text-align:right">' + r.value + '</span>' +
+        '</div>';
+    }).join('');
   }
-  showToast('Chuyển tiền thành công! 🎉', `${safeAmt.toLocaleString('vi-VN')}₫ → ${(name||'').slice(0,20)}`, 'success');
+
+  showToast('Chuyển tiền thành công! 🎉', safeAmt.toLocaleString('vi-VN') + '₫ → ' + (name||'').slice(0,20), 'success');
   playSuccessSound();
   renderRecentTxs();
   } catch(e) { console.error('completeTransfer:', e); }
@@ -10368,16 +12483,7 @@ function updateMobileNavActive(name) {
     });
   } catch(e) {}
 }
-/* Patch switchPage to also update mobile nav active state */
-(function() {
-  var origSwitch = window.switchPage;
-  if (typeof origSwitch === 'function') {
-    window.switchPage = function(name) {
-      origSwitch(name);
-      updateMobileNavActive(name);
-    };
-  }
-})();
+/* Mobile nav active update is now handled by FinalFix override via data-page attr toggle */
 
 /* Bank mobile tabs — sync with bank sidebar nav */
 document.addEventListener('DOMContentLoaded', function() {
@@ -10802,28 +12908,1146 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
       <div style="text-align:center">
         <div class="battle-vs">VS</div>
-        <div style="font-family:var(--font-display);font-size:10px;letter-spacing:2px;color:var(--text-muted);margin-top:8px" id="battleTotal">0 votes</div>
+        <div style="font-family:var(--font-display);font-size:10px;letter-spacing:2px;color:var(--text-muted);margin-bottom:10px" id="battleTimer">⏱ 30s</div>
+        <button class="btn btn-outline" onclick="openBattle()" style="font-size:11px;padding:8px 16px">🔄 Sản phẩm mới</button>
       </div>
       <div class="battle-card" id="battleCardB" onclick="voteProduct('B')">
         <div class="battle-emoji" id="battleEmojiB">📱</div>
         <div class="battle-name" id="battleNameB">Product B</div>
         <div class="battle-price" id="battlePriceB">0₫</div>
-        <div class="vote-bar"><div class="vote-fill" id="voteBarB" style="width:50%"></div></div>
+        <div class="vote-bar"><div class="vote-fill" id="voteBarB" style="width:50%;background:var(--accent-purple)"></div></div>
         <div style="font-family:var(--font-display);font-size:10px;color:var(--text-muted);margin-bottom:10px" id="battleVotesB">0 votes</div>
         <button class="btn-vote">👆 VOTE</button>
       </div>
     </div>
-    <div style="display:flex;justify-content:center;gap:12px;margin-top:20px;flex-wrap:wrap">
-      <button class="btn-order-action" onclick="newBattle()">🔄 New Battle</button>
-      <button class="btn-order-action" onclick="closeBattle()">✕ Close</button>
-    </div>
   </div>
 </div>
-<!-- EASTER EGG -->
-<div class="secret-overlay" id="secretOverlay">
-  <div class="secret-particles" id="secretParticles"></div>
-  <div class="secret-box">
-    <div style="font-size:72px;margin-bottom:16px;animation:badgePulse 0.8s ease infinite">🎉</div>
-    <div class="secret-title">SECRET DISCOVERED!</div>
-    <div style="font-size:13px;color:var(--text-secondary);margin-bottom:16px;font-family:var(--font-display);letter-spacing:2px">BẠN ĐÃ TÌM THẤY EASTER EGG</div>
-    <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;font-f
+<!-- ============================================================
+     TGDD UPGRADE: FLOATING BANKING PANEL
+     ============================================================ -->
+<button id="tgddFloatingToggle" onclick="tgddToggleBank()" title="Ngân hàng">🏦</button>
+
+<div id="tgddFloatingBank" class="hidden">
+  <div class="fb-header">
+    <div class="fb-logo">NMN<span>Digibank</span></div>
+    <button class="fb-close-btn" onclick="tgddToggleBank()">✕</button>
+  </div>
+  <div class="fb-body">
+    <div class="fb-label">SỐ DƯ KHẢ DỤNG</div>
+    <div class="fb-balance" id="fbBalance">0₫</div>
+    <div class="fb-meta">
+      <div class="fb-meta-item">
+        <div>Tài khoản</div>
+        <div class="fb-meta-val" id="fbAccNo">0123****5678</div>
+      </div>
+      <div class="fb-meta-item" style="text-align:right">
+        <div>Điểm tích lũy</div>
+        <div class="fb-meta-val" id="fbPoints" style="color:#FFD500">0 pts</div>
+      </div>
+    </div>
+    <div class="fb-actions">
+      <div class="fb-btn" onclick="tgddShowTxPopup()">📋 Lịch sử</div>
+      <div class="fb-btn" onclick="window.switchPage&&switchPage('bank')">🏦 Ngân hàng</div>
+    </div>
+    <div class="fb-mini-tx" id="fbMiniTx"></div>
+  </div>
+</div>
+
+<!-- TX HISTORY POPUP -->
+<div id="tgddTxPopup">
+  <div class="txp-header">
+    <div class="txp-title">📊 Lịch sử giao dịch <span class="adm-live-badge" style="margin-left:6px">LIVE</span></div>
+    <button class="txp-close" onclick="tgddHideTxPopup()">✕</button>
+  </div>
+  <div class="txp-list" id="txpList"></div>
+</div>
+
+<!-- ADMIN OVERLAY -->
+<div id="tgddAdminOverlay" onclick="tgddCloseAdmin()"></div>
+
+<!-- ADMIN CONTROL PANEL (Ctrl+Shift+A) -->
+<div id="tgddAdminPanel">
+  <div class="adm-header">
+    <div class="adm-title">⚙️ Admin Control Panel <span class="adm-live-badge">LIVE</span></div>
+    <button class="adm-close" onclick="tgddCloseAdmin()">✕</button>
+  </div>
+  <div class="adm-body">
+
+    <!-- BALANCE CONTROL -->
+    <div class="adm-sec">💰 Điều khiển số dư</div>
+    <div class="adm-row">
+      <input class="adm-input" id="admBalInput" type="number" placeholder="Nhập số dư mới (VND)" min="0"/>
+      <button class="adm-btn adm-btn-y" onclick="tgddAdmSetBalance()">Cập nhật</button>
+    </div>
+    <div class="adm-row">
+      <button class="adm-btn adm-btn-y" onclick="tgddAdmAddBalance(1000000)">+1M</button>
+      <button class="adm-btn adm-btn-y" onclick="tgddAdmAddBalance(5000000)">+5M</button>
+      <button class="adm-btn adm-btn-y" onclick="tgddAdmAddBalance(10000000)">+10M</button>
+      <button class="adm-btn adm-btn-r" onclick="tgddAdmAddBalance(-1000000)">-1M</button>
+    </div>
+    <div style="font-size:12px;color:var(--text-muted);padding:6px 10px;background:var(--bg-card);border-radius:8px;margin-bottom:6px">
+      Số dư hiện tại: <strong id="admCurBalance" style="color:var(--tgdd-yellow)">...</strong>
+    </div>
+
+    <!-- FAKE TRANSACTION -->
+    <div class="adm-sec">🧾 Tạo giao dịch giả</div>
+    <div class="adm-row">
+      <input class="adm-input" id="admTxName" placeholder="Tên giao dịch" value="Chuyển khoản test"/>
+      <input class="adm-input" id="admTxAmt" type="number" placeholder="Số tiền" value="500000" min="1000"/>
+    </div>
+    <div class="adm-row">
+      <select class="adm-select" id="admTxDir">
+        <option value="in">📥 Nhận tiền</option>
+        <option value="out">📤 Chuyển đi</option>
+      </select>
+      <button class="adm-btn adm-btn-y" onclick="tgddAdmCreateTx()">Tạo</button>
+    </div>
+
+    <!-- UI CONTROLS -->
+    <div class="adm-sec">🎨 Điều khiển UI</div>
+    <div class="adm-toggle-row">
+      <span class="adm-toggle-lbl">🌙 Dark / Light Mode</span>
+      <button class="adm-toggle" id="admThemeToggle" onclick="tgddAdmToggleTheme(this)"></button>
+    </div>
+    <div class="adm-toggle-row">
+      <span class="adm-toggle-lbl">🕵️ Stealth Mode (ẩn panel ngân hàng)</span>
+      <button class="adm-toggle" id="admStealthToggle" onclick="tgddAdmToggleStealth(this)"></button>
+    </div>
+    <div class="adm-toggle-row">
+      <span class="adm-toggle-lbl">🤖 AI Auto Transactions</span>
+      <button class="adm-toggle on" id="admAutoTxToggle" onclick="tgddAdmToggleAutoTx(this)"></button>
+    </div>
+
+    <!-- QR CONTROL -->
+    <div class="adm-sec">🔳 QR Code Control</div>
+    <div class="adm-row" style="flex-direction:column;align-items:flex-start">
+      <label style="cursor:pointer;padding:8px 14px;border:2px dashed var(--border-subtle);border-radius:10px;text-align:center;width:100%;font-size:12px;color:var(--text-muted);transition:border-color 0.2s" onmouseover="this.style.borderColor='#FFD500'" onmouseout="this.style.borderColor='var(--border-subtle)'">
+        📤 Upload QR mới
+        <input type="file" accept="image/*" style="display:none" onchange="tgddAdmUploadQR(this)"/>
+      </label>
+      <div id="admQrPreview" style="margin-top:8px;display:none">
+        <img id="admQrImg" style="max-width:80px;border-radius:6px;border:1px solid var(--border-subtle)" src="" alt="QR"/>
+        <button class="adm-btn adm-btn-r" style="margin-top:6px;font-size:10px" onclick="tgddAdmResetQR()">🗑 Xóa QR</button>
+      </div>
+    </div>
+
+    <!-- MINI CHART -->
+    <div class="adm-sec">📈 Biểu đồ số dư realtime</div>
+    <div class="adm-mini-chart" id="admMiniChart"></div>
+    <div style="font-size:10px;color:var(--text-muted);margin-top:4px;text-align:center">7 giao dịch gần nhất</div>
+  </div>
+</div>
+
+<!-- ADMIN SIDE BADGE -->
+<button id="tgddAdminBadge" onclick="tgddOpenAdmin()" title="Admin (Ctrl+Shift+A)">⚙</button>
+
+<!-- FAKE BANKING LOGIN -->
+<div id="tgddBankLogin">
+  <div class="bkl-card">
+    <div class="bkl-logo">
+      <div class="bkl-logo-icon">🏦</div>
+      <div class="bkl-title">NMN Digibank</div>
+      <div class="bkl-sub">NGUYỄN MINH NHỰT Banking</div>
+    </div>
+    <div class="bkl-field">
+      <div class="bkl-label">Số điện thoại / Email</div>
+      <input class="bkl-input" id="bklPhone" placeholder="Nhập số điện thoại..." type="tel"/>
+    </div>
+    <div class="bkl-field">
+      <div class="bkl-label">Mật khẩu</div>
+      <input class="bkl-input" id="bklPw" placeholder="••••••••" type="password" onkeydown="if(event.key==='Enter')tgddBankDoLogin()"/>
+    </div>
+    <button class="bkl-btn" onclick="tgddBankDoLogin()">🔐 ĐĂNG NHẬP</button>
+    <div class="bkl-skip" onclick="tgddBankSkipLogin()">Bỏ qua, tiếp tục mua sắm →</div>
+    <div class="bkl-secure">🔒 Bảo mật 256-bit SSL · Xác thực 2 lớp</div>
+  </div>
+</div>
+
+<!-- ============================================================
+     TGDD UPGRADE: MODULE JS
+     ============================================================ -->
+<script>
+(function() {
+  'use strict';
+
+  /* ── SAFE HELPERS ── */
+  function _el(id) { try { return document.getElementById(id) || null; } catch(e) { return null; } }
+  function _fmt(n) { try { return parseInt(n||0).toLocaleString('vi-VN') + '₫'; } catch(e) { return '0₫'; } }
+  function _now() { return new Date().toLocaleTimeString('vi-VN', {hour:'2-digit',minute:'2-digit'}); }
+  function _safeToast(t, m, type) { try { if(typeof showToast==='function') showToast(t, m, type||'info'); } catch(e) {} }
+  function _getBankBal() { try { return typeof BANK_BALANCE !== 'undefined' ? BANK_BALANCE : 0; } catch(e) { return 0; } }
+  function _getBankTxs() { try { return Array.isArray(BANK_TXS) ? BANK_TXS : []; } catch(e) { return []; } }
+
+  /* ── STATE ── */
+  var _autoTxEnabled = true;
+  var _autoTxInterval = null;
+  var _balHistory = [];
+  var _localTxs = []; // transactions generated by this module
+  var _stealthMode = false;
+  var _txPopupOpen = false;
+  var _bankPanelOpen = false;
+
+  /* ── CHECK STEALTH MODE FROM STORAGE ── */
+  try {
+    _stealthMode = localStorage.getItem('tgdd_stealth') === '1';
+    if (_stealthMode) document.body.classList.add('stealth-mode');
+  } catch(e) {}
+
+  /* ── BANK LOGIN CHECK — disabled auto-popup, manual trigger only ── */
+  (function checkBankLogin() {
+    try {
+      sessionStorage.setItem('tgdd_bank_shown', '1'); // auto-skip popup
+    } catch(e) {}
+  })();
+
+  /* ── BANK LOGIN ACTIONS ── */
+  window.tgddBankDoLogin = function() {
+    try {
+      var phone = _el('bklPhone');
+      var pw = _el('bklPw');
+      var phoneVal = phone ? phone.value.trim() : '';
+      var pwVal = pw ? pw.value.trim() : '';
+      if (!phoneVal || !pwVal) {
+        _safeToast('Thiếu thông tin', 'Vui lòng nhập đầy đủ', 'error');
+        return;
+      }
+      var el = _el('tgddBankLogin');
+      if (el) {
+        el.style.opacity = '0';
+        setTimeout(function() { el.classList.remove('show'); el.style.opacity = ''; }, 400);
+      }
+      sessionStorage.setItem('tgdd_bank_shown', '1');
+      _safeToast('Đăng nhập thành công 🏦', 'Chào mừng trở lại, Nguyễn Minh Nhựt!', 'success');
+      tgddUpdateFloatingPanel();
+    } catch(e) {}
+  };
+
+  window.tgddBankSkipLogin = function() {
+    try {
+      var el = _el('tgddBankLogin');
+      if (el) {
+        el.style.opacity = '0';
+        setTimeout(function() { el.classList.remove('show'); el.style.opacity = ''; }, 400);
+      }
+      sessionStorage.setItem('tgdd_bank_shown', '1');
+    } catch(e) {}
+  };
+
+  /* ── FLOATING PANEL ── */
+  window.tgddToggleBank = function() {
+    try {
+      var panel = _el('tgddFloatingBank');
+      if (!panel) return;
+      _bankPanelOpen = !_bankPanelOpen;
+      if (_bankPanelOpen) {
+        panel.classList.remove('hidden');
+        tgddUpdateFloatingPanel();
+      } else {
+        panel.classList.add('hidden');
+        tgddHideTxPopup();
+      }
+    } catch(e) {}
+  };
+
+  function tgddUpdateFloatingPanel() {
+    try {
+      var bal = _getBankBal();
+      var balEl = _el('fbBalance');
+      if (balEl) balEl.textContent = _fmt(bal);
+      var txs = _getBankTxs().slice(0, 3);
+      var miniTx = _el('fbMiniTx');
+      if (miniTx) {
+        if (txs.length === 0) {
+          miniTx.innerHTML = '<div style="font-size:11px;color:var(--text-muted);text-align:center;padding:6px 0">Chưa có giao dịch</div>';
+        } else {
+          miniTx.innerHTML = txs.map(function(t) {
+            var dir = t.dir || 'out';
+            var isIn = dir === 'in';
+            return '<div class="fb-tx">'
+              + '<div class="fb-tx-name">' + (t.name || 'Giao dịch') + '</div>'
+              + '<div class="fb-tx-amt ' + (isIn ? 'p' : 'n') + '">'
+              + (isIn ? '+' : '-') + _fmt(t.amount)
+              + '</div></div>';
+          }).join('');
+        }
+      }
+      // Update adm balance display too
+      var admBal = _el('admCurBalance');
+      if (admBal) admBal.textContent = _fmt(bal);
+    } catch(e) {}
+  }
+
+  /* ── TX HISTORY POPUP ── */
+  window.tgddShowTxPopup = function() {
+    try {
+      var pop = _el('tgddTxPopup');
+      if (!pop) return;
+      _txPopupOpen = true;
+      pop.classList.add('show');
+      tgddRenderTxPopup();
+    } catch(e) {}
+  };
+
+  window.tgddHideTxPopup = function() {
+    try {
+      var pop = _el('tgddTxPopup');
+      if (pop) pop.classList.remove('show');
+      _txPopupOpen = false;
+    } catch(e) {}
+  };
+
+  function tgddRenderTxPopup() {
+    try {
+      var list = _el('txpList');
+      if (!list) return;
+      var allTxs = _getBankTxs().concat(_localTxs).sort(function(a, b) {
+        return new Date(b.date || 0) - new Date(a.date || 0);
+      }).slice(0, 30);
+      if (allTxs.length === 0) {
+        list.innerHTML = '<div style="text-align:center;padding:24px;font-size:13px;color:var(--text-muted)">Chưa có giao dịch nào</div>';
+        return;
+      }
+      list.innerHTML = allTxs.map(function(t, i) {
+        var dir = t.dir || 'out';
+        var isIn = dir === 'in';
+        var icon = t.icon || (isIn ? '💰' : '💸');
+        var isNew = i < 2 && _localTxs.indexOf(t) !== -1;
+        return '<div class="txp-item">'
+          + '<div class="txp-icon ' + (isIn ? 'p' : 'n') + '">' + icon + '</div>'
+          + '<div class="txp-info">'
+          + '<div class="txp-name">' + (t.name || 'Giao dịch') + '</div>'
+          + '<div class="txp-time">' + _now() + ' — ' + (t.type || '') + '</div>'
+          + '</div>'
+          + (isNew ? '<span class="txp-new">MỚI</span>' : '')
+          + '<div class="txp-amt ' + (isIn ? 'p' : 'n') + '">'
+          + (isIn ? '+' : '-') + _fmt(t.amount)
+          + '</div></div>';
+      }).join('');
+    } catch(e) {}
+  }
+
+  /* ── AI AUTO TRANSACTIONS ── */
+  var AI_TX_POOL = [
+    {name:'Grab Food', icon:'🍜', type:'thanh toán', dir:'out', amounts:[35000,42000,65000,80000]},
+    {name:'Shopee', icon:'🛒', type:'mua sắm', dir:'out', amounts:[149000,299000,599000,1200000]},
+    {name:'Tiền điện', icon:'⚡', type:'hóa đơn', dir:'out', amounts:[250000,380000,520000]},
+    {name:'Tiền lương', icon:'💼', type:'thu nhập', dir:'in', amounts:[8000000,10000000,12500000]},
+    {name:'Ví MoMo', icon:'💜', type:'chuyển khoản', dir:'out', amounts:[100000,200000,500000]},
+    {name:'Cafe Highlands', icon:'☕', type:'thanh toán', dir:'out', amounts:[55000,85000,110000]},
+    {name:'Người thân', icon:'👨‍👩‍👧', type:'nhận tiền', dir:'in', amounts:[500000,1000000,2000000]},
+    {name:'Netflix', icon:'🎬', type:'subscription', dir:'out', amounts:[99000,150000]},
+    {name:'Vincom', icon:'🏬', type:'mua sắm', dir:'out', amounts:[350000,750000,1500000]},
+    {name:'Hoàn tiền cashback', icon:'🎁', type:'hoàn tiền', dir:'in', amounts:[15000,25000,50000]},
+  ];
+
+  function tgddAutoGenTx() {
+    try {
+      if (!_autoTxEnabled) return;
+      var pick = AI_TX_POOL[Math.floor(Math.random() * AI_TX_POOL.length)];
+      var amt = pick.amounts[Math.floor(Math.random() * pick.amounts.length)];
+      var tx = {
+        id: 'AI' + Date.now().toString().slice(-6),
+        name: pick.name,
+        icon: pick.icon,
+        type: pick.type,
+        dir: pick.dir,
+        amount: amt,
+        date: new Date(),
+        status: 'success'
+      };
+      // Push to real BANK_TXS if available
+      try {
+        if (Array.isArray(window.BANK_TXS)) {
+          BANK_TXS.unshift(tx);
+          if (tx.dir === 'in') BANK_BALANCE += amt;
+          else BANK_BALANCE = Math.max(0, BANK_BALANCE - amt);
+        }
+      } catch(e2) {}
+      _localTxs.unshift(tx);
+      if (_localTxs.length > 50) _localTxs.pop();
+      // Update balance chart
+      _balHistory.push(_getBankBal());
+      if (_balHistory.length > 7) _balHistory.shift();
+      // Update UI
+      tgddUpdateFloatingPanel();
+      tgddUpdateBalDisplay();
+      tgddUpdateMiniChart();
+      if (_txPopupOpen) tgddRenderTxPopup();
+      // Animate balance
+      var balEl = _el('fbBalance');
+      if (balEl) {
+        balEl.classList.remove('up', 'down');
+        void balEl.offsetWidth;
+        balEl.classList.add(tx.dir === 'in' ? 'up' : 'down');
+        setTimeout(function() { if(balEl) balEl.classList.remove('up', 'down'); }, 1500);
+      }
+      // Show toast for large amounts
+      if (amt >= 1000000) {
+        var prefix = tx.dir === 'in' ? '+' : '-';
+        _safeToast(pick.icon + ' ' + pick.name, prefix + _fmt(amt), tx.dir === 'in' ? 'success' : 'info');
+      }
+    } catch(e) {}
+  }
+
+  function startAutoTx() {
+    if (_autoTxInterval) clearInterval(_autoTxInterval);
+    _autoTxInterval = setInterval(function() {
+      if (_autoTxEnabled) tgddAutoGenTx();
+    }, 5000 + Math.random() * 8000);
+  }
+  startAutoTx();
+
+  /* ── BALANCE DISPLAY UPDATE ── */
+  function tgddUpdateBalDisplay() {
+    try {
+      var bal = _getBankBal();
+      var bankBal = _el('bankBalance');
+      if (bankBal) bankBal.textContent = _fmt(bal);
+      var fbBal = _el('fbBalance');
+      if (fbBal) fbBal.textContent = _fmt(bal);
+      var admBal = _el('admCurBalance');
+      if (admBal) admBal.textContent = _fmt(bal);
+    } catch(e) {}
+  }
+
+  /* ── MINI CHART ── */
+  function tgddUpdateMiniChart() {
+    try {
+      var chart = _el('admMiniChart');
+      if (!chart) return;
+      if (_balHistory.length < 2) {
+        var b = _getBankBal();
+        for (var i = 0; i < 7; i++) _balHistory.push(b + (Math.random()-0.5) * b * 0.1);
+      }
+      var max = Math.max.apply(null, _balHistory.concat([1]));
+      var min = Math.min.apply(null, _balHistory);
+      chart.innerHTML = _balHistory.map(function(v) {
+        var pct = max === min ? 50 : Math.round(((v - min) / (max - min)) * 90 + 10);
+        return '<div class="adm-chart-bar" style="height:' + pct + '%"></div>';
+      }).join('');
+    } catch(e) {}
+  }
+
+  /* ── ADMIN PANEL ── */
+  window.tgddOpenAdmin = function() {
+    try {
+      var panel = _el('tgddAdminPanel');
+      var overlay = _el('tgddAdminOverlay');
+      if (panel) panel.classList.add('show');
+      if (overlay) overlay.classList.add('show');
+      tgddUpdateFloatingPanel();
+      tgddUpdateMiniChart();
+      // Sync toggles
+      var themeToggle = _el('admThemeToggle');
+      if (themeToggle) themeToggle.classList.toggle('on', document.documentElement.getAttribute('data-theme') !== 'dark');
+      var stealthToggle = _el('admStealthToggle');
+      if (stealthToggle) stealthToggle.classList.toggle('on', _stealthMode);
+      var autoToggle = _el('admAutoTxToggle');
+      if (autoToggle) autoToggle.classList.toggle('on', _autoTxEnabled);
+    } catch(e) {}
+  };
+
+  window.tgddCloseAdmin = function() {
+    try {
+      var panel = _el('tgddAdminPanel');
+      var overlay = _el('tgddAdminOverlay');
+      if (panel) panel.classList.remove('show');
+      if (overlay) overlay.classList.remove('show');
+    } catch(e) {}
+  };
+
+  /* Ctrl+Shift+A trigger */
+  document.addEventListener('keydown', function(e) {
+    try {
+      if (e.ctrlKey && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
+        e.preventDefault();
+        var panel = _el('tgddAdminPanel');
+        if (panel && panel.classList.contains('show')) tgddCloseAdmin();
+        else tgddOpenAdmin();
+      }
+    } catch(e2) {}
+  });
+
+  /* ── ADMIN ACTIONS ── */
+  window.tgddAdmSetBalance = function() {
+    try {
+      var inp = _el('admBalInput');
+      var val = parseInt(inp ? inp.value : '0') || 0;
+      if (val < 0) { _safeToast('Lỗi', 'Số dư không thể âm', 'error'); return; }
+      if (typeof BANK_BALANCE !== 'undefined') BANK_BALANCE = val;
+      tgddUpdateBalDisplay();
+      tgddUpdateMiniChart();
+      _safeToast('✅ Đã cập nhật', 'Số dư: ' + _fmt(val), 'success');
+      if (inp) inp.value = '';
+    } catch(e) {}
+  };
+
+  window.tgddAdmAddBalance = function(delta) {
+    try {
+      if (typeof BANK_BALANCE !== 'undefined') {
+        BANK_BALANCE = Math.max(0, BANK_BALANCE + delta);
+      }
+      tgddUpdateBalDisplay();
+      tgddUpdateMiniChart();
+      _balHistory.push(_getBankBal());
+      if (_balHistory.length > 7) _balHistory.shift();
+      var sign = delta >= 0 ? '+' : '';
+      _safeToast((delta >= 0 ? '📥' : '📤') + ' Số dư đã thay đổi', sign + _fmt(delta), delta >= 0 ? 'success' : 'info');
+    } catch(e) {}
+  };
+
+  window.tgddAdmCreateTx = function() {
+    try {
+      var name = _el('admTxName');
+      var amt = _el('admTxAmt');
+      var dir = _el('admTxDir');
+      var nameVal = name ? (name.value.trim() || 'Giao dịch test') : 'Giao dịch test';
+      var amtVal = parseInt(amt ? amt.value : '500000') || 500000;
+      var dirVal = dir ? dir.value : 'out';
+      var tx = {
+        id: 'MN' + Date.now().toString().slice(-6),
+        name: nameVal, icon: dirVal === 'in' ? '💰' : '💸',
+        type: 'manual', dir: dirVal, amount: amtVal,
+        date: new Date(), status: 'success'
+      };
+      try {
+        if (Array.isArray(window.BANK_TXS)) {
+          BANK_TXS.unshift(tx);
+          if (dirVal === 'in') BANK_BALANCE += amtVal;
+          else BANK_BALANCE = Math.max(0, BANK_BALANCE - amtVal);
+        }
+      } catch(e2) {}
+      _localTxs.unshift(tx);
+      if (_localTxs.length > 50) _localTxs.pop();
+      _balHistory.push(_getBankBal());
+      if (_balHistory.length > 7) _balHistory.shift();
+      tgddUpdateFloatingPanel();
+      tgddUpdateBalDisplay();
+      tgddUpdateMiniChart();
+      if (_txPopupOpen) tgddRenderTxPopup();
+      _safeToast('✅ Giao dịch đã tạo', nameVal + ' · ' + _fmt(amtVal), 'success');
+    } catch(e) {}
+  };
+
+  window.tgddAdmToggleTheme = function(btn) {
+    try {
+      var html = document.documentElement;
+      var current = html.getAttribute('data-theme');
+      var next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      if (btn) btn.classList.toggle('on', next === 'light');
+      // Also call existing theme toggle if available
+      try { if(typeof toggleTheme === 'function') {} } catch(e) {}
+    } catch(e) {}
+  };
+
+  window.tgddAdmToggleStealth = function(btn) {
+    try {
+      _stealthMode = !_stealthMode;
+      document.body.classList.toggle('stealth-mode', _stealthMode);
+      if (btn) btn.classList.toggle('on', _stealthMode);
+      try { localStorage.setItem('tgdd_stealth', _stealthMode ? '1' : '0'); } catch(e2) {}
+      _safeToast(_stealthMode ? '🕵️ Stealth ON' : '👁️ Stealth OFF', _stealthMode ? 'Panel ngân hàng đã ẩn' : 'Panel ngân hàng hiện', 'info');
+    } catch(e) {}
+  };
+
+  window.tgddAdmToggleAutoTx = function(btn) {
+    try {
+      _autoTxEnabled = !_autoTxEnabled;
+      if (btn) btn.classList.toggle('on', _autoTxEnabled);
+      if (_autoTxEnabled) { startAutoTx(); _safeToast('🤖 AI ON', 'Tự động tạo giao dịch', 'success'); }
+      else { clearInterval(_autoTxInterval); _safeToast('🤖 AI OFF', 'Đã tắt', 'info'); }
+    } catch(e) {}
+  };
+
+  window.tgddAdmUploadQR = function(input) {
+    try {
+      if (!input || !input.files || !input.files[0]) return;
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        var preview = _el('admQrPreview');
+        var img = _el('admQrImg');
+        if (img) img.src = e.target.result;
+        if (preview) preview.style.display = 'block';
+        // Also update any QR image in the page
+        var qrImgs = document.querySelectorAll('.qr-img, #qrCodeImg, .bank-qr-img');
+        qrImgs.forEach(function(qi) { try { qi.src = e.target.result; } catch(e2) {} });
+        _safeToast('✅ QR đã cập nhật', 'Ảnh QR mới đã được áp dụng', 'success');
+      };
+      reader.readAsDataURL(input.files[0]);
+    } catch(e) {}
+  };
+
+  window.tgddAdmResetQR = function() {
+    try {
+      var preview = _el('admQrPreview');
+      var img = _el('admQrImg');
+      if (img) img.src = '';
+      if (preview) preview.style.display = 'none';
+      _safeToast('🔄 QR Reset', 'Đã xóa QR tùy chỉnh', 'info');
+    } catch(e) {}
+  };
+
+  /* ── INIT: pull initial data ── */
+  function init() {
+    try {
+      // Init balance history
+      var b = _getBankBal();
+      for (var i = 0; i < 7; i++) {
+        _balHistory.push(Math.round(b * (0.8 + Math.random() * 0.4)));
+      }
+      _balHistory[6] = b;
+      tgddUpdateFloatingPanel();
+      tgddUpdateMiniChart();
+      // Sync balance display every 5s
+      setInterval(function() {
+        tgddUpdateFloatingPanel();
+        if (_txPopupOpen) tgddRenderTxPopup();
+      }, 5000);
+      // Points counter (fake)
+      var pts = 12847;
+      setInterval(function() {
+        pts += Math.floor(Math.random() * 5);
+        var fbPts = _el('fbPoints');
+        if (fbPts) fbPts.textContent = pts.toLocaleString('vi-VN') + ' pts';
+      }, 8000);
+    } catch(e) {}
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    setTimeout(init, 300);
+  }
+
+  console.log('%c[TGDD Upgrade Module] Loaded ✓', 'color:#FFD500;font-weight:bold');
+
+  /* ── filterCat: proxy to renderProducts category filter ── */
+  window.filterCat = function(cat) {
+    try {
+      // Category nav active state
+      document.querySelectorAll('.tgdd-cat-item').forEach(function(btn) {
+        btn.classList.toggle('active', btn.getAttribute('data-cat') === cat);
+      });
+      // Call existing renderProducts after short delay for page switch
+      setTimeout(function() {
+        try {
+          if (typeof renderProducts === 'function') {
+            renderProducts(cat === 'all' ? 'all' : cat);
+          }
+          // Also click the filter btn if exists
+          var filterBtn = document.querySelector('.filter-btn[data-cat="' + cat + '"]');
+          if (!filterBtn) {
+            filterBtn = document.querySelector('.filter-btn[onclick*="' + cat + '"]');
+          }
+          if (filterBtn) filterBtn.click();
+        } catch(e) {}
+      }, 200);
+    } catch(e) {}
+  };
+
+  /* ── Remove padding from home page to let promo strip go full width ── */
+  (function fixHomePadding() {
+    try {
+      var homePage = document.getElementById('page-home');
+      if (homePage) {
+        homePage.style.paddingTop = '0';
+        homePage.style.paddingLeft = '0';
+        homePage.style.paddingRight = '0';
+      }
+      // But keep hero section padding
+      var hero = homePage ? homePage.querySelector('.hero') : null;
+      if (hero) hero.style.padding = '60px 40px 40px';
+    } catch(e) {}
+  })();
+
+})();
+</script>
+
+<!-- ╔══════════════════════════════════════════════════════════════╗
+     ║  TGDD FINAL STABILITY FIX — Tab Navigation + Readability   ║
+     ║  Injected last → overrides all previous wrappers            ║
+     ╚══════════════════════════════════════════════════════════════╝ -->
+<style>
+/* ── FONT FIX: TGDD STANDARD ── */
+*,html,body,button,input,select,textarea,
+.nav-btn,.section-title,.product-name,
+.cart-item-name,.feature-title,.banner-title {
+  font-family: 'Be Vietnam Pro', Inter, Arial, 'Helvetica Neue', sans-serif !important;
+}
+body {
+  font-size: 16px !important;
+  line-height: 1.6 !important;
+  color: #111 !important;
+  background: #f5f5f5 !important;
+}
+
+/* ── PAGE SYSTEM: BULLETPROOF ── */
+.page {
+  display: none !important;
+}
+.page.active {
+  display: block !important;
+  animation: pageIn 0.3s ease !important;
+}
+@keyframes pageIn {
+  from { opacity:0; transform:translateY(10px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+/* ── DISABLE WIPE OVERLAY (gây delay 250ms, dễ block click) ── */
+#page-transition-overlay {
+  display: none !important;
+  pointer-events: none !important;
+}
+
+/* ── NAV BUTTON: rõ, to, TGDD style ── */
+.nav-btn {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #1a1a1a !important;
+  letter-spacing: 0.3px !important;
+  padding: 8px 14px !important;
+  border-radius: 8px !important;
+  transition: background 0.18s ease, color 0.18s ease !important;
+  text-transform: none !important;
+}
+.nav-btn:hover {
+  background: rgba(0,0,0,0.10) !important;
+  color: #000 !important;
+}
+.nav-btn.active {
+  background: rgba(0,0,0,0.16) !important;
+  color: #000 !important;
+  font-weight: 700 !important;
+}
+/* Underline indicator */
+.nav-btn::before {
+  background: #000 !important;
+  box-shadow: none !important;
+  height: 3px !important;
+}
+.nav-btn:hover::before,
+.nav-btn.active::before {
+  left: 8% !important;
+  right: 8% !important;
+}
+/* Active pressed feedback */
+.nav-btn:active {
+  background: rgba(0,0,0,0.22) !important;
+  transform: scale(0.97) !important;
+}
+
+/* ── TEXT READABILITY ── */
+.section-title {
+  font-size: 26px !important;
+  color: #111 !important;
+  font-weight: 700 !important;
+}
+.section-title span {
+  background: linear-gradient(135deg, #E30019, #FFD500) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+.product-name {
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: #111 !important;
+}
+.price-sale {
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  color: #E30019 !important;
+}
+.price-original {
+  font-size: 13px !important;
+  color: #999 !important;
+}
+.product-category {
+  font-size: 11px !important;
+  color: #E30019 !important;
+  font-weight: 600 !important;
+}
+.stat-num {
+  font-size: 28px !important;
+  color: #E30019 !important;
+  text-shadow: none !important;
+}
+.feature-title {
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  color: #111 !important;
+}
+.feature-desc {
+  font-size: 14px !important;
+  color: #555 !important;
+  line-height: 1.7 !important;
+}
+.hero-sub {
+  font-size: 17px !important;
+  color: #444 !important;
+}
+.cart-item-name {
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: #111 !important;
+}
+.cart-item-price {
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: #E30019 !important;
+}
+.banner-title {
+  font-size: 36px !important;
+  font-weight: 800 !important;
+}
+.flash-time-num {
+  font-size: 24px !important;
+  font-weight: 800 !important;
+}
+
+/* ── CARD + BACKGROUND: LIGHT RETAIL ── */
+.product-card,
+.cart-item,
+.feature-card,
+.cart-summary,
+.admin-stat,
+.order-card,
+.contact-form-card,
+.contact-info,
+.chart-card,
+.orders-page-layout,
+.bank-card-box {
+  background: #fff !important;
+  border-color: #e8e8e8 !important;
+  color: #111 !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07) !important;
+}
+
+/* ── HEADER TGDD YELLOW ── */
+header {
+  background: #FFD500 !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.14) !important;
+}
+
+/* ── BUTTON PRIMARY TGDD ── */
+.btn-primary {
+  background: #FFD500 !important;
+  color: #111 !important;
+  font-weight: 700 !important;
+  box-shadow: 0 3px 10px rgba(255,213,0,0.4) !important;
+}
+.btn-primary:hover {
+  background: #f0c800 !important;
+  box-shadow: 0 5px 16px rgba(255,213,0,0.55) !important;
+}
+.btn-add-cart {
+  background: #fff !important;
+  border: 1.5px solid #FFD500 !important;
+  color: #111 !important;
+  font-weight: 600 !important;
+}
+.btn-add-cart:hover {
+  background: #FFD500 !important;
+  color: #000 !important;
+  border-color: #FFD500 !important;
+}
+
+/* ── FILTER BUTTONS ── */
+.filter-btn {
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: #444 !important;
+  background: #fff !important;
+  border: 1px solid #ddd !important;
+  padding: 7px 16px !important;
+  border-radius: 20px !important;
+}
+.filter-btn:hover, .filter-btn.active {
+  background: rgba(255,213,0,0.15) !important;
+  border-color: #FFD500 !important;
+  color: #000 !important;
+  font-weight: 600 !important;
+}
+
+/* ── ORDERS + WISHLIST EMPTY STATE ── */
+.orders-empty-state, .wishlist-empty-state-fix {
+  text-align: center;
+  padding: 60px 40px;
+  color: #888;
+}
+.orders-empty-state .empty-icon, .wishlist-empty-state-fix .empty-icon {
+  font-size: 64px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+.orders-empty-state h3, .wishlist-empty-state-fix h3 {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+.orders-empty-state p, .wishlist-empty-state-fix p {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 24px;
+}
+
+/* ── CONTACT PAGE READABILITY ── */
+.contact-info-title {
+  font-size: 22px !important;
+  font-weight: 700 !important;
+  color: #111 !important;
+}
+.contact-method-title {
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: #111 !important;
+}
+.contact-method-value {
+  font-size: 14px !important;
+  color: #444 !important;
+}
+.contact-form-card .card-title {
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  color: #111 !important;
+}
+.form-label {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: #333 !important;
+}
+.form-input {
+  font-size: 15px !important;
+  color: #111 !important;
+  background: #f9f9f9 !important;
+  border: 1px solid #ddd !important;
+}
+.form-input:focus {
+  border-color: #FFD500 !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(255,213,0,0.2) !important;
+}
+.contact-submit {
+  background: #FFD500 !important;
+  color: #111 !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+}
+
+/* ── ORDERS PAGE ── */
+.order-id { font-size: 13px !important; color: #666 !important; }
+.order-status { font-size: 13px !important; font-weight: 600 !important; }
+.order-product { font-size: 14px !important; font-weight: 600 !important; color: #111 !important; }
+.btn-order-action {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+}
+
+/* ── BANK PAGE TEXT ── */
+.bank-page-title {
+  font-size: 20px !important;
+  font-weight: 700 !important;
+}
+.bank-section-title {
+  font-size: 16px !important;
+  font-weight: 700 !important;
+}
+.bank-nav-item {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+}
+
+/* ── ADMIN PAGE ── */
+.admin-stat-value {
+  font-size: 28px !important;
+  font-weight: 800 !important;
+  color: #111 !important;
+}
+.admin-stat-label {
+  font-size: 13px !important;
+  color: #555 !important;
+}
+.chart-title {
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  color: #111 !important;
+}
+
+/* ── WISHLIST PAGE ── */
+#wishlistGrid .product-name {
+  font-size: 14px !important;
+}
+#wishlistGrid .price-sale {
+  font-size: 17px !important;
+}
+</style>
+
+<script>
+/* ╔═══════════════════════════════════════════════════════════════════╗
+   ║  NMN STORE — BULLETPROOF NAVIGATION v3                           ║
+   ║  Không dùng setTimeout phức tạp. Không wrap function.            ║
+   ║  Event delegation trực tiếp + MutationObserver fallback.         ║
+   ╚═══════════════════════════════════════════════════════════════════╝ */
+(function() {
+  'use strict';
+
+  /* ─── BƯỚC 1: Hàm switch cực đơn giản, không try-catch ẩn lỗi ─── */
+  function goPage(name) {
+    if (!name) return;
+
+    /* Hiện/ẩn pages */
+    var all = document.querySelectorAll('.page');
+    for (var i = 0; i < all.length; i++) all[i].classList.remove('active');
+    var pg = document.getElementById('page-' + name);
+    if (!pg) { console.error('[NAV] Không có page:', name); return; }
+    pg.classList.add('active');
+
+    /* Nav active */
+    var btns = document.querySelectorAll('[data-page]');
+    for (var j = 0; j < btns.length; j++) {
+      btns[j].classList.toggle('active', btns[j].getAttribute('data-page') === name);
+    }
+
+    /* Scroll top */
+    try { window.scrollTo(0, 0); } catch(e) {}
+
+    /* Sync STATE */
+    try { if (window.STATE) window.STATE.currentPage = name; } catch(e) {}
+
+    /* Render nội dung */
+    callPageRender(name);
+
+    console.log('[NAV] →', name);
+  }
+
+  /* ─── BƯỚC 2: Gọi render function cho từng trang ─── */
+  function callPageRender(name) {
+    /* Mỗi case độc lập, có log riêng để debug */
+    if (name === 'shop') {
+      try { if (typeof window.renderProducts === 'function') window.renderProducts(); }
+      catch(e) { console.warn('[NAV:shop] renderProducts error:', e); }
+    }
+    else if (name === 'cart') {
+      /* Render cart items */
+      try { if (typeof window.renderCart === 'function') window.renderCart(); }
+      catch(e) { console.warn('[NAV:cart] renderCart error:', e); renderCartFallback(); }
+      /* Render cart summary */
+      try { if (typeof window.updateCartSummary === 'function') window.updateCartSummary(); } catch(e) {}
+    }
+    else if (name === 'payment') {
+      try { if (typeof window.renderPaymentSummary === 'function') window.renderPaymentSummary(); }
+      catch(e) { console.warn('[NAV:payment] error:', e); }
+    }
+    else if (name === 'admin') {
+      try { if (typeof window.initAdminCharts === 'function') window.initAdminCharts(); }
+      catch(e) { console.warn('[NAV:admin] error:', e); }
+    }
+    else if (name === 'qr') {
+      try { if (typeof window.initQRPage === 'function') window.initQRPage(); }
+      catch(e) { console.warn('[NAV:qr] error:', e); }
+    }
+    else if (name === 'bank') {
+      try {
+        if (typeof window.initBankDashboard === 'function') window.initBankDashboard();
+        else if (typeof window.initBankPage === 'function') window.initBankPage();
+      } catch(e) { console.warn('[NAV:bank] error:', e); }
+    }
+    else if (name === 'orders') {
+      try { if (typeof window.renderOrders === 'function') window.renderOrders(); }
+      catch(e) { console.warn('[NAV:orders] error:', e); }
+    }
+    else if (name === 'wishlist') {
+      try { if (typeof window.renderWishlist === 'function') window.renderWishlist(); }
+      catch(e) { console.warn('[NAV:wishlist] error:', e); }
+    }
+    /* about, contact, home, profile: static HTML, không cần render */
+  }
+
+  /* ─── BƯỚC 3: Fallback render cart thủ công nếu renderCart crash ─── */
+  function renderCartFallback() {
+    var el = document.getElementById('cartItemsContainer');
+    if (!el) return;
+    try {
+      var cart = (window.STATE && Array.isArray(window.STATE.cart)) ? window.STATE.cart : [];
+      if (cart.length === 0) {
+        el.innerHTML = '<div style="text-align:center;padding:60px 20px">'
+          + '<div style="font-size:72px;opacity:0.3">🛒</div>'
+          + '<h3 style="font-size:22px;font-weight:700;color:#111;margin:16px 0 8px">Giỏ hàng trống</h3>'
+          + '<p style="color:#666;margin-bottom:24px">Chưa có sản phẩm nào. Hãy thêm vào!</p>'
+          + '<button onclick="goPage(\'shop\')" style="background:#FFD500;border:none;padding:12px 28px;border-radius:8px;font-weight:700;font-size:15px;cursor:pointer">🛍 Mua sắm ngay</button>'
+          + '</div>';
+      }
+    } catch(e2) {}
+  }
+
+  /* ─── BƯỚC 4: Event delegation — 1 listener cho toàn bộ nav ─── */
+  function attachNavEvents() {
+    /* Desktop nav */
+    document.addEventListener('click', function(e) {
+      var btn = e.target.closest('[data-page]');
+      if (btn) {
+        e.preventDefault();
+        var pg = btn.getAttribute('data-page');
+        if (pg) goPage(pg);
+        return;
+      }
+      /* Logo → home */
+      var logo = e.target.closest('.logo');
+      if (logo) { e.preventDefault(); goPage('home'); }
+    });
+
+    console.log('[NAV] Event delegation attached ✓');
+  }
+
+  /* ─── BƯỚC 5: Override window.switchPage ─── */
+  window.switchPage = goPage;
+  window.goPage = goPage; /* alias public */
+
+  /* ─── BƯỚC 6: Override nav button onclick attributes trực tiếp ─── */
+  function patchNavButtons() {
+    document.querySelectorAll('.nav-btn[data-page], .mobile-nav-item[data-page]').forEach(function(btn) {
+      var pg = btn.getAttribute('data-page');
+      if (!pg) return;
+      btn.setAttribute('onclick', 'goPage("' + pg + '")');
+    });
+    /* Logo */
+    var logos = document.querySelectorAll('.logo');
+    logos.forEach(function(l) { l.setAttribute('onclick', 'goPage("home")'); });
+    console.log('[NAV] Buttons patched ✓');
+  }
+
+  /* ─── BƯỚC 7: Boot ─── */
+  function boot() {
+    attachNavEvents();
+    patchNavButtons();
+
+    /* Pre-render cart ngay lúc load để sẵn sàng */
+    try { if (typeof window.renderCart === 'function') window.renderCart(); }
+    catch(e) { renderCartFallback(); }
+
+    /* Pre-render orders & wishlist */
+    try { if (typeof window.renderOrders === 'function') window.renderOrders(); } catch(e) {}
+    try { if (typeof window.renderWishlist === 'function') window.renderWishlist(); } catch(e) {}
+
+    console.log('%c[NMN Store v3] Nav OK — All tabs ready ✓', 'background:#000;color:#FFD500;font-weight:bold;padding:4px 10px;border-radius:4px');
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+
+  /* Safety net: re-patch sau 1s phòng code khác override */
+  setTimeout(function() {
+    window.switchPage = goPage;
+    window.goPage = goPage;
+    patchNavButtons();
+  }, 1000);
+
+})();
+</script>
+
